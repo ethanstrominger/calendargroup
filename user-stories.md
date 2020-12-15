@@ -1,0 +1,1 @@
+As a CalendarAdministrator, I want to display a list of all my events from a specified ical url, so that I can advertise them
