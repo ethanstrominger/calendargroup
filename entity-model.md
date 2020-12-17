@@ -1,44 +1,29 @@
+# Syncrhoization
 ```
-              ||                             
-              ||                                                     ________________________
-              ||                                                     |                      |
-              ||    USERS -< CALENDAR GROUPS ---< EVENT GROUPS ---<  |       EVENTS         |
-              ||                                      /\             |______________________|
-              ||                                      ||               /\                 /\
-      APP     ||                                      ||               ||                 ||
-              ||                                      ||               ||                 ||      
-==============||======================================||===============||=================||==============
-              ||                                      ||               ||                 ||               
-              ||                                      ||               ||                 ||
-              ||                                      ||               ||                 ||         
-              ||                             PUBLIC CALENDARS ---< EVENTS       EVENTBRITE EVENTS
-              ||                                                                     CSV FILES  
-              ||                                                         
+PUBLIC WEBCAL EVENTS >------------------------------------- PUBLIC WEBCAL CALENDARS
+      /\                                                           /\
+      ||                                                           ||
+      ||                                                           ||
+      ||                                                           ||
+      \/                                                           \/
+   APP EVENTS >---------------------------------------------- APP CALENDARS
+       |                                                          \/
+       |                                                           |
+       |                                                           |
+      \/                                                           |
+FILTER GROUP EVENTS >----------------------------------------- FILTER GROUPS
+      ||                                                           ||
+      ||                                                           ||
+      ||                                                           ||
+      \/                                                           \/
+GOOGLE CALENDAR EVENTS >------------------------------------ GOOGLE CALENDARS
+```
 
+# USER EVENT INFO
 
-#V2
-                   USERS
-              ||     \/
-              ||     |
-              ||     |                                                _______________________
-              ||     /\                                               |                      | 
-              || USER GROUPS -< CALENDAR GROUP ---< EVENT GROUP ---<  |       EVENTS         |--< USER EVENT INFO >-- USERS 
-              ||                 ||                   /\              |______________________|
-              ||                 ||                   ||               /\                 /\
-      APP     ||                 ||                   ||               ||                 ||
-              ||                 ||                   ||               ||                 ||    
-              ||                 ||                   ||               ||                 ||            
-              ||                 ||                   ||               ||                 ||
-              ||                 ||                   ||               ||                 ||
-              ||                 ||                   ||               ||                 ||   
-==============||=================||===================||===============||=================||==============
-              ||                 ||                   ||               ||                 ||
-              ||                 ||                   ||               ||                 ||               
-              ||                 ||                   ||               ||                 ||                         
-              ||                 ||                   ||               \/                 ||         
-              ||                 ||           PUBLIC CALENDARS ---< EVENTS       EVENTBRITE EVENTS
-              ||                 \/                                                    CVS  
-              ||              Web Calendar                                               
-``
+USERS ---< USER APP EVENT INFO >---- APP EVENTS
 
-T
+# ROLES
+ADMIN -> All tables
+EVENT ADMIN    >--< APP CALENDARS: CRUD OF EVENTS PER CALENDAR
+               >--< FILTER GROUPS: CRUD OF FILTER GROUP INFO
