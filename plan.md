@@ -13,7 +13,7 @@ V 1.0.0
 - [X] Create a CalendarGroupTest google account
 - [X] Create a test calendar
 - [X] Export to an ics
-- [ ] Define json for event
+- [X] Define json for event
 - [ ] Create a test that you can convert an ics into an event json
 - [ ] Create a test that you can do that from a URL
 - [ ] Use this in Website Two
