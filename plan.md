@@ -11,8 +11,8 @@ Overview: converts webcal => json => object of events.   First for non-repeating
 V 1.0.0
 
 - [X] Create a CalendarGroupTest google account
-- [ ] Create a test calendar
-- [ ] Export to an ics
+- [X] Create a test calendar
+- [X] Export to an ics
 - [ ] Define json for event
 - [ ] Create a test that you can convert an ics into an event json
 - [ ] Create a test that you can do that from a URL
