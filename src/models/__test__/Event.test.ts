@@ -1,7 +1,7 @@
-import { CalEvent } from "./Event";
+import { CalEvent } from "../CalEvent";
 
 describe("store", () => {
-  it("not repeating event can be created", /* async */ () => {
+  it("not repeating event can be created", () => {
     const currentTime = new Date();
     const calEvent = new CalEvent({
       calEventId: "hi",
