@@ -1,25 +1,31 @@
 import { CalEvent } from "../models/CalEvent";
-// import fs from "fs";
+import { readFileSync } from "fs";
+import ICAL from "ical.js";
 
-// const iCalData = fs.readFileSync(iCalFileName).toString();
-// get calEvents(): { [key: string]: CalEvent } {
-// return this._calEvents;
-// }
-// private static _convertICalRecordToICalEvent(vevent) {
-// console.log("converting");
-// const element = {
-//   uid: vevent.getFirstPropertyValue("uid"),
-//   summary: vevent.getFirstPropertyValue("summary"),
-//   dtstart: new Date(vevent.getFirstPropertyValue("dtstart")),
-//   dtend: new Date(vevent.getFirstPropertyValue("dtend")),
-//   description: vevent.getFirstPropertyValue("description"),
-//   location: vevent.getFirstPropertyValue("location"),
-// };
-// console.log("done");
-// return element;
-// }
+const _convertICalRecordToICalEvent = (calEvent) : CalEvent => {
+    const uid = calEvent.getFirstPropertyValue("uid"); 
+    return new CalEvent ({
+        calEventId: uid,
+        calEventWebcalId: uid,
+        title: calEvent.getFirstPropertyValue("summary"),
+        startDateTime: new Date(calEvent.getFirstPropertyValue("dtstart")),
+        endDateTime: new Date(calEvent.getFirstPropertyValue("dtend")),
+        description: calEvent.getFirstPropertyValue("description"),
+        location: calEvent.getFirstPropertyValue("location"),
+    });
+}
+
+function _getICalEventRecords(webcalFilename: string) {
+    const iCalText = readFileSync(webcalFilename).toString();
+    const iCalData = ICAL.parse(iCalText);
+    const iCalDataComponent = new ICAL.Component(iCalData);
+    const iCalEventRecords = iCalDataComponent.getAllSubcomponents("vevent");
+    return iCalEventRecords;
+}
 
 export const getCalEventsFromWebcalFile = (webcalFilename: string): CalEvent[] => {
-    const webcalEvents: CalEvent[] = [];
-    return webcalEvents;
+    const iCalEventRecords = _getICalEventRecords(webcalFilename);
+    const calEvents = iCalEventRecords.map(_convertICalRecordToICalEvent);
+    return calEvents;
 };
+
