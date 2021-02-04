@@ -2,9 +2,9 @@ import { CalEvent } from "../models/CalEvent";
 import { readFileSync } from "fs";
 import ICAL from "ical.js";
 
-const _convertICalRecordToICalEvent = (calEvent) : CalEvent => {
-    const uid = calEvent.getFirstPropertyValue("uid"); 
-    return new CalEvent ({
+const _convertICalRecordToICalEvent = (calEvent): CalEvent => {
+    const uid = calEvent.getFirstPropertyValue("uid");
+    const retVal = new CalEvent({
         calEventId: uid,
         calEventWebcalId: uid,
         title: calEvent.getFirstPropertyValue("summary"),
@@ -12,7 +12,16 @@ const _convertICalRecordToICalEvent = (calEvent) : CalEvent => {
         endDateTime: new Date(calEvent.getFirstPropertyValue("dtend")),
         description: calEvent.getFirstPropertyValue("description"),
         location: calEvent.getFirstPropertyValue("location"),
+        rrule: calEvent.getFirstPropertyValue("rrule"),
+        recurenceId: new Date(calEvent.getFirstPropertyValue("recurrence-id")),
+        created: new Date(calEvent.getFirstPropertyValue("created")),
+        lastModified: new Date(calEvent.getFirstPropertyValue("lastModified")),
+        dtstamp: new Date(calEvent.getFirstPropertyValue("dtstamp")),
+        exdate: new Date(calEvent.getFirstPropertyValue("exdate")),
+        sequence: calEvent.getFirstPropertyValue("sequence"),
     });
+    console.log('retval', retVal);
+    return retVal;
 }
 
 function _getICalEventRecords(webcalFilename: string) {

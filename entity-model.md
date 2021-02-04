@@ -1,4 +1,5 @@
-# Syncrhoization
+# Syncrhonization Diagram
+
 ```
 PUBLIC WEBCAL EVENTS >------------------------------------- PUBLIC WEBCAL CALENDARS
       /\                                                           /\
@@ -8,8 +9,8 @@ PUBLIC WEBCAL EVENTS >------------------------------------- PUBLIC WEBCAL CALEND
       \/                                                           \/
    APP EVENTS >---------------------------------------------- APP CALENDARS
        |                                                          \/
-       |                                                           |
-       |                                                           |
+       | Create events from APP EVENTS                             |
+       | based on filter group criteria                            |
       \/                                                           |
 FILTER GROUP EVENTS >----------------------------------------- FILTER GROUPS
       ||                                                           ||
