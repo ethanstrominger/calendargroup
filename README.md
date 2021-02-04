@@ -1,4 +1,6 @@
 # calendargroup
+VO - Combine multiple meetup and other Webcal calendars into one calendar so that all the selected calendars can be subscribed to with one URL.
+
 V1 - The calendar aggregator will facilitate sharing related events from Meetup, EventBrite, and calendars that use webcal via a 
 calendar that event goers can subscribe to.  
 
