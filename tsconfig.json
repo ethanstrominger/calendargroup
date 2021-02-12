@@ -3,7 +3,9 @@
       "baseUrl": "./", // "./src" works too
       "jsx": "react",
       "target": "ES2020",
+      "moduleResolution": "node"
     },
+    "moduleResolution": "node",
     "include": ["./"],
 
 }

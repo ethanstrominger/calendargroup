@@ -51,7 +51,7 @@ export class CalEvent implements ICalEvent {
     this.exdate = calEvent.exdate;
     this.sequence = calEvent.sequence;
     if (this.recurenceId) {
-      this.uniqueOccurenceId = this.calEventId + this.recurenceId.toUTCString()
+      this.uniqueOccurenceId = this.calEventId + this.recurenceId
     } else {
       this.uniqueOccurenceId = this.calEventId;
     }
