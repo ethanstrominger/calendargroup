@@ -1,11 +1,11 @@
 import { CalEvent } from "../../models/CalEvent";
 import { getCalEventsFromWebcalFile } from "../WebcalUtis";
 import { getCalEventsFromWebcalURL } from "../WebcalUtis";
-import { ICALFILENAME, ICAL_URL } from '../../../__test-helper__/testGlobals';
+import { ICAL_FILENAME, ICAL_URL } from '../../__test-helper__/testGlobals';
 
 describe("ICS import", () => {
     it("You can get events from an ICS", () => {
-        const events = getCalEventsFromWebcalFile(ICALFILENAME);
+        const events = getCalEventsFromWebcalFile(ICAL_FILENAME);
         expect(events[0] instanceof CalEvent);
     });
 });
