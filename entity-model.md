@@ -1,30 +1,38 @@
 # Syncrhonization Diagram
 
 ```
-PUBLIC WEBCAL EVENTS >------------------------------------- PUBLIC WEBCAL CALENDARS
-      /\                                                           /\
-      ||                                                           ||
-      ||                                                           ||
-      ||                                                           ||
-      \/                                                           \/
-   APP EVENTS >---------------------------------------------- APP CALENDARS
-       |                                                          \/
-       | Create events from APP EVENTS                             |
-       | based on filter group criteria                            |
-      \/                                                           |
-FILTER GROUP EVENTS >----------------------------------------- FILTER GROUPS
-      ||                                                           ||
-      ||                                                           ||
-      ||                                                           ||
-      \/                                                           \/
-GOOGLE CALENDAR EVENTS >------------------------------------ GOOGLE CALENDARS
+┌----------------------┐                                      ┌--------------┐
+│ EXTERNAL CALENDAR /  │ ------------------------------------<|    EXTERNAL  |
+│    EVENT LIST        │                                      |     EVENTS   |
+└----------------------┘                                      └--------------┘
+       |                                                            |
+       |                                                            |
+       |                                                            |
+      /|\                                                          /|\
+┌----------------------┐                                      ┌--------------┐
+|   AGGREGATOR         |-------------------------------------<|  AGGREGATED  |
+|                      |                                      |    EVENTS    |
+└---------------------┘                                       └--------------┘
+   \|/         \|/
+    |           |
+    |     ┌-------------┐    ┌-------------------┐
+    |     |   FILTER    |---<| FILTER CONDITIONS |
+    |     └-------------┘    └-------------------┘
+    |          \|/
+    |           |
+┌----------------------┐
+|       EVENT          |
+|       GROUP          |
+└----------------------┘                       
 ```
 
 # USER EVENT INFO
 
-USERS ---< USER APP EVENT INFO >---- APP EVENTS
+USERS ---< USER AGG EVENT INFO >---- AGG EVENTS
 
 # ROLES
-ADMIN -> All tables
-EVENT ADMIN    >--< APP CALENDARS: CRUD OF EVENTS PER CALENDAR
-               >--< FILTER GROUPS: CRUD OF FILTER GROUP INFO
+
+ADMIN -> CRUD on all tables
+EVENT GROUP ADMIN --< EVENT GROUP: CRUD EVENT GROUP AND RELATED AGGREGRATORS, FILTERS, AND FILtER CONDITIONS
+EVERYONE: READ ON EVENT GROUP, FILTERS, FILTER CONDITIONS AND SUBSCRIBE TO AN EVENT GROUP
+

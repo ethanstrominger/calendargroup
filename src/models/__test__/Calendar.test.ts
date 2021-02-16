@@ -33,4 +33,31 @@ describe("Calendar CRUD", () => {
     expect(calEvent1 === calendar.calEvents["1"]).toBeTruthy();
     expect(calEvent2 === calendar.calEvents["2"]).toBeTruthy();
   });
+
+  it("An array of events can be added to a calendar", () => {
+    const currentTime = new Date();
+    const calEvent1 = new CalEvent({
+      calEventId: "1",
+      calEventWebcalId: "a webcalid",
+      title: "a title",
+      description: "a description",
+      startDateTime: currentTime,
+      endDateTime: new Date(currentTime.getTime() + 1000 * 60 * 60),
+    });
+
+    const tomorrowTime = new Date(currentTime.getTime() + 1000 * 60 * 60 * 24);
+    const calEvent2 = new CalEvent({
+      calEventId: "2",
+      calEventWebcalId: "a webcalid for event 2",
+      title: "a title for event 2",
+      description: "a description for event 2",
+      startDateTime: currentTime,
+      endDateTime: new Date(currentTime.getTime() + 1000 * 60 * 60),
+    });
+    const calEventsArray: CalEvent[] = [calEvent1, calEvent2]
+    const calendar = new Calendar();
+    calendar.addCalEvents(calEventsArray);
+    expect(calEvent1 === calendar.calEvents["1"]).toBeTruthy();
+    expect(calEvent2 === calendar.calEvents["2"]).toBeTruthy();
+  });
 });

@@ -15,6 +15,6 @@ export class Calendar implements ICalendar {
   get calEvents() { return this._calEvents; }
 
   addCalEvents = (calEvents: CalEvent[]) =>
-    (calEvents.map(calEvent => {this._calEvents[calEvent.uniqueOccurenceId] = calEvent}));
+    (calEvents.map(calEvent => {this.addCalEvent(calEvent)}));
 
 }
