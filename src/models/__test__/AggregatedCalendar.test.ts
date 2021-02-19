@@ -1,7 +1,7 @@
 import { AggregatedCalendar } from "../AggregatedCalendar";
-import { CalEvent } from "../CalEvent";
+import { AggregatedEvent } from "../AggregatedEvent";
 
-describe("Calendar CRUD", () => {
+describe("AggregatedCalendar CRUD", () => {
   it("A calendar can be created", () => {
     const calendar = new AggregatedCalendar();
     expect(calendar).toBeDefined();
@@ -9,9 +9,9 @@ describe("Calendar CRUD", () => {
 
   it("Events can be added to a calendar", () => {
     const currentTime = new Date();
-    const calEvent1 = new CalEvent({
-      calEventId: "1",
-      calEventWebcalId: "a webcalid",
+    const aggregatedEvent1 = new AggregatedEvent({
+      aggregatedEventId: "1",
+      aggregatedEventWebcalId: "a webcalid",
       title: "a title",
       description: "a description",
       startDateTime: currentTime,
@@ -19,26 +19,26 @@ describe("Calendar CRUD", () => {
     });
 
     const tomorrowTime = new Date(currentTime.getTime() + 1000 * 60 * 60 * 24);
-    const calEvent2 = new CalEvent({
-      calEventId: "2",
-      calEventWebcalId: "a webcalid for event 2",
+    const aggregatedEvent2 = new AggregatedEvent({
+      aggregatedEventId: "2",
+      aggregatedEventWebcalId: "a webcalid for event 2",
       title: "a title for event 2",
       description: "a description for event 2",
       startDateTime: currentTime,
       endDateTime: new Date(currentTime.getTime() + 1000 * 60 * 60),
     });
     const calendar = new AggregatedCalendar();
-    calendar.addCalEvent(calEvent1);
-    calendar.addCalEvent(calEvent2);
-    expect(calEvent1 === calendar.calEvents["1"]).toBeTruthy();
-    expect(calEvent2 === calendar.calEvents["2"]).toBeTruthy();
+    calendar.addAggregatedEvent(aggregatedEvent1);
+    calendar.addAggregatedEvent(aggregatedEvent2);
+    expect(aggregatedEvent1 === calendar.aggregatedEvents["1"]).toBeTruthy();
+    expect(aggregatedEvent2 === calendar.aggregatedEvents["2"]).toBeTruthy();
   });
 
   it("An array of events can be added to a calendar", () => {
     const currentTime = new Date();
-    const calEvent1 = new CalEvent({
-      calEventId: "1",
-      calEventWebcalId: "a webcalid",
+    const aggregatedEvent1 = new AggregatedEvent({
+      aggregatedEventId: "1",
+      aggregatedEventWebcalId: "a webcalid",
       title: "a title",
       description: "a description",
       startDateTime: currentTime,
@@ -46,18 +46,21 @@ describe("Calendar CRUD", () => {
     });
 
     const tomorrowTime = new Date(currentTime.getTime() + 1000 * 60 * 60 * 24);
-    const calEvent2 = new CalEvent({
-      calEventId: "2",
-      calEventWebcalId: "a webcalid for event 2",
+    const aggregatedEvent2 = new AggregatedEvent({
+      aggregatedEventId: "2",
+      aggregatedEventWebcalId: "a webcalid for event 2",
       title: "a title for event 2",
       description: "a description for event 2",
       startDateTime: currentTime,
       endDateTime: new Date(currentTime.getTime() + 1000 * 60 * 60),
     });
-    const calEventsArray: CalEvent[] = [calEvent1, calEvent2]
+    const aggregatedEventsArray: AggregatedEvent[] = [
+      aggregatedEvent1,
+      aggregatedEvent2,
+    ];
     const calendar = new AggregatedCalendar();
-    calendar.addCalEvents(calEventsArray);
-    expect(calEvent1 === calendar.calEvents["1"]).toBeTruthy();
-    expect(calEvent2 === calendar.calEvents["2"]).toBeTruthy();
+    calendar.addAggregatedEvents(aggregatedEventsArray);
+    expect(aggregatedEvent1 === calendar.aggregatedEvents["1"]).toBeTruthy();
+    expect(aggregatedEvent2 === calendar.aggregatedEvents["2"]).toBeTruthy();
   });
 });

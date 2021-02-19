@@ -1,20 +1,25 @@
-import { CalEvent } from "./CalEvent";
+import { AggregatedEvent } from "./AggregatedEvent";
 
 export interface IAggregatedCalendar {
-  calEvents: { [key: string]: CalEvent };
+  aggregatedEvents: { [key: string]: AggregatedEvent };
 }
 
 export class AggregatedCalendar implements IAggregatedCalendar {
-  _calEvents: { [key: string]: CalEvent } = {};
-  
+  _aggregatedEvents: { [key: string]: AggregatedEvent } = {};
+
   constructor() {}
-  
-  addCalEvent = (calEvent: CalEvent) =>
-    (this._calEvents[calEvent.uniqueOccurenceId] = calEvent);
 
-  get calEvents() { return this._calEvents; }
+  addAggregatedEvent = (aggregatedEvent: AggregatedEvent) =>
+    (this._aggregatedEvents[
+      aggregatedEvent.uniqueOccurenceId
+    ] = aggregatedEvent);
 
-  addCalEvents = (calEvents: CalEvent[]) =>
-    (calEvents.map(calEvent => {this.addCalEvent(calEvent)}));
+  get aggregatedEvents() {
+    return this._aggregatedEvents;
+  }
 
+  addAggregatedEvents = (aggregatedEvents: AggregatedEvent[]) =>
+    aggregatedEvents.map((aggregatedEvent) => {
+      this.addAggregatedEvent(aggregatedEvent);
+    });
 }
