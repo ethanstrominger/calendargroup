@@ -1,10 +1,10 @@
 import { CalEvent } from "./CalEvent";
 
-export interface ICalendar {
+export interface IAggregatedCalendar {
   calEvents: { [key: string]: CalEvent };
 }
 
-export class Calendar implements ICalendar {
+export class AggregatedCalendar implements IAggregatedCalendar {
   _calEvents: { [key: string]: CalEvent } = {};
   
   constructor() {}

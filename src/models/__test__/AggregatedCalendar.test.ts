@@ -1,9 +1,9 @@
-import { Calendar } from "../Calendar";
+import { AggregatedCalendar } from "../AggregatedCalendar";
 import { CalEvent } from "../CalEvent";
 
 describe("Calendar CRUD", () => {
   it("A calendar can be created", () => {
-    const calendar = new Calendar();
+    const calendar = new AggregatedCalendar();
     expect(calendar).toBeDefined();
   });
 
@@ -27,7 +27,7 @@ describe("Calendar CRUD", () => {
       startDateTime: currentTime,
       endDateTime: new Date(currentTime.getTime() + 1000 * 60 * 60),
     });
-    const calendar = new Calendar();
+    const calendar = new AggregatedCalendar();
     calendar.addCalEvent(calEvent1);
     calendar.addCalEvent(calEvent2);
     expect(calEvent1 === calendar.calEvents["1"]).toBeTruthy();
@@ -55,7 +55,7 @@ describe("Calendar CRUD", () => {
       endDateTime: new Date(currentTime.getTime() + 1000 * 60 * 60),
     });
     const calEventsArray: CalEvent[] = [calEvent1, calEvent2]
-    const calendar = new Calendar();
+    const calendar = new AggregatedCalendar();
     calendar.addCalEvents(calEventsArray);
     expect(calEvent1 === calendar.calEvents["1"]).toBeTruthy();
     expect(calEvent2 === calendar.calEvents["2"]).toBeTruthy();
