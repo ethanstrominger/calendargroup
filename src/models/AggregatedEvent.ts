@@ -8,7 +8,7 @@ export interface IAggregatedEvent {
   startDateTime: Date;
   endDateTime: Date;
   rrule?: string;
-  recurenceId?: Date;
+  recurrenceId?: Date;
   created?: Date;
   lastModified?: Date;
   dtstamp?: Date;
@@ -27,7 +27,7 @@ export class AggregatedEvent implements IAggregatedEvent {
   readonly startDateTime: Date;
   readonly endDateTime: Date;
   readonly rrule?: string;
-  readonly recurenceId?: Date;
+  readonly recurrenceId?: Date;
   readonly created?: Date;
   readonly lastModified?: Date;
   readonly dtstamp?: Date;
@@ -45,14 +45,14 @@ export class AggregatedEvent implements IAggregatedEvent {
     this.endDateTime = aggregatedEvent.endDateTime;
     this.location = aggregatedEvent.location;
     this.rrule = aggregatedEvent.rrule;
-    this.recurenceId = aggregatedEvent.recurenceId;
+    this.recurrenceId = aggregatedEvent.recurrenceId;
     this.created = aggregatedEvent.created;
     this.lastModified = aggregatedEvent.lastModified;
     this.dtstamp = aggregatedEvent.dtstamp;
     this.exdate = aggregatedEvent.exdate;
     this.sequence = aggregatedEvent.sequence;
-    if (this.recurenceId) {
-      this.uniqueOccurenceId = this.aggregatedEventId + this.recurenceId;
+    if (this.recurrenceId) {
+      this.uniqueOccurenceId = this.aggregatedEventId + this.recurrenceId;
     } else {
       this.uniqueOccurenceId = this.aggregatedEventId;
     }

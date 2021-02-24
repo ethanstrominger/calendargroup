@@ -1,52 +1,64 @@
-|v|As a|I want to be able to|so that|
-|---|----|-----|----|
-|1.0.0|event orgainzer|get a list of non-repeating events and originating repeating events for a public calendar (from webcal in json format)|advertise the events on my website in an appealing format|
-|1.0.0|event organizer|create, update, delete non-repeating events (using app API for backend, React for frontend)|publish to a calendar  (that also takes care of repeating events)|
-|1.0.0|event organizer|get a list of all instances of an event, repeating and non-repeating||
-|1.0.1|security / auditing|require user create an account to CUD||
-|1.0.1|integretor|single sign on||
 
-Overview: converts webcal => json => object of events.   First for non-repeating, then repeating.  Auth and CUD for V 1.0.1
+Overview: 
+v converts ical => json => object of events.   First for non-repeating, then repeating.  Auth and CUD for V 1.0.1
 
 V 1.0.0
 
 To Do
+
 - Create tests for converting ICS to a list of ICS event strings and vice versa 
-  - given an ics url for a given calendar with repeating and non-repeating events, when iCalEvents = getICalEvents(ics url)
-    - then iCalEvents is a hashtable of string keys and string values 
-    - then the key for the non-repeating events equals the event id
-    - then the key for the repeating event equals the event id plus the occurence id
-    - then makeEventsIcsText (ical event list) equals the venvent portion of the original ics
-    - and when iCal = makeIcs (iCalEvents), confirm vevent section of iCal equals the vevent portion of the given ICS url and iCal starts with BEGIN vCalendar and ends with END vCalendar
+
+|Given|When|Then|
+|-----|----|----|
+| given an ics url for an existing calendar with repeating and non-repeating events|when you get events *[iCalEvents = Utility.getICalEvents(ics url)*]|then iCalEvents is a hashtable of string keys and iCalEvents (eventUid, vevent)|
+||| then the eventUId for the first non-repeating event equals the uid of the ical event [*iCalEvents[ x ].eventUid=iCalEvents[ x ].iCalEventUid*]|
+||| then the eventUid for the first repeating event equals the event id plus the reccurence id *iCalEvents[ x ].eventUid=iCalEvents[ x ].iCalEventUid + iCalEvents[ x ]reccurenceId*|
+||| then combining all the vevent values of the hashtable equals the vevents portion of the original ics *[sum of iCalEvents = vevents portion of ics url]*|
+||| and (then) combining a calendar from the above sum of iCalEvents, the vevent section of iCal equals the vevent portion of the given ICS url and iCal starts with BEGIN vCalendar and ends with END vCalendar *[Utility.makeCalendar(sum of iCalEvents)] = BEGIN VCALENDAR + vevents portion of ics url + END VCALENDAR ]*|
    - **take iCal, paste it into an ics file and confirm it can be imported**
-- Create tests
-  - can create an aggregator
-  - can associate an aggregator with a URL
-  - given an aggregator associated with an ICS url, vevent portion of aggregator.icsEventsComponent equals the vevent portion of the ICS url
-  - can create an event group
-  - can associate multiple aggregators with a URL
-  - given an event group eventGroup with two aggregators, confirm aggregator.icsEventsComponent of both are contained within eventGroup.ics
-  - confirm count of 
-- create route for event group
-- see if can subscribe locally
-- store event group and aggregators
+
+- Create tests for event group and aggregator
+
+|Given|When|Then|
+|-----|----|----|
+||When you create an event aggregator with name and URL|then you can get the uid and URL of the event aggregator [*EventAggregatorTransactons.create(name, url) => EventAggregatorTransactions.get(name).url = url and EventAggregatorTransactions.uid is defined|
+|given an aggregator associated with an ICS url||then the vevent of the aggregator equals Aregator.equals the vevent portion of the ICS url [*eventAggregator.vevents = vevent portion of the ICS url*] |
+||When you create two eventGroups|each eventGroup has a distinct uid[*EventGroupTransactions.create(name1),EventGroupActions.create(name2) => EventGroupTransactions.get(name1).uid != EventGroupTransactons.get(name2).uid* ]|
+|| when you associate multiple event aggregators with an event group|then you can get the event aggregators for the event group|
+|given an event group eventGroup with two event aggregators for valid ICS URL|| then vevent of both are contained within the subscribable calendar *[vEventGroup.eventAggregator[0 and 1].vevents are contained within vEventGroup.icsText ]*|
+||then vEventGroup.icsText starts with START VCALENDAR and ends with VCALENDAR|------
+- create route for getting event group calendar
+- persist event group and aggregators
 - deploy
 - see if can subscribe
-- add authorization
+
+v1.0.1
 - add UI for CRUD
-- add subscription URL to UI
+- create a default admin account
+- add authorization
+- add UI for CRUD of accounts
 
+v1.0.2
+- add UI and backend for CRUD of EventGroupAdmin
+- add security for CRUD of event groups by EventGroupAdmin
 
+Future versions
+- Read events from
+  - CSV
+  - google sheet
+  - webscrape
+    - EventBrite
+    - Meetup
 
-   
+  
 Done
-X Create a CalendarGroupTest google account
-X Create a test calendar
-X Export to an ics
-X Define json for event
-X Create tests
-  X convert an ics file into an event array
-  X convert an ics URL into an event array
+- X Create a CalendarGroupTest google account
+- X Create a test calendar
+- X Export to an ics
+- X Define json for event
+- X Create tests
+  - X convert an ics file into an event array
+  - X convert an ics URL into an event array
 
 
 

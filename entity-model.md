@@ -1,38 +1,49 @@
 # Syncrhonization Diagram
 
 ```
-┌----------------------┐                                      ┌--------------┐
-│ EXTERNAL CALENDAR /  │ ------------------------------------<|    EXTERNAL  |
-│    EVENT LIST        │                                      |     EVENTS   |
-└----------------------┘                                      └--------------┘
-       |                                                            |
-       |                                                            |
-       |                                                            |
-      /|\                                                          /|\
-┌----------------------┐                                      ┌--------------┐
-|   AGGREGATOR         |-------------------------------------<|  AGGREGATED  |
-|                      |                                      |    EVENTS    |
-└----------------------┘                                      └--------------┘
-   \|/         \|/
-    |           |
-    |     ┌-------------┐    ┌-------------------┐
-    |     |   FILTER    |---<| FILTER CONDITIONS |
-    |     └-------------┘    └-------------------┘
-    |          \|/
-    |           |
-┌----------------------┐
-|       EVENT          | => An event group is a subscribable calendar of aggregated events
-|       GROUP          |
-└----------------------┘                       
-```
+┌----------------------┐                                      ┌------------┐
+│ EXTERNAL CALENDAR /  │ ------------------------------------<|  EXTERNAL  |
+│    EVENT LIST        │                                      |   EVENTS   |
+└----------------------┘                                      └------------┘
+          |                                                         |
+          |                                                         |
+          |                                                         |
+         /|\                                                       /|\
+┌----------------------┐                                      ┌------------┐
+|        EVENT         | >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> | AGGREGATED |
+|     AGGREGATOR       |                                      |   EVENTS   |
+└----------------------┘                                      └------------┘
+   \|/         \|/                                                   |
+    |           |                                                    |
+    |           |                                                    |
+    |           |                                          ┌---------|---------┐
+    |           |                                          |         |         |
+    |     ┌-------------┐    ┌-------------------┐         |         |         |
+    |     |   FILTER    |---<| FILTER CONDITIONS |         |    ┌---------┐    |
+    |     └-------------┘    └-------------------┘         |    |  ICAL   |    |
+    |          \|/                                         |    | EVENTS  |    |
+    |           |                                          |    └---------┘    |
+┌----------------------┐                                   |                   |
+|       EVENT          |                                   |   SUBSCRIBABLE    |
+|       GROUP          | >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> |     CALENDAR      |
+└----------------------┘                                   |                   |
+                                                           |                   |
+                                                           └-------------------┘
+                                                                    /\
+                                                                    ||
+                                                                    || Event Goer subscribes to calendr
+                                                                    ||
+                                                                 EVENT GOER
 
+```  
 # USER EVENT INFO
 
-USERS ---< USER AGG EVENT INFO >---- AGG EVENTS
+USERS ---< SUBSCRIBED ICAL EVENT INFO >---- AGG EVENTS
 
 # ROLES
 
 - ADMIN -> CRUD on all tables
 - EVENT GROUP ADMIN --< EVENT GROUP: CRUD EVENT GROUP AND RELATED AGGREGRATORS, FILTERS, AND FILtER CONDITIONS
-- EVERYONE: READ ON EVENT GROUP, FILTERS, FILTER CONDITIONS AND SUBSCRIBE TO AN EVENT GROUP
+- USER -< SUBSCRIBED ICAL EVENT: CRYD
+- EVERYONE -> READ ON EVENT GROUP, FILTERS, FILTER CONDITIONS AND SUBSCRIBE TO AN EVENT GROUP
 

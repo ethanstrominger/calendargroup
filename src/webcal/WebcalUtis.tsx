@@ -14,7 +14,7 @@ function _convertIAggregatedEventToAggregatedEvent(ICALEvent) {
         description: ICALEvent.getFirstPropertyValue("description"),
         location: ICALEvent.getFirstPropertyValue("location"),
         rrule: ICALEvent.getFirstPropertyValue("rrule"),
-        recurenceId: new Date(ICALEvent.getFirstPropertyValue("recurrence-id")),
+        recurrenceId: new Date(ICALEvent.getFirstPropertyValue("recurrence-id")),
         created: new Date(ICALEvent.getFirstPropertyValue("created")),
         lastModified: new Date(ICALEvent.getFirstPropertyValue("lastModified")),
         dtstamp: new Date(ICALEvent.getFirstPropertyValue("dtstamp")),
