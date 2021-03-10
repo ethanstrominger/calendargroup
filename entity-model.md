@@ -8,25 +8,25 @@
           |                                                         |
           |                                                         |
           |                                                         |
-         /|\                                                       /|\
-┌----------------------┐                                      ┌------------┐
-|        EVENT         | >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> | AGGREGATED |
-|     AGGREGATOR       |                                      |   EVENTS   |
-└----------------------┘                                      └------------┘
-   \|/         \|/                                                   |
-    |           |                                                    |
-    |           |                                                    |
-    |           |                                          ┌---------|---------┐
-    |           |                                          |         |         |
-    |     ┌-------------┐    ┌-------------------┐         |         |         |
-    |     |   FILTER    |---<| FILTER CONDITIONS |         |    ┌---------┐    |
-    |     └-------------┘    └-------------------┘         |    |  ICAL   |    |
-    |          \|/                                         |    | EVENTS  |    |
-    |           |                                          |    └---------┘    |
+         /|\                                                        |
+┌----------------------┐                                            |
+|        EVENT         | -------------------------------------------┐   <==== Event aggregator procedure fetches        
+|     SOURCES       |                                            |         external events for an event aggregrator and
+└----------------------┘                                            |         if applicable, filters the events based on the
+   \|/                                                              |         filter for the event aggregator
+    |                                                               |
+    |                                                               |
+    |                                                      ┌--------|----------┐
+    |                                                      |        |          |
+    |     ┌-------------┐    ┌-------------------┐         |       /|\         |
+    |     |   FILTER    |---<| FILTER CONDITIONS |         |    ┌------------┐ |
+    |     └-------------┘    └-------------------┘         |    | AGGREGATED | |    
+    |          \|/                                         |    | EVENTS     | |
+    |           |                                          |    └------------┘ |
 ┌----------------------┐                                   |                   |
-|       EVENT          |                                   |   SUBSCRIBABLE    |
-|       GROUP          | >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> |     CALENDAR      |
-└----------------------┘                                   |                   |
+|       EVENT          |                                   |   SUBSCRIBABLE    | <=== Event group procedure combines the aggregated
+|       AGGREGATOR          | >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> |     CALENDAR      |      events for all the event aggregators of an 
+└----------------------┘                                   |                   | .    event group
                                                            |                   |
                                                            └-------------------┘
                                                                     /\
@@ -36,6 +36,22 @@
                                                                  EVENT GOER
 
 ```  
+# MODEL ENTITY DEFINITIONS
+EventAggregator: 
+ - UUID
+ - Name
+ - Url
+ - veventComponentsText
+
+EventGroup: UUID, Name, [ EventAggregators ], [ Filters ]
+  - UUID
+  - Name
+  - aggregatedVeventComponentsText
+
+Filter: UUID: Name, [ FilterConditions ], [ EventAggregators ]
+FilterCondition: UUID, FilterExpression
+
+
 # USER EVENT INFO
 
 USERS ---< SUBSCRIBED ICAL EVENT INFO >---- AGG EVENTS
