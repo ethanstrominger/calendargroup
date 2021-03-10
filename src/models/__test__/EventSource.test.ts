@@ -1,9 +1,9 @@
-import { EventAggregator } from "../EventAggregator";
+import { EventSource } from "../EventSource";
 import { AggregatedEvent } from "../AggregatedEvent";
 
-describe("EventAggregator CRUD", () => {
+describe("EventSource CRUD", () => {
   it("A calendar can be created", () => {
-    const calendar = new EventAggregator();
+    const calendar = new EventSource();
     expect(calendar).toBeDefined();
   });
 
@@ -27,7 +27,7 @@ describe("EventAggregator CRUD", () => {
       startDateTime: currentTime,
       endDateTime: new Date(currentTime.getTime() + 1000 * 60 * 60),
     });
-    const calendar = new EventAggregator();
+    const calendar = new EventSource();
     calendar.addAggregatedEvent(aggregatedEvent1);
     calendar.addAggregatedEvent(aggregatedEvent2);
     expect(aggregatedEvent1 === calendar.aggregatedEvents["1"]).toBeTruthy();
@@ -58,7 +58,7 @@ describe("EventAggregator CRUD", () => {
       aggregatedEvent1,
       aggregatedEvent2,
     ];
-    const calendar = new EventAggregator();
+    const calendar = new EventSource();
     calendar.addAggregatedEvents(aggregatedEventsArray);
     expect(aggregatedEvent1 === calendar.aggregatedEvents["1"]).toBeTruthy();
     expect(aggregatedEvent2 === calendar.aggregatedEvents["2"]).toBeTruthy();

@@ -1,10 +1,10 @@
 import { AggregatedEvent } from "./AggregatedEvent";
 
-export interface IEventAggregator {
+export interface IEventSource {
   aggregatedEvents: { [key: string]: AggregatedEvent };
 }
 
-export class EventAggregator implements IEventAggregator {
+export class EventSource implements IEventSource {
   _aggregatedEvents: { [key: string]: AggregatedEvent } = {};
 
   constructor() {}

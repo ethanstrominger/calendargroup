@@ -10,7 +10,7 @@
           |                                                         |
          /|\                                                        |
 ┌----------------------┐                                            |
-|        EVENT         | -------------------------------------------┐   <==== Event aggregator procedure fetches        
+|        EVENT         | -------------------------------------------┐   <==== Event aggregator procedure fetches
 |     SOURCES       |                                            |         external events for an event aggregrator and
 └----------------------┘                                            |         if applicable, filters the events based on the
    \|/                                                              |         filter for the event aggregator
@@ -20,12 +20,12 @@
     |                                                      |        |          |
     |     ┌-------------┐    ┌-------------------┐         |       /|\         |
     |     |   FILTER    |---<| FILTER CONDITIONS |         |    ┌------------┐ |
-    |     └-------------┘    └-------------------┘         |    | AGGREGATED | |    
+    |     └-------------┘    └-------------------┘         |    | AGGREGATED | |
     |          \|/                                         |    | EVENTS     | |
     |           |                                          |    └------------┘ |
 ┌----------------------┐                                   |                   |
 |       EVENT          |                                   |   SUBSCRIBABLE    | <=== Event group procedure combines the aggregated
-|       AGGREGATOR          | >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> |     CALENDAR      |      events for all the event aggregators of an 
+|       AGGREGATOR          | >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> |     CALENDAR      |      events for all the event aggregators of an
 └----------------------┘                                   |                   | .    event group
                                                            |                   |
                                                            └-------------------┘
@@ -35,22 +35,25 @@
                                                                     ||
                                                                  EVENT GOER
 
-```  
+```
+
 # MODEL ENTITY DEFINITIONS
-EventAggregator: 
- - UUID
- - Name
- - Url
- - veventComponentsText
 
-EventGroup: UUID, Name, [ EventAggregators ], [ Filters ]
-  - UUID
-  - Name
-  - aggregatedVeventComponentsText
+EventSource:
 
-Filter: UUID: Name, [ FilterConditions ], [ EventAggregators ]
+- UUID
+- Name
+- Url
+- veventComponentsText
+
+EventGroup: UUID, Name, [ EventSources ], [ Filters ]
+
+- UUID
+- Name
+- aggregatedVeventComponentsText
+
+Filter: UUID: Name, [ FilterConditions ], [ EventSources ]
 FilterCondition: UUID, FilterExpression
-
 
 # USER EVENT INFO
 
@@ -62,4 +65,3 @@ USERS ---< SUBSCRIBED ICAL EVENT INFO >---- AGG EVENTS
 - EVENT GROUP ADMIN --< EVENT GROUP: CRUD EVENT GROUP AND RELATED AGGREGRATORS, FILTERS, AND FILtER CONDITIONS
 - USER -< SUBSCRIBED ICAL EVENT: CRYD
 - EVERYONE -> READ ON EVENT GROUP, FILTERS, FILTER CONDITIONS AND SUBSCRIBE TO AN EVENT GROUP
-
