@@ -1,6 +1,6 @@
 import { AggregatedEvent } from "../../models/AggregatedEvent";
-import { getAggregatedEventsFromWebcalFile, getVeventsComponentTextFromFile } from "../WebcalUtis";
-import { getAggregatedEventsFromWebcalURL } from "../WebcalUtis";
+import { getAggregatedEventsFromWebcalFile, getVeventComponentsTextFromFile } from "../WebcalUtils";
+import { getAggregatedEventsFromWebcalURL } from "../WebcalUtils";
 import { ICAL_FILENAME, ICAL_URL } from '../../__test-helper__/testGlobals';
 import { readFileSync } from "fs";
 
@@ -23,9 +23,15 @@ describe("URL import", () => {
 // Then the string is contained within the ics
 describe("ComponentText extraction", () => {
     it("The event text is extracted correctly", async () => {
-        const veventsComponentText = getVeventsComponentTextFromFile(ICAL_FILENAME);
+        const veventComponentsText = getVeventComponentsTextFromFile(ICAL_FILENAME);
         const fileContent = readFileSync(ICAL_FILENAME).toString()
-        expect(fileContent.includes(veventsComponentText));
+        console.log('Debug count',veventComponentsText.match(/\n/g),veventComponentsText.match(/\r/g),
+        veventComponentsText.match(/\n\r/g),veventComponentsText.match(/\r\n/g))
+        expect(fileContent).toContain(veventComponentsText);
+
+        const countFromGet = (veventComponentsText.match(/VEVENT/g) || []).length;
+        const countFromFile = (fileContent.match(/VEVENT/g) || []).length;
+        expect(countFromGet).toEqual(countFromFile);
     });
 });
 

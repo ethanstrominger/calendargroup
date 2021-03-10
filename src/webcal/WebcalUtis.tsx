@@ -29,7 +29,9 @@ function _getEventsFromICALFile(webcalFilename: string) {
 };
 
 function _getAggregatedEventsFromICALText(iCalText: string) {
-    const iAggregatedEventRecords = _getVeventComponentsFromICALText(iCalText);
+    const iCalData = ICAL.parse(iCalText);
+    const iCalDataComponent = new ICAL.Component(iCalData);
+    const iAggregatedEventRecords = iCalDataComponent.getAllSubcomponents("vevent");
     const aggregatedEvents = iAggregatedEventRecords.map(_convertIAggregatedEventToAggregatedEvent);
     return aggregatedEvents;
 };
@@ -51,23 +53,6 @@ export const getAggregatedEventsFromWebcalURL = async (url: string): Promise<Agg
     return _getAggregatedEventsFromICALText(responseText);
 }
 
-export const getVeventComponentsTextFromFile = (webcalFilename: string): string => {
-    const iCalText = readFileSync(webcalFilename).toString();
-    const vEvents = _getVeventComponentsFromICALText(iCalText);
-    return _getTextFromArray(vEvents)
+export const getVeventComponentsTextFromFile = (ICAL_FILENAME: string): string => {
+    return ""
 }
-function _getVeventComponentsFromICALText(iCalText: string): Array<ICAL.Component> {
-    const iCalData = ICAL.parse(iCalText);
-    const iCalDataComponent = new ICAL.Component(iCalData);
-    return iCalDataComponent.getAllSubcomponents("vevent");
-}
-
-function _getTextFromArray(vArray: any[]) {
-    let text = ""
-    let arrayLength = vArray.length;
-    for (let i = 0; i < arrayLength; i++) {
-      text += vArray[i].toString()+'\r\n'
-    }
-    return text
-}
-
