@@ -2,12 +2,12 @@ import { EventSource } from "../EventSource";
 import { AggregatedEvent } from "../AggregatedEvent";
 
 describe("EventSource CRUD", () => {
-  it("A calendar can be created", () => {
-    const calendar = new EventSource();
-    expect(calendar).toBeDefined();
+  it("A eventSource can be created", () => {
+    const eventSource = new EventSource();
+    expect(eventSource).toBeDefined();
   });
 
-  it("Events can be added to a calendar", () => {
+  it("Events can be added to a eventSource", () => {
     const currentTime = new Date();
     const aggregatedEvent1 = new AggregatedEvent({
       aggregatedEventId: "1",
@@ -27,14 +27,14 @@ describe("EventSource CRUD", () => {
       startDateTime: currentTime,
       endDateTime: new Date(currentTime.getTime() + 1000 * 60 * 60),
     });
-    const calendar = new EventSource();
-    calendar.addAggregatedEvent(aggregatedEvent1);
-    calendar.addAggregatedEvent(aggregatedEvent2);
-    expect(aggregatedEvent1 === calendar.aggregatedEvents["1"]).toBeTruthy();
-    expect(aggregatedEvent2 === calendar.aggregatedEvents["2"]).toBeTruthy();
+    const eventSource = new EventSource();
+    eventSource.addAggregatedEvent(aggregatedEvent1);
+    eventSource.addAggregatedEvent(aggregatedEvent2);
+    expect(aggregatedEvent1 === eventSource.aggregatedEvents["1"]).toBeTruthy();
+    expect(aggregatedEvent2 === eventSource.aggregatedEvents["2"]).toBeTruthy();
   });
 
-  it("An array of events can be added to a calendar", () => {
+  it("An array of events can be added to a eventSource", () => {
     const currentTime = new Date();
     const aggregatedEvent1 = new AggregatedEvent({
       aggregatedEventId: "1",
@@ -58,9 +58,9 @@ describe("EventSource CRUD", () => {
       aggregatedEvent1,
       aggregatedEvent2,
     ];
-    const calendar = new EventSource();
-    calendar.addAggregatedEvents(aggregatedEventsArray);
-    expect(aggregatedEvent1 === calendar.aggregatedEvents["1"]).toBeTruthy();
-    expect(aggregatedEvent2 === calendar.aggregatedEvents["2"]).toBeTruthy();
+    const eventSource = new EventSource();
+    eventSource.addAggregatedEvents(aggregatedEventsArray);
+    expect(aggregatedEvent1 === eventSource.aggregatedEvents["1"]).toBeTruthy();
+    expect(aggregatedEvent2 === eventSource.aggregatedEvents["2"]).toBeTruthy();
   });
 });
