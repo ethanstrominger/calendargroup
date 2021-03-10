@@ -53,3 +53,6 @@ export const getAggregatedEventsFromWebcalURL = async (url: string): Promise<Agg
     return _getAggregatedEventsFromICALText(responseText);
 }
 
+export const getVeventsComponentTextFromFile = (ICAL_FILENAME: string): string => {
+    return ""
+}
