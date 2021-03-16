@@ -11,7 +11,7 @@
          /|\                                                        |
 ┌----------------------┐                                            |
 |        EVENT         | -------------------------------------------┐   <==== Event aggregator procedure fetches
-|     SOURCES       |                                            |         external events for an event aggregrator and
+|     SOURCES          |                                            |         external events for an event aggregrator and
 └----------------------┘                                            |         if applicable, filters the events based on the
    \|/                                                              |         filter for the event aggregator
     |                                                               |
@@ -25,7 +25,7 @@
     |           |                                          |    └------------┘ |
 ┌----------------------┐                                   |                   |
 |       EVENT          |                                   |   SUBSCRIBABLE    | <=== Event group procedure combines the aggregated
-|       AGGREGATOR          | >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> |     CALENDAR      |      events for all the event aggregators of an
+|       AGGREGATOR     | >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> |     CALENDAR      |      events for all the event aggregators of an
 └----------------------┘                                   |                   | .    event group
                                                            |                   |
                                                            └-------------------┘
@@ -51,6 +51,11 @@ EventGroup: UUID, Name, [ EventSources ], [ Filters ]
 - UUID
 - Name
 - aggregatedVeventComponentsText
+
+EventAggregator
+
+- UUID
+- Name
 
 Filter: UUID: Name, [ FilterConditions ], [ EventSources ]
 FilterCondition: UUID, FilterExpression
