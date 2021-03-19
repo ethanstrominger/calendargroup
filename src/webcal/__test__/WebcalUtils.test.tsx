@@ -25,8 +25,6 @@ describe("ComponentText extraction", () => {
     it("The event text is extracted correctly", async () => {
         const veventComponentsText = getVeventComponentsTextFromFile(ICAL_FILENAME);
         const fileContent = readFileSync(ICAL_FILENAME).toString()
-        console.log('Debug count',veventComponentsText.match(/\n/g),veventComponentsText.match(/\r/g),
-        veventComponentsText.match(/\n\r/g),veventComponentsText.match(/\r\n/g))
         expect(fileContent).toContain(veventComponentsText);
 
         const countFromGet = (veventComponentsText.match(/VEVENT/g) || []).length;

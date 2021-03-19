@@ -1,9 +1,9 @@
-import { EventSource } from "../EventSource";
+import { SmartEventSource } from "../SmartEventSource";
 import { AggregatedEvent } from "../AggregatedEvent";
 
-describe("EventSource CRUD", () => {
+describe("SmartEventSource CRUD", () => {
   it("A eventSource can be created", () => {
-    const eventSource = new EventSource();
+    const eventSource = new SmartEventSource();
     expect(eventSource).toBeDefined();
   });
 
@@ -27,7 +27,7 @@ describe("EventSource CRUD", () => {
       startDateTime: currentTime,
       endDateTime: new Date(currentTime.getTime() + 1000 * 60 * 60),
     });
-    const eventSource = new EventSource();
+    const eventSource = new SmartEventSource();
     eventSource.addAggregatedEvent(aggregatedEvent1);
     eventSource.addAggregatedEvent(aggregatedEvent2);
     expect(aggregatedEvent1 === eventSource.aggregatedEvents["1"]).toBeTruthy();
@@ -58,7 +58,7 @@ describe("EventSource CRUD", () => {
       aggregatedEvent1,
       aggregatedEvent2,
     ];
-    const eventSource = new EventSource();
+    const eventSource = new SmartEventSource();
     eventSource.addAggregatedEvents(aggregatedEventsArray);
     expect(aggregatedEvent1 === eventSource.aggregatedEvents["1"]).toBeTruthy();
     expect(aggregatedEvent2 === eventSource.aggregatedEvents["2"]).toBeTruthy();
