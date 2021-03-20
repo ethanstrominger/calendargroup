@@ -1,4 +1,5 @@
 import { AggregatedEvent } from "./AggregatedEvent";
+import { v4 as uuidv4 } from "uuid";
 
 export interface ISmartEventSource {
   aggregatedEvents: { [key: string]: AggregatedEvent };
@@ -6,8 +7,14 @@ export interface ISmartEventSource {
 
 export class SmartEventSource implements ISmartEventSource {
   _aggregatedEvents: { [key: string]: AggregatedEvent } = {};
+  _uuid: string = "";
 
-  constructor() {}
+  constructor() {
+    this._uuid = uuidv4();
+  }
+
+
+  get uuid(): string {return this._uuid}
 
   addAggregatedEvent = (aggregatedEvent: AggregatedEvent) =>
     (this._aggregatedEvents[

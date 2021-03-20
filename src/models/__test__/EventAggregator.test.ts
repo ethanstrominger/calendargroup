@@ -11,7 +11,8 @@ describe("EventAggregator CRUD", () => {
     const name = "event aggregator name";
     const eventAggregator = new EventAggregator(name);
     const eventSource = new SmartEventSource();
-    const success = eventAggregator.addEventSource();
-    expect(eventAggregator.getEventSources()).toContain(eventSource);
+    eventAggregator.addEventSource(eventSource);
+    expect(eventAggregator.getEventSources()[eventSource.uuid
+    ]).toEqual(eventSource);
   });
 });
