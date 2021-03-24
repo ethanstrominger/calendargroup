@@ -3,9 +3,14 @@ import { AggregatedEvent } from "../AggregatedEvent";
 
 describe("SmartEventSource CRUD", () => {
   it("A eventSource can be created", () => {
-    const eventSource = new SmartEventSource("Name", "URL", "www.google.com");
+    const name = "Name";
+    const sourceType = "URL";
+    const source = "www.google.com";
+    const eventSource = new SmartEventSource(name, sourceType, source);
     expect(eventSource).toBeDefined();
-    expect(eventSource.name).toEqual("Name");
+    expect(eventSource.name).toEqual(name);
+    expect(eventSource.sourceType).toEqual(sourceType);
+    expect(eventSource.source).toEqual(source);
   });
 
   it("Events can be added to a eventSource", () => {
