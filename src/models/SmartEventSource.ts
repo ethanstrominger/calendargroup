@@ -8,9 +8,15 @@ export interface ISmartEventSource {
 export class SmartEventSource implements ISmartEventSource {
   _aggregatedEvents: { [key: string]: AggregatedEvent } = {};
   _uuid: string = "";
+  name: string;
+  sourceType: string;
+  source: string;
 
-  constructor() {
+  constructor(name, sourceType, source) {
     this._uuid = uuidv4();
+    this.name = name;
+    this.sourceType = sourceType;
+    this.source = source;
   }
 
 
