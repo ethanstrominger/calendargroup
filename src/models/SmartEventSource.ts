@@ -6,6 +6,10 @@ export interface ISmartEventSource {
 }
 
 export class SmartEventSource implements ISmartEventSource {
+  static smartEventSources: { [key: string]: SmartEventSource } = {};
+  static getByUUID(uuid: string) {
+    return SmartEventSource.smartEventSources[uuid];
+  }
   _aggregatedEvents: { [key: string]: AggregatedEvent } = {};
   _uuid: string = "";
   name: string;
@@ -17,6 +21,7 @@ export class SmartEventSource implements ISmartEventSource {
     this.name = name;
     this.sourceType = sourceType;
     this.source = source;
+    SmartEventSource.smartEventSources[this._uuid] = this;
   }
 
 

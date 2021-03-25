@@ -13,6 +13,17 @@ describe("SmartEventSource CRUD", () => {
     expect(eventSource.source).toEqual(source);
   });
 
+  it("You can get an eventSource by UUID", () => {
+    const name = "Name";
+    const sourceType = "URL";
+    const source = "www.google.com";
+    const eventSource = new SmartEventSource(name, sourceType, source);
+    const retrievedEventSource = SmartEventSource.getByUUID(eventSource.uuid);
+    expect(retrievedEventSource.name).toEqual(name);
+    expect(retrievedEventSource.sourceType).toEqual(sourceType);
+    expect(retrievedEventSource.source).toEqual(source);
+  });
+
   it("Events can be added to a eventSource", () => {
     const currentTime = new Date();
     const aggregatedEvent1 = new AggregatedEvent({

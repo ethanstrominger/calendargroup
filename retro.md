@@ -1,3 +1,19 @@
+
+3/25/21 - Ethan & Joel
+Improve
+- Try Autoformat feature in Excel on CSV
+- Deferred push of Java Car notes.md
+Liked
+- Saved Excel formatting in separate file for reuse (with CSV)
+- Test descriptions 
+    - Were ready in spreadsheet 
+    - Good to review for clarity
+- Split notes.md into 3 documents (finally)
+ 
+ ------------------
+
+Retro History
+
 3/16/21 - Ethan & Joel
 Improve
 - Agenda Timer not working right - slow? (https://www.timeblocks.co/)
@@ -9,10 +25,7 @@ Liked
 - Agenda timer (https://www.timeblocks.co/)
 - Successfully set up calendar project on Joel's PC 
 - Used mob timer even though Ethan had to navigate mostly (only one who knew)
- 
- ------------------
 
-Retro History
 
 RETRO IMPROVEMENTS:
 - 3/11/2021:
