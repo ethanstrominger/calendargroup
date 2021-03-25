@@ -25,7 +25,7 @@
     |           |                                          |    └------------┘ |
 ┌----------------------┐                                   |                   |
 |       EVENT          |                                   |   SUBSCRIBABLE    | <=== Event group procedure combines the aggregated
-|       AGGREGATOR     | >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> |     CALENDAR      |      events for all the event aggregators of an
+|       AGGREGATORS    | >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> |     CALENDAR      |      events for all the event aggregators of an
 └----------------------┘                                   |                   | .    event group
                                                            |                   |
                                                            └-------------------┘
@@ -43,14 +43,15 @@ EventSource:
 
 - UUID
 - Name
-- Url
-- veventComponentsText
+- Type (FILE or URL)
+- Source (FILE or URL)
+- Timezones
 
-EventGroup: UUID, Name, [ EventSources ], [ Filters ]
+AggregatedEvents:
 
 - UUID
 - Name
-- aggregatedVeventComponentsText
+- other fields specified by webcal format
 
 EventAggregator
 
