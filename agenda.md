@@ -7,6 +7,10 @@ BEFORE MEETING
 - Discuss staying alert (snacks, standing,...)
 - Set Ethan's keyboard (for use with Windows remotely)
 - Ethan restart computer before meeting (if still having problems after moving it from floor)
+- Open (and modify as needed)
+- Time how much time we're coding & try to increase
+- Modify mob timer source code to add "stand" reminder (1) text, (2) text to speech (TTS) 
+  [and consider other improvements]
 
 AGENDA (during meeting)
 
@@ -18,15 +22,15 @@ Before Starting Project:
 
 - Set Timers for
   (1) Mob Timer (https://mobti.me/arrested-egg) (edit Navigator to say "Navigator (Stand)")  
-  (2) Agenda Timer(s), e.g., https://www.timeblocks.co/-MVugQnlN9XkoNqc65sx
+  (2) Agenda Timer(s), e.g., https://www.timeme.com/alarm-clock.htm?1xdchgajjzbibj4bgbj9cgbjJdgbkkegbkpfgbk4ggbkEhgblkigblzjgbl4kgb/Alarm+Clock
           Item	       Len	 Start
           Welcome	    5	 9:30 AM
           Review Notes 10	 9:35 AM
           Coding	   25	 9:45 AM
           Retro	        5	10:10 AM
-          Coding	   10	10:15 AM
-          Break        10	10:25 AM
-          Coding	   35	10:35 AM
+          Coding	   15	10:15 AM
+          Break        10	10:30 AM
+          Coding	   30	10:40 AM
           Retro+Plan   15	11:10 AM
           Closing	    5	11:25 AM
 
@@ -69,4 +73,6 @@ IntelliJ Shortcuts:
 
 End of Session:
 
+- Update log of when started coding:
+  - 25-Mar: started at 10:55
 - Commit & Push - so everyone has the latest code before leave

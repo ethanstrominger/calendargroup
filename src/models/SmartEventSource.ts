@@ -10,6 +10,7 @@ export class SmartEventSource implements ISmartEventSource {
   static getByUUID(uuid: string) {
     return SmartEventSource.smartEventSources[uuid];
   }
+  // C Field - 
   _aggregatedEvents: { [key: string]: AggregatedEvent } = {};
   _uuid: string = "";
   name: string;

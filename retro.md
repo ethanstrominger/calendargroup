@@ -3,12 +3,14 @@
 Improve
 - Try Autoformat feature in Excel on CSV
 - Deferred push of Java Car notes.md
+- Break should be exactly at 10:30
 Liked
 - Saved Excel formatting in separate file for reuse (with CSV)
 - Test descriptions 
     - Were ready in spreadsheet 
     - Good to review for clarity
 - Split notes.md into 3 documents (finally)
+- Implemented getByUiid
  
  ------------------
 
