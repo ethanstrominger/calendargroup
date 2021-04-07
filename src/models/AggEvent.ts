@@ -1,12 +1,12 @@
-export interface IAggregatedEvent {
-  aggregatedEventId: string;
-  aggregatedEventWebcalId: string;
+export interface IAggEvent {
+  aggEventId: string;
+  aggEventWebcalId: string;
   title: string;
   description?: string;
   location?: string;
   repeatingAggregatedEventWebcalId?: string;
-  startDateTime: Date;
-  endDateTime: Date;
+  dtStart: Date;
+  dtEnd: Date;
   rrule?: string;
   recurrenceId?: Date;
   created?: Date;
@@ -16,16 +16,16 @@ export interface IAggregatedEvent {
   sequence?: number;
 }
 
-export class AggregatedEvent implements IAggregatedEvent {
+export class AggEvent implements IAggEvent {
   readonly uniqueOccurenceId: string;
-  readonly aggregatedEventId: string;
-  readonly aggregatedEventWebcalId: string;
+  readonly aggEventId: string;
+  readonly aggEventWebcalId: string;
   readonly title: string;
   readonly description?: string;
   readonly location?: string;
   readonly repeatingAggregatedEventWebcalId?: string;
-  readonly startDateTime: Date;
-  readonly endDateTime: Date;
+  readonly dtStart: Date;
+  readonly dtEnd: Date;
   readonly rrule?: string;
   readonly recurrenceId?: Date;
   readonly created?: Date;
@@ -34,27 +34,27 @@ export class AggregatedEvent implements IAggregatedEvent {
   readonly exdate?: Date;
   readonly sequence?: number;
 
-  constructor(aggregatedEvent: IAggregatedEvent) {
-    this.aggregatedEventId = aggregatedEvent.aggregatedEventId;
-    this.aggregatedEventWebcalId = aggregatedEvent.aggregatedEventWebcalId;
-    this.title = aggregatedEvent.title;
-    this.description = aggregatedEvent.description;
+  constructor(aggEvent: IAggEvent) {
+    this.aggEventId = aggEvent.aggEventId;
+    this.aggEventWebcalId = aggEvent.aggEventWebcalId;
+    this.title = aggEvent.title;
+    this.description = aggEvent.description;
     this.repeatingAggregatedEventWebcalId =
-      aggregatedEvent.repeatingAggregatedEventWebcalId;
-    this.startDateTime = aggregatedEvent.startDateTime;
-    this.endDateTime = aggregatedEvent.endDateTime;
-    this.location = aggregatedEvent.location;
-    this.rrule = aggregatedEvent.rrule;
-    this.recurrenceId = aggregatedEvent.recurrenceId;
-    this.created = aggregatedEvent.created;
-    this.lastModified = aggregatedEvent.lastModified;
-    this.dtstamp = aggregatedEvent.dtstamp;
-    this.exdate = aggregatedEvent.exdate;
-    this.sequence = aggregatedEvent.sequence;
+      aggEvent.repeatingAggregatedEventWebcalId;
+    this.dtStart = aggEvent.dtStart;
+    this.dtEnd = aggEvent.dtEnd;
+    this.location = aggEvent.location;
+    this.rrule = aggEvent.rrule;
+    this.recurrenceId = aggEvent.recurrenceId;
+    this.created = aggEvent.created;
+    this.lastModified = aggEvent.lastModified;
+    this.dtstamp = aggEvent.dtstamp;
+    this.exdate = aggEvent.exdate;
+    this.sequence = aggEvent.sequence;
     if (this.recurrenceId) {
-      this.uniqueOccurenceId = this.aggregatedEventId + this.recurrenceId;
+      this.uniqueOccurenceId = this.aggEventId + this.recurrenceId;
     } else {
-      this.uniqueOccurenceId = this.aggregatedEventId;
+      this.uniqueOccurenceId = this.aggEventId;
     }
   }
 }
