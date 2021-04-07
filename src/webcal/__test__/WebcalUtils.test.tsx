@@ -1,20 +1,20 @@
-import { AggregatedEvent } from "../../models/AggregatedEvent";
-import { getAggregatedEventsFromWebcalFile, getVeventComponentsTextFromFile } from "../WebcalUtils";
-import { getAggregatedEventsFromWebcalURL } from "../WebcalUtils";
+import { AggEvent } from "../../models/AggEvent";
+import { getAggEventsFromWebcalFile, getVeventComponentsTextFromFile } from "../WebcalUtils";
+import { getAggEventsFromWebcalURL } from "../WebcalUtils";
 import { ICAL_FILENAME, ICAL_URL } from '../../__test-helper__/testGlobals';
 import { readFileSync } from "fs";
 
 describe("ICS import", () => {
     it("You can get events from an ICS", () => {
-        const events = getAggregatedEventsFromWebcalFile(ICAL_FILENAME);
-        expect(events[0] instanceof AggregatedEvent);
+        const events = getAggEventsFromWebcalFile(ICAL_FILENAME);
+        expect(events[0] instanceof AggEvent);
     });
 });
 
 describe("URL import", () => {
     it("You can get events from a URL", async () => {
-        const events = await getAggregatedEventsFromWebcalURL(ICAL_URL);
-        expect(events[0] instanceof AggregatedEvent);
+        const events = await getAggEventsFromWebcalURL(ICAL_URL);
+        expect(events[0] instanceof AggEvent);
     });
 });
 

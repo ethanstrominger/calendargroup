@@ -1,13 +1,13 @@
-import { AggregatedEvent } from "../models/AggregatedEvent";
+import { AggEvent } from "../models/AggEvent";
 import { readFileSync } from "fs";
 import ICAL from "ical.js";
 import { XMLHttpRequest } from "xmlhttprequest";
 
-function _convertIAggregatedEventToAggregatedEvent(ICALEvent) {
+function _convertIAggEventToAggEvent(ICALEvent) {
     const uid = ICALEvent.getFirstPropertyValue("uid");
-    return new AggregatedEvent({
-        aggregatedEventId: uid,
-        aggregatedEventWebcalId: uid,
+    return new AggEvent({
+        aggEventId: uid,
+        aggEventWebcalId: uid,
         title: ICALEvent.getFirstPropertyValue("summary"),
         startDateTime: new Date(ICALEvent.getFirstPropertyValue("dtstart")),
         endDateTime: new Date(ICALEvent.getFirstPropertyValue("dtend")),
@@ -25,22 +25,22 @@ function _convertIAggregatedEventToAggregatedEvent(ICALEvent) {
 
 function _getEventsFromICALFile(webcalFilename: string) {
     const iCalText = readFileSync(webcalFilename).toString();
-    return _getAggregatedEventsFromICALText(iCalText);
+    return _getAggEventsFromICALText(iCalText);
 };
 
-function _getAggregatedEventsFromICALText(iCalText: string) {
+function _getAggEventsFromICALText(iCalText: string) {
     const iCalData = ICAL.parse(iCalText);
     const iCalDataComponent = new ICAL.Component(iCalData);
-    const iAggregatedEventRecords = iCalDataComponent.getAllSubcomponents("vevent");
-    const aggregatedEvents = iAggregatedEventRecords.map(_convertIAggregatedEventToAggregatedEvent);
-    return aggregatedEvents;
+    const iAggEventRecords = iCalDataComponent.getAllSubcomponents("vevent");
+    const aggEvents = iAggEventRecords.map(_convertIAggEventToAggEvent);
+    return aggEvents;
 };
 
-export const getAggregatedEventsFromWebcalFile = (webcalFilename: string): AggregatedEvent[] => {
+export const getAggEventsFromWebcalFile = (webcalFilename: string): AggEvent[] => {
     return _getEventsFromICALFile(webcalFilename);
 };
 
-export const getAggregatedEventsFromWebcalURL = async (url: string): Promise<AggregatedEvent[]> => {
+export const getAggEventsFromWebcalURL = async (url: string): Promise<AggEvent[]> => {
     // todo: change to fetch?
     const Http = new XMLHttpRequest();
     Http.open("GET", url);
@@ -50,7 +50,7 @@ export const getAggregatedEventsFromWebcalURL = async (url: string): Promise<Agg
             resolve(Http.responseText);
         }
     });
-    return _getAggregatedEventsFromICALText(responseText);
+    return _getAggEventsFromICALText(responseText);
 }
 
 export const getVeventComponentsTextFromFile = (ICAL_FILENAME: string): string => {

@@ -1,14 +1,13 @@
-import { AggregatedEvent } from "./AggregatedEvent";
+import { AggEvent } from "./AggEvent";
 import { v4 as uuidv4 } from "uuid";
 
 export interface ISmartEventSource {
-  aggregatedEvents: { [key: string]: AggregatedEvent };
+  aggEvents: { [key: string]: AggEvent };
 }
 
 export class SmartEventSource implements ISmartEventSource {
-
-  // C Field - 
-  readonly aggregatedEvents: { [key: string]: AggregatedEvent } = {};
+  // C Field -
+  readonly aggEvents: { [key: string]: AggEvent } = {};
   readonly uuid: string = "";
   name: string;
   sourceType: string;
@@ -27,13 +26,11 @@ export class SmartEventSource implements ISmartEventSource {
     SmartEventSource.smartEventSources[this.uuid] = this;
   }
 
-  addAggregatedEvent = (aggregatedEvent: AggregatedEvent) =>
-    (this.aggregatedEvents[
-      aggregatedEvent.uniqueOccurenceId
-    ] = aggregatedEvent);
+  addAggEvent = (aggEvent: AggEvent) =>
+    (this.aggEvents[aggEvent.uniqueOccurenceId] = aggEvent);
 
-  addAggregatedEvents = (aggregatedEvents: AggregatedEvent[]) =>
-    aggregatedEvents.map((aggregatedEvent) => {
-      this.addAggregatedEvent(aggregatedEvent);
+  addAggEvents = (aggEvents: AggEvent[]) =>
+    aggEvents.map((aggEvent) => {
+      this.addAggEvent(aggEvent);
     });
 }
