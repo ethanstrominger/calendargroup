@@ -16,7 +16,7 @@ export class AggEvent {
   readonly exdate?: Date;
   readonly sequence?: number;
 
-  constructor(aggEvent: IAggEvent) {
+  constructor(aggEvent: AggEvent) {
     this.uid = aggEvent.uid;
     this.aggEventWebcalId = aggEvent.aggEventWebcalId;
     this.title = aggEvent.title;
