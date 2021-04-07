@@ -1,5 +1,5 @@
 export interface IAggEvent {
-  aggEventId: string;
+  uid: string;
   aggEventWebcalId: string;
   title: string;
   description?: string;
@@ -18,7 +18,7 @@ export interface IAggEvent {
 
 export class AggEvent implements IAggEvent {
   readonly uniqueOccurenceId: string;
-  readonly aggEventId: string;
+  readonly uid: string;
   readonly aggEventWebcalId: string;
   readonly title: string;
   readonly description?: string;
@@ -35,7 +35,7 @@ export class AggEvent implements IAggEvent {
   readonly sequence?: number;
 
   constructor(aggEvent: IAggEvent) {
-    this.aggEventId = aggEvent.aggEventId;
+    this.uid = aggEvent.uid;
     this.aggEventWebcalId = aggEvent.aggEventWebcalId;
     this.title = aggEvent.title;
     this.description = aggEvent.description;
@@ -52,9 +52,9 @@ export class AggEvent implements IAggEvent {
     this.exdate = aggEvent.exdate;
     this.sequence = aggEvent.sequence;
     if (this.recurrenceId) {
-      this.uniqueOccurenceId = this.aggEventId + this.recurrenceId;
+      this.uniqueOccurenceId = this.uid + this.recurrenceId;
     } else {
-      this.uniqueOccurenceId = this.aggEventId;
+      this.uniqueOccurenceId = this.uid;
     }
   }
 }

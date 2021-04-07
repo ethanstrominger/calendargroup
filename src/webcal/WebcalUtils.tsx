@@ -6,7 +6,7 @@ import { XMLHttpRequest } from "xmlhttprequest";
 function _convertIAggEventToAggEvent(ICALEvent) {
     const uid = ICALEvent.getFirstPropertyValue("uid");
     return new AggEvent({
-        aggEventId: uid,
+        uid: uid,
         aggEventWebcalId: uid,
         title: ICALEvent.getFirstPropertyValue("summary"),
         startDateTime: new Date(ICALEvent.getFirstPropertyValue("dtstart")),

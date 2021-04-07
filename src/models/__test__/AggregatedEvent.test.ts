@@ -4,7 +4,7 @@ describe("store", () => {
   it("not repeating event can be created", () => {
     const currentTime = new Date();
     const aggEvent = new AggEvent({
-      aggEventId: "hi",
+      uid: "hi",
       aggEventWebcalId: "a webcalid",
       title: "a title",
       description: "a description",
@@ -19,7 +19,7 @@ describe("repeating events", () => {
   it("repeating event can be created", () => {
     const currentTime = new Date();
     const aggEvent = new AggEvent({
-      aggEventId: "hi",
+      uid: "hi",
       aggEventWebcalId: "a webcalid",
       title: "a title",
       description: "a description",

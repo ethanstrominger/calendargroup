@@ -27,7 +27,7 @@ describe("SmartEventSource CRUD", () => {
   it("Events can be added to a eventSource", () => {
     const currentTime = new Date();
     const aggEvent1 = new AggEvent({
-      aggEventId: "1",
+      uid: "1",
       aggEventWebcalId: "a webcalid",
       title: "a title",
       description: "a description",
@@ -37,7 +37,7 @@ describe("SmartEventSource CRUD", () => {
 
     const tomorrowTime = new Date(currentTime.getTime() + 1000 * 60 * 60 * 24);
     const aggEvent2 = new AggEvent({
-      aggEventId: "2",
+      uid: "2",
       aggEventWebcalId: "a webcalid for event 2",
       title: "a title for event 2",
       description: "a description for event 2",
@@ -54,7 +54,7 @@ describe("SmartEventSource CRUD", () => {
   it("An array of events can be added to a eventSource", () => {
     const currentTime = new Date();
     const aggEvent1 = new AggEvent({
-      aggEventId: "1",
+      uid: "1",
       aggEventWebcalId: "a webcalid",
       title: "a title",
       description: "a description",
@@ -64,7 +64,7 @@ describe("SmartEventSource CRUD", () => {
 
     const tomorrowTime = new Date(currentTime.getTime() + 1000 * 60 * 60 * 24);
     const aggEvent2 = new AggEvent({
-      aggEventId: "2",
+      uid: "2",
       aggEventWebcalId: "a webcalid for event 2",
       title: "a title for event 2",
       description: "a description for event 2",
