@@ -24,8 +24,7 @@
     |          \|/                                         |    | EVENTS     | |
     |           |                                          |    └------------┘ |
 ┌----------------------┐                                   |                   |
-|       EVENT          |                                   |   SUBSCRIBABLE    | <=== Event group procedure combines the aggregated
-|       AGGREGATORS    | >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> |     CALENDAR      |      events for all the event aggregators of an
+|       SMART CALENDAR | >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> |     CALENDAR      |      events for all the event aggregators of an
 └----------------------┘                                   |                   | .    event group
                                                            |                   |
                                                            └-------------------┘
