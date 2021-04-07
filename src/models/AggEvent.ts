@@ -1,22 +1,4 @@
-export interface IAggEvent {
-  uid: string;
-  aggEventWebcalId: string;
-  title: string;
-  description?: string;
-  location?: string;
-  repeatingAggregatedEventWebcalId?: string;
-  dtStart: Date;
-  dtEnd: Date;
-  rrule?: string;
-  recurrenceId?: Date;
-  created?: Date;
-  lastModified?: Date;
-  dtstamp?: Date;
-  exdate?: Date;
-  sequence?: number;
-}
-
-export class AggEvent implements IAggEvent {
+export class AggEvent {
   readonly uniqueOccurenceId: string;
   readonly uid: string;
   readonly aggEventWebcalId: string;
