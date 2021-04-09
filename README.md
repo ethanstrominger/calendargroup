@@ -1,13 +1,52 @@
-# calendargroup
-Terminology: ICAL Calendar: ICAL is a standard format for calendars.  Calendar apps that support this format (such as Google calendar) can display any other web calendar alone or combined with other Webcal events using a URL, includiing calendars  you created in that app.
+# Purpose
+Version 1: Provide capability to select calendars for a particular topic from various web sources into a single subscribable calendar.  Anyone can then subscribe to the single calendar with a URL using their favorite calendar app.  They will see the aggregated events as a single calendar and can optionally display them along with their personal and subscribed calendars.
 
-This app will release the following features incrementally:
-  - Combine multiple Webcal calendars into one Group Calendar that can be subscribed to with one URL
-  - Query Group Calendar based on date, time, day of the week, tags, and length
-  - Create Query Calendars based on a query that can be subscribed to wth one URL
-  - Add individual EventBrite events into a group calendar.
-  - Support imports from CSV spreadsheets.
+Version 2: Provide query capabilities for any calendar by date, time of day, online/offline, location, tags, and other criteria.
+# Technology
+Backend: Typescript, Express
+Front End: React, axios
+DB: TBD
+Deployment: TBD
+
+# Development Approach
+Use TDD to develop the backend.  To make sure database / data storage and backend are cleanly separated, only implement data storage after implementing the frontend and backend without permanent data storage.
+Project Status
+[X] Understand webcal format (partially)
+
+[X] Define initial test strategy 
+[X] Define initial Object / Domain Model 
+[X] Select backend technology
+[X] Look for useful libraries or github projects (found ical.js library, evaluated node-ical.js, decided ical.js is better)
+[X] Create backend repository
+[ ] Implement backend functionality using Test Driven Development
+   - started.  Implemented some tests, but revised test strategy, so redoing some of them, and many more to implement)
+[ ] Implement routes for anything needed by frontend
+[ ] Implement route for subscribing to a web calendar
+
+[X] Select frontend technology
+[ ] Define basic screens
+[ ] Create wireframes / figma
+[ ] Implement UI
+
+[ ] Implement data storage
+
+[ ] Deploy to github, Heroku, and/or Amazon
 
 
-
-V3 - Event goers will be able to subscribe to changes for an event automatically, by choice, or by selection. 
+# How to Contribute
+- Read documentation
+- Backend
+  - Identify a test to implement, work on a failing test
+  - Understand webcal format by reviewing annoted_ics.md 
+  - Deploy and develop
+    - Select IDE or text editor
+    - Install extensions useful for typescript and javascript
+      - 
+    - Install node
+    - Clone or fork and clone backend repo
+    - From project directory:
+      ```
+      npm install
+      npm test
+      ```
+    

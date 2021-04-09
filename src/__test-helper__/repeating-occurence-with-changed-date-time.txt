@@ -1,0 +1,16 @@
+BEGIN:VEVENT
+DTSTART;TZID=America/New_York:20210417T100000
+DTEND;TZID=America/New_York:20210417T110000
+DTSTAMP:20210409T190000Z
+UID:7iuqd35c5e1h3dkaat8v579qlp@google.com
+RECURRENCE-ID;TZID=America/New_York:20210416T110000
+CREATED:20210409T175106Z
+DESCRIPTION:<ul><li>First Fri event happens Saturday an hour later.&nbsp\;&
+ nbsp\;</li><li>Thu event canceled</li></ul>
+LAST-MODIFIED:20210409T180158Z
+LOCATION:Berliln\, MA
+SEQUENCE:5
+STATUS:CONFIRMED
+SUMMARY:Repeating Occurence Exception: Fri 4/16 moved to Sat 4/17 earlier
+TRANSP:OPAQUE
+END:VEVENT
