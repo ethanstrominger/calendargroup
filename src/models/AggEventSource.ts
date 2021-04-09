@@ -1,11 +1,11 @@
 import { AggEvent } from "./AggEvent";
 import { v4 as uuidv4 } from "uuid";
 
-export interface ISmartEventSource {
+export interface IAggEventSource {
   aggEvents: { [key: string]: AggEvent };
 }
 
-export class SmartEventSource implements ISmartEventSource {
+export class AggEventSource implements IAggEventSource {
   // C Field -
   readonly aggEvents: { [key: string]: AggEvent } = {};
   readonly uuid: string = "";
@@ -13,9 +13,9 @@ export class SmartEventSource implements ISmartEventSource {
   sourceType: string;
   source: string;
 
-  static smartEventSources: { [key: string]: SmartEventSource } = {};
+  static aggEventSources: { [key: string]: AggEventSource } = {};
   static getByUUID(uuid: string) {
-    return SmartEventSource.smartEventSources[uuid];
+    return AggEventSource.aggEventSources[uuid];
   }
 
   constructor(name, sourceType, source) {
@@ -23,7 +23,7 @@ export class SmartEventSource implements ISmartEventSource {
     this.name = name;
     this.sourceType = sourceType;
     this.source = source;
-    SmartEventSource.smartEventSources[this.uuid] = this;
+    AggEventSource.aggEventSources[this.uuid] = this;
   }
 
   addAggEvent = (aggEvent: AggEvent) =>
