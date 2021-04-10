@@ -16,6 +16,8 @@
     "fs": "^0.0.1-security",
     "ical.js": "^1.4.0",
     "moment": "^2.29.1",
+    "tsc": "^1.20150623.0",
+    "typescript": "^4.2.4",
     "xmlhttprequest": "^1.8.0"
   }
 }

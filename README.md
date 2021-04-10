@@ -1,16 +1,18 @@
 # Purpose
 Version 1: Provide capability to select calendars for a particular topic from various web sources into a single subscribable calendar.  Anyone can then subscribe to the aggregated calendar using their favorite calendar app using a URL.  They will then be able to view the events from the aggregagated calendar in their calendar app and can optionally display them along with their other personal and subscribed calendars.
 
+Sources for events will include calendars in ical format (most web calendars), web scraping of event bright and other sources, and CSV files.
+
 Version 2: Provide query capabilities for any calendar by date, time of day, online/offline, location, tags, and other criteria.
 # Technology
-- Backend: Typescript, Express
-- Front End: React, axios
+- Backend: Typescript, Express, Jest
+- Front End: React, axios, Jest, SASS  Potentially: tailwind? materialui?
 - DB: TBD
 - Deployment: TBD
 
 # Development Approach
-Use TDD to develop the backend.  To make sure database / data storage and backend are cleanly separated, only implement data storage after implementing the frontend and backend without permanent data storage.
-Project Status
+Use TDD to develop the backend.  To make sure database / data storage and backend are cleanly separated, only implement data storage after implementing the frontend and backend without permanent data storage.  Scope of testing for front end UI is TBD - business logic 
+# Project Status
 - [X] Understand webcal format (partially)
 
 - [X] Define initial test strategy 
