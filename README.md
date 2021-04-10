@@ -1,5 +1,5 @@
 # Purpose
-Version 1: Provide capability to select calendars for a particular topic from various web sources into a single subscribable calendar.  Anyone can then subscribe to the single calendar with a URL using their favorite calendar app.  They will see the aggregated events as a single calendar and can optionally display them along with their personal and subscribed calendars.
+Version 1: Provide capability to select calendars for a particular topic from various web sources into a single subscribable calendar.  Anyone can then subscribe to the aggregated calendar using their favorite calendar app using a URL.  They will then be able to view the events from the aggregagated calendar in their calendar app and can optionally display them along with their other personal and subscribed calendars.
 
 Version 2: Provide query capabilities for any calendar by date, time of day, online/offline, location, tags, and other criteria.
 # Technology
