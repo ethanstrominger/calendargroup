@@ -1,7 +1,7 @@
-import { AggEvent } from "../../models/AggEvent";
-import { getAggEventsFromWebcalFile, getVeventComponentsTextFromFile } from "../WebcalUtils";
-import { getAggEventsFromWebcalURL } from "../WebcalUtils";
-import { ICAL_FILENAME, ICAL_URL } from '../../__test-helper__/testGlobals';
+import { AggEvent } from "../../../src/models/AggEvent";
+import { getAggEventsFromWebcalFile, getVeventComponentsTextFromFile } from "../WebcalUtils.tsx-archive";
+import { getAggEventsFromWebcalURL } from "../WebcalUtils.tsx-archive";
+import { ICAL_FILENAME, ICAL_URL } from '../../../src/__test-helper__/testGlobals';
 import { readFileSync } from "fs";
 
 describe("ICS import", () => {

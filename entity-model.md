@@ -84,6 +84,9 @@ AggEvent:
 
 - aggEventUID: string
 - webCalText: string,
+
+
+V2 at
 - webcalAttributes: EventAttributesType
 
 webcalAttributes (matches format of webCalText)
