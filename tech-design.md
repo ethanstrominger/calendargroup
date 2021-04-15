@@ -1,9 +1,27 @@
 ## Algorithm
 Goal: Combine multiple calendars into a new calendar, where:
-  - For any events on the new calendar where start and end date were originally defived from the default for that calendar, the event specifies the timezone
-  - Add original source of event (URL or file specification) to the top of the description
-  - All timezones used are defined once and only once
-  - Any info except timezones and events is discarded
+  - Event Timezone ID: For any source event with no timezone specified in the source calendar, the event in the new calendar will specify the timezone copied from the source calendar default
+  - URL: Add original source of event (URL or file specification) to the top of the description, followed by 2 carriage returns (for space between the URL and original description)
+  - Calendar Timezone Definitions: The list of timezone definitions at the beginning of the new calendar include all the timezone definitions from the original calendars with no duplicates
+  - The new calendar will retain/discard/override the following information (ICS terms below):
+    - Retain:
+        - Timezone Component 
+        - Event Component 
+    - Override:
+       - Calendar Properties 
+          - Calendar Scale : Gregorian
+          - Method : Publish
+          - Product Identifier : AggregatedCalendar
+          - Version : Version of AggregatedCalendar, e.g., 1.0          
+          - X-WR-CALNAME : user-provided (by creator of Aggregated Calendar)
+          - X-WR-TIMEZONE : user-provided (by creator of Aggregated Calendar)
+          - X-WR-CALDESC : user-provided (by creator of Aggregated Calendar)
+    - Discard:
+       - To-Do Component  
+       - Journal Component 
+       - Free/Busy Component 
+       - Alarm Component  
+       - Calendar extensions not mentioned above (Note: extensions have "X-" prefix)
 
 Given a list of valid ICS file names
 
