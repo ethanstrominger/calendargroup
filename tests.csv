@@ -1,6 +1,6 @@
 ﻿Setup Object(s),Act,Assert,Code
-None,Add Aggregated Event,Returns a new Aggregated Event with the attribute values provided and a UUID,AggregatedEvent.create(event:AggregatedEvent) => AggregatedEventAggregatedEvent.get(uuid:string) => AggregatedEvent
-Aggregated Event,Get Aggregated Event by UUID,Returns the Aggregated Event from the Setup,AggregatedEvent.create(event:AggregatedEvent) => AggregatedEventAggregatedEvent.get(uuid:string) => AggregatedEvent
+None,Add Aggregated Event,Returns a new Aggregated Event with the attribute values provided and a UUID,AggregatedEvent.create(event:AggregatedEvent) => AggregatedEvent.get(uuid:string) => AggregatedEvent
+Aggregated Event,Get Aggregated Event by UUID,Returns the Aggregated Event from the Setup,AggregatedEvent.create(event:AggregatedEvent) => AggregatedEvent.get(uuid:string) => AggregatedEvent
 None,Add Event Source,Returns a new Event Source with the attribute values provided and a UUID,EventSource.create(event:EventSource) => EventSourceEventSource.get(uuid:string) => EventSource
 Event Source,Get Event Source,Returns the Event Source from the Setup,
 None,Add Event Aggregator,Returns a new Event Aggregator with the attribute values provided and a UUID,AggegatedEvent.create(event:EventAggregator) => EventAggregatorEventAggregator.get(uuid:string) => EventAggregator

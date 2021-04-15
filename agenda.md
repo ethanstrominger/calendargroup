@@ -21,15 +21,15 @@ Before Starting Project:
   (1) Mob Timer (https://mobti.me/arrested-egg) (edit Navigator to say "Navigator (Stand)")  
   (2) Agenda Timer(s), e.g., https://www.timeme.com/alarm-clock.htm?1xdchgajjzbibj4bgbj9cgbjJdgbkkegbkpfgbk4ggbkEhgblkigblzjgbl4kgb/Alarm+Clock
           Item	       Len	 Start
-          Welcome	    5	 9:30 AM
+          Welcome	      5	 9:30 AM
           Review Notes 10	 9:35 AM
-          Coding	   25	 9:45 AM
+          Coding	     25	 9:45 AM
           Retro	        5	10:10 AM
-          Coding	   15	10:15 AM
+          Coding	     15	10:15 AM
           Break        10	10:30 AM
-          Coding	   30	10:40 AM
+          Coding	     30	10:40 AM
           Retro+Plan   15	11:10 AM
-          Closing	    5	11:25 AM
+          Closing	      5	11:25 AM
 
 - Have co-author string ready:
         ``

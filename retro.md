@@ -1,3 +1,7 @@
+4/15/21 - Ethan & Joel
+Liked
+- Having person who didn't write the documentation read and explain it to the person who did - and modify/improve at the same time.
+- Learned more about ICS format.
 
 3/25/21 - Ethan & Joel
 Improve
