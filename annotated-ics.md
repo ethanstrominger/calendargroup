@@ -49,7 +49,7 @@ BEGIN:VCALENDAR
         DTSTAMP:20210409T190000Z
         UID:12pvkpgashueshetu51qnilcld@google.com
         CREATED:20210409T174347Z
-        DESCRIPTION:Runs Mon Mar 5\, 9-10 AM EST\n\nThis is the same timezone as th
+        DESCRIPTION: Runs Mon Mar 5\, 9-10 AM EST\n\nThis is the same timezone as th
         e calendar.
         LAST-MODIFIED:20210409T174347Z
         LOCATION:2000 Massachusetts Ave\, Cambridge\, MA 02140\, USA
