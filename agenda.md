@@ -13,6 +13,8 @@
 
 Before Starting Project:
 
+- Pull (get latest)
+
 - Review:
   (1) Previous Retro 
   (2) TDD and End of Session steps (see details below)

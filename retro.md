@@ -1,3 +1,16 @@
+4/22/21 - Ethan & Joel
+Feel
+- Good, positive, cheerful
+- Good, relieved
+Liked
+- Using timer flexibly when editing algorithm
+- Doing the algorithm
+- Quick start
+- Explaining text if not author
+- Knowing there are generators and parser
+Improve
+- Do some code
+
 4/15/21 - Ethan & Joel
 Liked
 - Having person who didn't write the documentation read and explain it to the person who did - and modify/improve at the same time.

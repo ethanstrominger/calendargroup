@@ -1,4 +1,7 @@
 TO DO:  
+- Algorithm
+  - Event fields to take/keep
+  - ...
 - Try Autoformat feature in Excel on CSV     
 - Refactor SmartEventSource.getByUuid test and production
 - Modify mob timer source code to add "stand" reminder (1) text, (2) text to speech (TTS) 
@@ -7,3 +10,4 @@ TO DO:
 - (Joel) Try opening this project in Visual Studio (may require something different)     
 
 DONE:
+- 
