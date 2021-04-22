@@ -2,12 +2,15 @@
 Feel
 - Good, positive, cheerful
 - Good, relieved
+- Inquisitive
 Liked
 - Using timer flexibly when editing algorithm
 - Doing the algorithm
 - Quick start
 - Explaining text if not author
 - Knowing there are generators and parser
+- Did some code
+- Updated todo at end of session with current progress and next step 
 Improve
 - Do some code
 

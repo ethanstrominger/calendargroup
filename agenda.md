@@ -74,5 +74,6 @@ TDD Cycles:
 
 - **Update log of when started coding** (time and h:mm from start time):
   - 3/25/2021: 10:55 AM (1:25 from start)
+  - 4/22/2021: 9:45 AM (0:15 from start paired on algorithm edits; 1:30 from start paired on TDD) 
   - ...
 - **Commit & Push** - so everyone has the latest code before leave

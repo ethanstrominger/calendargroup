@@ -1,6 +1,11 @@
-import { addTimezoneIfAbsent, updateEventDescription } from "./WebcalUtils";
+import { addTimezoneIfAbsent, getTimezonesFromText, updateEventDescription } from "./WebcalUtils";
 
 describe("webcal util", () => {
+    it("check you can get timezones from ical formatted text", () => {
+        const webcalText = "xxx"
+        const timezones = getTimezonesFromText(webcalText);
+        expect(timezones.length).toBeGreaterThan(0);
+    });
     it("check when event has timezone then compatible timezone is the same", () => {
         const timeString = "DTSTART;TZID=Europe/Berlin:20210405T130000";
         expect(addTimezoneIfAbsent(timeString, "America/New_York")).toEqual(timeString);
@@ -32,3 +37,5 @@ describe("webcal util - description", () => {
       expect(updateEventDescription(descriptionWithPrefix, filename)).toEqual(expectedValue);
     })
 });
+
+

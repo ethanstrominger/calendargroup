@@ -15,5 +15,8 @@ export function updateEventDescription(descriptionWithPrefix: string, filename: 
     const prefix = descriptionComponents[0];
     const description = descriptionComponents[1].trim();
     return `${prefix}: ${filename}\n\n${description}`;
+}
 
+export function getTimezonesFromText(webcalText: string) {
+    return ["a"];
 }
