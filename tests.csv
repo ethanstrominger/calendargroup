@@ -7,16 +7,16 @@ None,Add Event Aggregator,Returns a new Event Aggregator with the attribute valu
 Event Aggregator,Get Event Aggregator,Returns the Event Aggregator from the Setup,
 Event Source and two Event Aggregators,Add two Aggregated Events to an Event Source,"Returns true, the Aggregated Event List of the Event Source includes both aggregated event in the instance and when you fetch from db.","EventSource.addAggregatedEvent(aggregatedEvent:AggregatedEvent)=>booleaneventSource.aggregatedEvents => hash map of AggregatedEvent, UUID is used for key"
 Event Aggretator and to event sources,Add event sources to the event aggregator,"Returns true, the Aggregated Event List of the Event Source includes both aggregated event in the instance and when you fetch from db","EventAggregator.addEventSource(eventSource:EventSource)=>booleanEventAggregator.eventSources => hash map of EventSource, UUID is used for key"
-A webcal calendar with a non-repeating events ,Get Aggregated Events from webcal,An event in the list of events includes a unique hashkey and an aggregated event                                                                                                                                                                                   ,iAggregatedEvents = Utility.getICalEvents(url) 
-A webcal calendar with a non-repeating events ,Get Aggregated Events from webcal,The hash key of the non-repeating event equals the event id,iAggregatedEvents = Utility.getICalEvents(url) 
-A webcal calendar with a repeating event and an exception to a repeating event,Get Aggregated Events from webcal,The haskkey of the original repeating event equals the event id,iAggregatedEvents = Utility.getICalEvents(url) 
-A webcal calendar with a repeating event and an exception to a repeating event,Get Aggregated Events from webcal,The hash key of a repeating event exception equals the event id plus the recurrence id ,iAggregatedEvents = Utility.getICalEvents(url) 
-A webcal calendar with a non-repeating event,Get webcal formatted text of an event,The derived webcal event text is contained in the webcal of the calendar,aggregatedEvent.getEventWebcal => text string for event in webcal format
-A webcal calendar with a repeating event,Get webcal formatted text of an event,The derived webcal event text is contained in the webcal of the calendar,aggregatedEvent.getEventWebcal => text string for event in webcal format
-A webcal calendar with one timezone,Get timezone of a calendar with one timezone,,
-A webcal calendar with one timezone with an event that has default timezone,Get timezone of an event without a timezone,,
-A webcal calendar with one timezone with an event that has a repeating event (timezone is always specified),Get timezone of a calendar with a timezone,,
+A ical calendar with a non-repeating events ,Get Aggregated Events from ical,An event in the list of events includes a unique hashkey and an aggregated event                                                                                                                                                                                   ,iAggregatedEvents = Utility.getICalEvents(url) 
+A ical calendar with a non-repeating events ,Get Aggregated Events from ical,The hash key of the non-repeating event equals the event id,iAggregatedEvents = Utility.getICalEvents(url) 
+A ical calendar with a repeating event and an exception to a repeating event,Get Aggregated Events from ical,The haskkey of the original repeating event equals the event id,iAggregatedEvents = Utility.getICalEvents(url) 
+A ical calendar with a repeating event and an exception to a repeating event,Get Aggregated Events from ical,The hash key of a repeating event exception equals the event id plus the recurrence id ,iAggregatedEvents = Utility.getICalEvents(url) 
+A ical calendar with a non-repeating event,Get ical formatted text of an event,The derived ical event text is contained in the ical of the calendar,aggregatedEvent.getEventIcal => text string for event in ical format
+A ical calendar with a repeating event,Get ical formatted text of an event,The derived ical event text is contained in the ical of the calendar,aggregatedEvent.getEventIcal => text string for event in ical format
+A ical calendar with one timezone,Get timezone of a calendar with one timezone,,
+A ical calendar with one timezone with an event that has default timezone,Get timezone of an event without a timezone,,
+A ical calendar with one timezone with an event that has a repeating event (timezone is always specified),Get timezone of a calendar with a timezone,,
 An aggregated event,Add timezone to an event without a timezone,,
-None,Create a webcal calendar with one timezone,,
-None,Create a webcal calendar with two timezones,,
+None,Create a ical calendar with one timezone,,
+None,Create a ical calendar with two timezones,,
 None,Get timezone of a calendar with two timezones,,

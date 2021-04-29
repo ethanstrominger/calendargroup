@@ -13,6 +13,7 @@
     "uuid": "^8.3.2"
   },
   "dependencies": {
+    "@touch4it/ical-timezones": "^1.6.0",
     "fs": "^0.0.1-security",
     "ical-generator": "^2.0.0",
     "ical.js": "^1.4.0",

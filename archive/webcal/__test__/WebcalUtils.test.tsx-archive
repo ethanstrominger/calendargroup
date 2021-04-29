@@ -1,19 +1,19 @@
 import { AggEvent } from "../../../src/models/AggEvent";
-import { getAggEventsFromWebcalFile, getVeventComponentsTextFromFile } from "../WebcalUtils.tsx-archive";
-import { getAggEventsFromWebcalURL } from "../WebcalUtils.tsx-archive";
+import { getAggEventsFromIcalFile, getVeventComponentsTextFromFile } from "../IcalUtils.tsx-archive";
+import { getAggEventsFromIcalURL } from "../IcalUtils.tsx-archive";
 import { ICAL_FILENAME, ICAL_URL } from '../../../src/__test-helper__/testGlobals';
 import { readFileSync } from "fs";
 
 describe("ICS import", () => {
     it("You can get events from an ICS", () => {
-        const events = getAggEventsFromWebcalFile(ICAL_FILENAME);
+        const events = getAggEventsFromIcalFile(ICAL_FILENAME);
         expect(events[0] instanceof AggEvent);
     });
 });
 
 describe("URL import", () => {
     it("You can get events from a URL", async () => {
-        const events = await getAggEventsFromWebcalURL(ICAL_URL);
+        const events = await getAggEventsFromIcalURL(ICAL_URL);
         expect(events[0] instanceof AggEvent);
     });
 });

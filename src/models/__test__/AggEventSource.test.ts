@@ -28,7 +28,7 @@ describe("AggEventSource CRUD", () => {
     const currentTime = new Date();
     const aggEvent1 = new AggEvent({
       uid: "1",
-      aggEventWebcalId: "a webcalid",
+      aggEventIcalId: "a icalid",
       title: "a title",
       description: "a description",
       startDateTime: currentTime,
@@ -38,7 +38,7 @@ describe("AggEventSource CRUD", () => {
     const tomorrowTime = new Date(currentTime.getTime() + 1000 * 60 * 60 * 24);
     const aggEvent2 = new AggEvent({
       uid: "2",
-      aggEventWebcalId: "a webcalid for event 2",
+      aggEventIcalId: "a icalid for event 2",
       title: "a title for event 2",
       description: "a description for event 2",
       startDateTime: currentTime,
@@ -55,7 +55,7 @@ describe("AggEventSource CRUD", () => {
     const currentTime = new Date();
     const aggEvent1 = new AggEvent({
       uid: "1",
-      aggEventWebcalId: "a webcalid",
+      aggEventIcalId: "a icalid",
       title: "a title",
       description: "a description",
       startDateTime: currentTime,
@@ -65,7 +65,7 @@ describe("AggEventSource CRUD", () => {
     const tomorrowTime = new Date(currentTime.getTime() + 1000 * 60 * 60 * 24);
     const aggEvent2 = new AggEvent({
       uid: "2",
-      aggEventWebcalId: "a webcalid for event 2",
+      aggEventIcalId: "a icalid for event 2",
       title: "a title for event 2",
       description: "a description for event 2",
       startDateTime: currentTime,

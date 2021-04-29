@@ -5,7 +5,7 @@ describe("store", () => {
     const currentTime = new Date();
     const aggEvent = new AggEvent({
       uid: "hi",
-      aggEventWebcalId: "a webcalid",
+      aggEventIcalId: "a icalid",
       title: "a title",
       description: "a description",
       startDateTime: currentTime,
@@ -20,7 +20,7 @@ describe("repeating events", () => {
     const currentTime = new Date();
     const aggEvent = new AggEvent({
       uid: "hi",
-      aggEventWebcalId: "a webcalid",
+      aggEventIcalId: "a icalid",
       title: "a title",
       description: "a description",
       startDateTime: currentTime,

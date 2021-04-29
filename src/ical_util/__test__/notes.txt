@@ -1,11 +1,3 @@
-Notes: 
-- Timezone can be added just with the name. There's a library that can get you the offsets
--
-
-------
-Sample code:
-// Sample ical code with a single event using the default timezone below:
-
 var moment = require('moment');
 import { addTimezoneIfAbsent, updateEventDescription } from "./IcalUtils";
 

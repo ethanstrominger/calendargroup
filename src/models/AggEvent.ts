@@ -1,11 +1,11 @@
 export class AggEvent {
   readonly uniqueOccurenceId: string;
   readonly uid: string;
-  readonly aggEventWebcalId: string;
+  readonly aggEventIcalId: string;
   readonly title: string;
   readonly description?: string;
   readonly location?: string;
-  readonly repeatingAggregatedEventWebcalId?: string;
+  readonly repeatingAggregatedEventIcalId?: string;
   readonly dtStart: Date;
   readonly dtEnd: Date;
   readonly rrule?: string;
@@ -18,11 +18,11 @@ export class AggEvent {
 
   constructor(aggEvent: AggEvent) {
     this.uid = aggEvent.uid;
-    this.aggEventWebcalId = aggEvent.aggEventWebcalId;
+    this.aggEventIcalId = aggEvent.aggEventIcalId;
     this.title = aggEvent.title;
     this.description = aggEvent.description;
-    this.repeatingAggregatedEventWebcalId =
-      aggEvent.repeatingAggregatedEventWebcalId;
+    this.repeatingAggregatedEventIcalId =
+      aggEvent.repeatingAggregatedEventIcalId;
     this.dtStart = aggEvent.dtStart;
     this.dtEnd = aggEvent.dtEnd;
     this.location = aggEvent.location;
