@@ -1,3 +1,6 @@
+import icalParser /* ICAL */ from "ical.js";
+import { IcalObject } from "./IcalObject";
+
 export function addTimezoneIfAbsent(
   timeString: string,
   defaultTimezone: string
@@ -23,6 +26,15 @@ export function updateEventDescription(
   return `${prefix}: ${filename}\n\n${description}`;
 }
 
-export function getTimezonesFromText(icalText: string) {
-  return ["a"];
+export function getIcalObjectFromText(icalText: string): IcalObject {
+  const iCalData = icalParser.parse(icalText);
+  const iCalDataComponent = new icalParser.Component(iCalData);
+  const timezones = iCalDataComponent.getAllSubcomponents("vtimezone");
+  const timezoneIds = timezones.map((timezone) =>
+    timezone.getFirstPropertyValue("tzid")
+  );
+
+  const icalObject = new IcalObject();
+  icalObject.timezoneIds = timezoneIds;
+  return icalObject;
 }

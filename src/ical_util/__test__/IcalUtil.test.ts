@@ -1,30 +1,18 @@
-import ical from "ical-generator";
 import {
   addTimezoneIfAbsent,
-  getTimezonesFromText,
+  getIcalObjectFromText,
   updateEventDescription,
 } from "./IcalUtils";
-import { getVtimezoneComponent } from "@touch4it/ical-timezones";
-
-const newYorkTimeZoneName = "America/New_York";
-class IcalObject {
-  timezones: [string];
-}
-function createCalendarWithOneTimezone(timeZoneName: string) {
-  const cal = ical({});
-  cal.timezone({ name: "America/New_York", generator: getVtimezoneComponent });
-  return cal.toString();
-}
-function getIcalObjectFromText(icalText: string) {
-  return new IcalObject();
-}
+import { createCalendarWithOneTimezone } from "./ICalTestHelper";
+import { IcalObject } from "./IcalObject";
+import { newYorkTimeZoneName } from "./ICalTestHelper";
 
 describe("ical util", () => {
   it("check you can get timezones from ical formatted text", () => {
     const icalText = createCalendarWithOneTimezone(newYorkTimeZoneName);
     const icalObject: IcalObject = getIcalObjectFromText(icalText);
-    expect(icalObject.timezones.length).toEqual(1);
-    // expect(timezones[0]).toEqual(newYorkTimeZoneName);
+    expect(icalObject.timezoneIds.length).toEqual(1);
+    expect(icalObject.timezoneIds[0]).toEqual(newYorkTimeZoneName);
   });
   it("check when event has timezone then compatible timezone is the same", () => {
     const timeString = "DTSTART;TZID=Europe/Berlin:20210405T130000";
