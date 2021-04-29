@@ -1,0 +1,40 @@
+Notes: 
+- Timezone can be added just with the name. There's a library that can get you the offsets
+-
+
+------
+Sample code:
+// Sample ical code with a single event using the default timezone below:
+
+var moment = require('moment');
+import { addTimezoneIfAbsent, updateEventDescription } from "./WebcalUtils";
+
+const ical = require('ical-generator');
+
+// Create new Calendar and set optional fields
+const cal = ical({
+    domain: 'sebbo.net',
+    prodId: {company: 'superman-industries.com', product: 'ical-generator'},
+    name: 'My Testfeed',
+    timezone: 'America/New_York'
+});
+
+// You can also set values like this…
+cal.domain('sebbo.net');
+
+// … or get values
+cal.domain(); // --> "sebbo.net"
+
+const now = new Date()
+const getTimeToHourMultiplier = 1000 * 60 * 60;
+// create a new event
+const event = cal.createEvent({
+    start: now,
+    end: new Date(now.getTime()+getTimeToHourMultiplier),
+    timestamp: moment(),
+    summary: 'My Event',
+    description: 'The quick brown fox jumped over the lazy dog and could not stop from jumping over the lazy dog because that is what lazy dogs and quick brown foxes like to do.  Really, I know this.  It is an amazing fact.  Okay, so let us see what what do',
+    organizer: 'Sebastian Pekarek <mail@example.com>'
+});
+
+console.log(cal.toString());

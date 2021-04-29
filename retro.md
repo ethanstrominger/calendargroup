@@ -1,3 +1,19 @@
+4/29/21 - Ethan & Joel
+Feel
+- Reflective
+- Tired
+- Disappointed (didn't get full red green refactor cycle done; but at least we tried / coded a lot)
+- End of meeting: Hungry, unsatisfied (wanted to get further), frustrated
+- Glad to figure out npm install problem (was frustrating)
+Liked
+- Retro
+- Started coding soon in meeting
+- Lots of coding
+- Changed autosave settings (no longer save after delay; now save when change focus from file to file)
+Improve
+- Figure out how to run just the failed test(s)
+- To avoid slowdowns: Write down what learned (especially if worked independently). Better to work together.
+
 4/22/21 - Ethan & Joel
 Feel
 - Good, positive, cheerful
