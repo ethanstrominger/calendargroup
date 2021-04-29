@@ -78,4 +78,4 @@ TDD Cycles:
   - 4/22/2021: 9:45 AM (0:15 from start paired on algorithm edits; 1:30 from start paired on TDD) 
   - 4/29/2021: 10:05 connected, 10:18 looked at code, 10:22 started coding
   - ...
-- **Commit & Push** - so everyone has the latest code before leave
+- **Stage, Commit, & Push** - so everyone has the latest code before leave
