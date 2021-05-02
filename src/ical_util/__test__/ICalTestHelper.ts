@@ -32,3 +32,42 @@ export function createCalendarWithTwoTimezones(
   });
   return cal.toString();
 }
+
+interface NonRepeatingEventAttributes {
+  startDate: Date;
+  endDate: Date;
+  eventTimezoneId?: string;
+  dtStamp: Date;
+  created: Date;
+  location: string;
+  summary: string;
+  description?: string | null;
+}
+
+interface CombinedAttributes {
+  calendarTimeZoneId: string;
+  eventData: NonRepeatingEventAttributes;
+}
+
+export function createEventWithNonDefaultTimezone(
+  combinedAttributes: CombinedAttributes
+) {
+  const { calendarTimeZoneId, eventData } = combinedAttributes;
+  const cal = icalGenerator({});
+  // this sets the default timezone id for the calendar.  A VTIMEZONE section will
+  // with the full definition for the default timezone will be added the ical text.
+  cal.timezone({ name: calendarTimeZoneId, generator: getVtimezoneComponent });
+  const now = new Date();
+  const getTimeToHourMultiplier = 1000 * 60 * 60;
+  // A VTIMEZONE section with the full definition for the event timezone will be added the ical text.
+  const event = cal.createEvent({
+    start: eventData.startDate,
+    end: eventData.endDate,
+    timezone: eventData.eventTimezoneId,
+    summary: eventData.summary,
+    created: eventData.created,
+    stamp: eventData.dtStamp,
+    location: eventData.location,
+  });
+  return cal.toString();
+}
