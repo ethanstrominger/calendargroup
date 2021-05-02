@@ -1,16 +1,12 @@
-import {
-  addTimezoneIfAbsent,
-  getIcalObjectFromText,
-  updateEventDescription,
-} from "./IcalUtils";
+import { getIcalObjectFromText } from "../IcalUtils";
 import {
   createCalendarWithOneTimezone,
   createCalendarWithTwoTimezones,
   createEventWithNonDefaultTimezone,
   londonTimeZoneId,
   newYorkTimeZoneId,
-} from "./IcalTestHelper";
-import { IcalObject } from "./IcalObject";
+} from "./test-helper/IcalTestHelper";
+import { IcalObject } from "../IcalObject";
 
 describe("ical timezones", () => {
   it("check you can get timezones from ical formatted text when one defined", () => {
@@ -58,6 +54,7 @@ describe("simple events", () => {
     });
 
     const icalObject: IcalObject = getIcalObjectFromText(icalText);
-    expect(icalObject.events[0].summary).toEqual(summaryValue);
+    const event = icalObject.events[0];
+    expect(icalObject.events[0].aggEventIcalId).toEqual(summaryValue);
   });
 });

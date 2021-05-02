@@ -1,5 +1,5 @@
-import { AggEventSource } from "../AggEventSource";
-import { AggEvent } from "../AggEvent";
+import { AggEventSource } from "../../models/AggEventSource";
+import { AggEvent } from "../../models/AggEvent";
 
 describe("AggEventSource CRUD", () => {
   it("A aggEventSource can be created", () => {
@@ -27,26 +27,34 @@ describe("AggEventSource CRUD", () => {
   it("Events can be added to a aggEventSource", () => {
     const currentTime = new Date();
     const aggEvent1 = new AggEvent({
+      uniqueOccurenceId: "1",
       uid: "1",
       aggEventIcalId: "a icalid",
       title: "a title",
       description: "a description",
-      startDateTime: currentTime,
-      endDateTime: new Date(currentTime.getTime() + 1000 * 60 * 60),
+      dtStart: currentTime,
+      dtEnd: new Date(currentTime.getTime() + 1000 * 60 * 60),
     });
 
     const tomorrowTime = new Date(currentTime.getTime() + 1000 * 60 * 60 * 24);
     const aggEvent2 = new AggEvent({
+      uniqueOccurenceId: "2",
       uid: "2",
       aggEventIcalId: "a icalid for event 2",
       title: "a title for event 2",
       description: "a description for event 2",
-      startDateTime: currentTime,
-      endDateTime: new Date(currentTime.getTime() + 1000 * 60 * 60),
+      dtStart: currentTime,
+      dtEnd: new Date(currentTime.getTime() + 1000 * 60 * 60),
     });
-    const aggEventSource = new AggEventSource();
+    const aggEventSource = new AggEventSource(
+      "name",
+      "URL",
+      "https://example.com/events"
+    );
     aggEventSource.addAggEvent(aggEvent1);
     aggEventSource.addAggEvent(aggEvent2);
+    console.log("a", aggEvent1);
+    console.log("b", aggEventSource.aggEvents["1"]);
     expect(aggEvent1 === aggEventSource.aggEvents["1"]).toBeTruthy();
     expect(aggEvent2 === aggEventSource.aggEvents["2"]).toBeTruthy();
   });
@@ -54,25 +62,31 @@ describe("AggEventSource CRUD", () => {
   it("An array of events can be added to a aggEventSource", () => {
     const currentTime = new Date();
     const aggEvent1 = new AggEvent({
+      uniqueOccurenceId: "x1",
       uid: "1",
       aggEventIcalId: "a icalid",
       title: "a title",
       description: "a description",
-      startDateTime: currentTime,
-      endDateTime: new Date(currentTime.getTime() + 1000 * 60 * 60),
+      dtStart: currentTime,
+      dtEnd: new Date(currentTime.getTime() + 1000 * 60 * 60),
     });
 
     const tomorrowTime = new Date(currentTime.getTime() + 1000 * 60 * 60 * 24);
     const aggEvent2 = new AggEvent({
+      uniqueOccurenceId: "x",
       uid: "2",
       aggEventIcalId: "a icalid for event 2",
       title: "a title for event 2",
       description: "a description for event 2",
-      startDateTime: currentTime,
-      endDateTime: new Date(currentTime.getTime() + 1000 * 60 * 60),
+      dtStart: currentTime,
+      dtEnd: new Date(currentTime.getTime() + 1000 * 60 * 60),
     });
     const aggEventsArray: AggEvent[] = [aggEvent1, aggEvent2];
-    const aggEventSource = new AggEventSource();
+    const aggEventSource = new AggEventSource(
+      "name",
+      "URL",
+      "https://example.com/events"
+    );
     aggEventSource.addAggEvents(aggEventsArray);
     expect(aggEvent1 === aggEventSource.aggEvents["1"]).toBeTruthy();
     expect(aggEvent2 === aggEventSource.aggEvents["2"]).toBeTruthy();

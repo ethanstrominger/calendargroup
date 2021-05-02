@@ -40,3 +40,25 @@ export class AggEvent {
     }
   }
 }
+
+export class ICalEvent {
+  dtStart: Date;
+  dtEnd: Date;
+  eventTimezoneId?: string;
+  dtStamp: Date;
+  created: Date;
+  location?: string;
+  summary: string;
+  description?: string | null;
+
+  constructor(iCalEvent: ICalEvent) {
+    this.dtStart = iCalEvent.dtStart;
+    this.dtEnd = iCalEvent.dtEnd;
+    this.eventTimezoneId = iCalEvent.eventTimezoneId;
+    this.dtStamp = iCalEvent.dtStamp;
+    this.created = iCalEvent.created;
+    this.location = iCalEvent.location;
+    this.summary = iCalEvent.summary;
+    this.description = iCalEvent.description;
+  }
+}
