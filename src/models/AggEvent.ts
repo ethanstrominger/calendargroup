@@ -1,8 +1,8 @@
 export class AggEvent {
   readonly uniqueOccurenceId: string;
-  readonly uid: string;
+  readonly originIcalUid: string;
   readonly aggEventIcalId: string;
-  readonly title: string;
+  summary: string;
   readonly description?: string;
   readonly location?: string;
   readonly repeatingAggregatedEventIcalId?: string;
@@ -17,9 +17,9 @@ export class AggEvent {
   readonly sequence?: number;
 
   constructor(aggEvent: AggEvent) {
-    this.uid = aggEvent.uid;
+    this.originIcalUid = aggEvent.originIcalUid;
     this.aggEventIcalId = aggEvent.aggEventIcalId;
-    this.title = aggEvent.title;
+    this.summary = aggEvent.summary;
     this.description = aggEvent.description;
     this.repeatingAggregatedEventIcalId =
       aggEvent.repeatingAggregatedEventIcalId;
@@ -34,9 +34,9 @@ export class AggEvent {
     this.exdate = aggEvent.exdate;
     this.sequence = aggEvent.sequence;
     if (this.recurrenceId) {
-      this.uniqueOccurenceId = this.uid + this.recurrenceId;
+      this.uniqueOccurenceId = this.originIcalUid + this.recurrenceId;
     } else {
-      this.uniqueOccurenceId = this.uid;
+      this.uniqueOccurenceId = this.originIcalUid;
     }
   }
 }

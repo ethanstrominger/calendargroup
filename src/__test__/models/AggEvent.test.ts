@@ -5,9 +5,9 @@ describe("store", () => {
     const currentTime = new Date();
     const aggEvent = new AggEvent({
       uniqueOccurenceId: "x",
-      uid: "hi",
+      originIcalUid: "hi",
       aggEventIcalId: "a icalid",
-      title: "a title",
+      summary: "a summary",
       description: "a description",
       dtStart: currentTime,
       dtEnd: new Date(currentTime.getTime() + 1000 * 60 * 60),
@@ -21,9 +21,9 @@ describe("repeating events", () => {
     const currentTime = new Date();
     const aggEvent = new AggEvent({
       uniqueOccurenceId: "z",
-      uid: "hi",
+      originIcalUid: "hi",
       aggEventIcalId: "a icalid",
-      title: "a title",
+      summary: "a summary",
       description: "a description",
       dtStart: currentTime,
       dtEnd: new Date(currentTime.getTime() + 1000 * 60 * 60),

@@ -13,7 +13,7 @@ describe("AggEventSource CRUD", () => {
     expect(aggEventSource.source).toEqual(source);
   });
 
-  it("You can get an aggEventSource by UUID", () => {
+  it("You can get an aggEventSource by UoriginIcalUid", () => {
     const name = "Name";
     const sourceType = "URL";
     const source = "www.google.com";
@@ -28,9 +28,9 @@ describe("AggEventSource CRUD", () => {
     const currentTime = new Date();
     const aggEvent1 = new AggEvent({
       uniqueOccurenceId: "1",
-      uid: "1",
+      originIcalUid: "1",
       aggEventIcalId: "a icalid",
-      title: "a title",
+      summary: "a summary",
       description: "a description",
       dtStart: currentTime,
       dtEnd: new Date(currentTime.getTime() + 1000 * 60 * 60),
@@ -39,9 +39,9 @@ describe("AggEventSource CRUD", () => {
     const tomorrowTime = new Date(currentTime.getTime() + 1000 * 60 * 60 * 24);
     const aggEvent2 = new AggEvent({
       uniqueOccurenceId: "2",
-      uid: "2",
+      originIcalUid: "2",
       aggEventIcalId: "a icalid for event 2",
-      title: "a title for event 2",
+      summary: "a summary for event 2",
       description: "a description for event 2",
       dtStart: currentTime,
       dtEnd: new Date(currentTime.getTime() + 1000 * 60 * 60),
@@ -53,8 +53,6 @@ describe("AggEventSource CRUD", () => {
     );
     aggEventSource.addAggEvent(aggEvent1);
     aggEventSource.addAggEvent(aggEvent2);
-    console.log("a", aggEvent1);
-    console.log("b", aggEventSource.aggEvents["1"]);
     expect(aggEvent1 === aggEventSource.aggEvents["1"]).toBeTruthy();
     expect(aggEvent2 === aggEventSource.aggEvents["2"]).toBeTruthy();
   });
@@ -63,9 +61,9 @@ describe("AggEventSource CRUD", () => {
     const currentTime = new Date();
     const aggEvent1 = new AggEvent({
       uniqueOccurenceId: "x1",
-      uid: "1",
+      originIcalUid: "1",
       aggEventIcalId: "a icalid",
-      title: "a title",
+      summary: "a summary",
       description: "a description",
       dtStart: currentTime,
       dtEnd: new Date(currentTime.getTime() + 1000 * 60 * 60),
@@ -74,9 +72,9 @@ describe("AggEventSource CRUD", () => {
     const tomorrowTime = new Date(currentTime.getTime() + 1000 * 60 * 60 * 24);
     const aggEvent2 = new AggEvent({
       uniqueOccurenceId: "x",
-      uid: "2",
+      originIcalUid: "2",
       aggEventIcalId: "a icalid for event 2",
-      title: "a title for event 2",
+      summary: "a summary for event 2",
       description: "a description for event 2",
       dtStart: currentTime,
       dtEnd: new Date(currentTime.getTime() + 1000 * 60 * 60),

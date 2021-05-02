@@ -8,7 +8,7 @@ function _convertIAggEventToAggEvent(ICALEvent) {
     return new AggEvent({
         uid: uid,
         aggEventIcalId: uid,
-        title: ICALEvent.getFirstPropertyValue("summary"),
+        summary: ICALEvent.getFirstPropertyValue("summary"),
         startDateTime: new Date(ICALEvent.getFirstPropertyValue("dtstart")),
         endDateTime: new Date(ICALEvent.getFirstPropertyValue("dtend")),
         description: ICALEvent.getFirstPropertyValue("description"),
