@@ -1,4 +1,7 @@
 4/29/21 - Ethan & Joel
+Improve
+- Figure out how to run just the failed test(s)
+- To avoid slowdowns: Write down what learned (especially if worked independently). Better to work together.
 Feel
 - Reflective
 - Tired
@@ -10,11 +13,10 @@ Liked
 - Started coding soon in meeting
 - Lots of coding
 - Changed autosave settings (no longer save after delay; now save when change focus from file to file)
-Improve
-- Figure out how to run just the failed test(s)
-- To avoid slowdowns: Write down what learned (especially if worked independently). Better to work together.
 
 4/22/21 - Ethan & Joel
+Improve
+- Do some code
 Feel
 - Good, positive, cheerful
 - Good, relieved
@@ -27,8 +29,6 @@ Liked
 - Knowing there are generators and parser
 - Did some code
 - Updated todo at end of session with current progress and next step 
-Improve
-- Do some code
 
 4/15/21 - Ethan & Joel
 Liked

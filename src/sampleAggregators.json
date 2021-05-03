@@ -1,0 +1,10 @@
+[
+    {
+        "urlSuffix":"softwarecrafter",
+        "calendars":["example.de/berlin/events", "bostonsoftwarecrafters.com/events"]
+    },
+    {
+        "urlSuffix":"climatechange",
+        "calendars":["greenerworldfolks.com/calendar", "meetup.com/climatechange/events"]
+    }        
+]
