@@ -1,3 +1,28 @@
+5/3/21 - Ethan & Joel
+Improve 
+- Rename ICalUtil to ICalSerializer, change to class, and maybe rename method to Deserialize (to make consistent with other serializers); or maybe see if something on top of the parser works the way we want
+- Make sure understand the code that we're working on before starting
+- Try to get a full cycle red-green-refactor each session
+- Use separate terminal for running tests so can tell more clearly which test failed without scrolling; maybe switch to Visual Studio
+- Between sessions: 
+  - Look at error message for failing test, even if it's the same test that's failing
+  - Ethan: Eat first thing
+- Record when start coding in the beginning
+Feel
+- Part 1:
+  - Bad, guilty, hungry
+  - Joel: Surprising less tired (2 days after 2nd Pfizer shot)
+- Part 2:
+  - Less hungry, kind of happy (tentatively happy)
+  - Surprised (that ical parser doesn't do whole job for you with serialize/deserialize - or maybe we missed something?)
+  - Disappointed (didn't get test working that was failing before started session)
+Liked
+- Chance to explain project prep for MVP
+- TTS Agenda working! (It tells us what we're doing, not just a gong or other sound), and made a copy and ran it to rejigger the timings after an unusually early break
+- Mob timer window at left - visible at all times
+- Seeing code and test side-by-side in IDE
+- Refactored the test
+
 4/29/21 - Ethan & Joel
 Improve
 - Figure out how to run just the failed test(s)

@@ -42,24 +42,23 @@ export function createCalendarWithTwoTimezones(
   return cal.toString();
 }
 
-export function createEventWithNonDefaultTimezone(
-  calendarTimeZoneId: string,
-  eventData: AggEvent
+export function createCalendarWithEvent(
+  data : {calendarTimeZoneId: string,
+  eventTimeZoneId: string,
+  eventData: AggEvent}
 ) {
   const cal = icalGenerator({});
   // see notes on iCalGenerator, getVTimezoneComponent, and timezone
-  cal.timezone({ name: calendarTimeZoneId, generator: getVtimezoneComponent });
-  const now = new Date();
-  const getTimeToHourMultiplier = 1000 * 60 * 60;
-  const event = cal.createEvent({
-    start: eventData.dtStart,
-    end: eventData.dtEnd,
+  cal.timezone({ name: data.calendarTimeZoneId, generator: getVtimezoneComponent });
+  cal.createEvent({
+    start: data.eventData.dtStart,
+    end: data.eventData.dtEnd,
     // see notes on iCalGenerator, getVTimezoneComponent, and timezone
-    timezone: eventData.timezoneId,
-    summary: eventData.summary,
-    created: eventData.created,
-    stamp: eventData.dtStamp,
-    location: eventData.location,
+    timezone: data.eventTimeZoneId,
+    summary: data.eventData.summary,
+    created: data.eventData.created,
+    stamp: data.eventData.dtStamp,
+    location: data.eventData.location,
   });
   return cal.toString();
 }

@@ -15,6 +15,7 @@
 Before Starting Project:
 
 - Pull (get latest)
+- npm install (in case packages added)
 
 - Review:
   (1) Previous Retro 
@@ -77,5 +78,6 @@ TDD Cycles:
   - 3/25/2021: 10:55 AM (1:25 from start)
   - 4/22/2021: 9:45 AM (0:15 from start paired on algorithm edits; 1:30 from start paired on TDD) 
   - 4/29/2021: 10:05 connected, 10:18 looked at code, 10:22 started coding
+  - 5/3/2021: staggered start, did a little at 9:45 AM, then explanation, then resumed around 10:00 AM
   - ...
 - **Stage, Commit, & Push** - so everyone has the latest code before leave

@@ -2,7 +2,7 @@ import { getIcalObjectFromText } from "../IcalUtils";
 import {
   createCalendarWithOneTimezone,
   createCalendarWithTwoTimezones,
-  createEventWithNonDefaultTimezone,
+  createCalendarWithEvent,
   londonTimeZoneId,
   newYorkTimeZoneId,
 } from "./test-helper/IcalTestHelper";
@@ -32,7 +32,7 @@ function addHoursToDate(date: Date, hours: number) {
 }
 
 describe("simple events", () => {
-  it("check event attributes that should not change, don't change for a non-repeating event with non-default timezone", () => {
+  it("check event values get saved", () => {
     const startDateValue = new Date();
     const endDateValue = addHoursToDate(startDateValue, 1);
     const dtStampValue = addHoursToDate(startDateValue, 2);
@@ -40,21 +40,22 @@ describe("simple events", () => {
     const locationValue = "10 Mass Ave, Boston, MA";
     const summaryValue = "A non-default timezone non-repeating event";
 
-    const icalText = createEventWithNonDefaultTimezone({
-      calendarTimeZoneId: londonTimeZoneId,
-      eventData: {
-        startDate: startDateValue,
-        endDate: endDateValue,
-        eventTimezoneId: newYorkTimeZoneId,
+    const icalText = createCalendarWithEvent(
+      {calendarTimeZoneId : londonTimeZoneId,
+      eventTimeZoneId : newYorkTimeZoneId,
+      eventData : {
+        originIcalUid: "1",
+        dtStart: startDateValue,
+        dtEnd: endDateValue,
         dtStamp: dtStampValue,
         created: createdValue,
         location: locationValue,
         summary: summaryValue,
-      },
-    });
+      }}
+    );
 
     const icalObject: IcalObject = getIcalObjectFromText(icalText);
     const event = icalObject.events[0];
-    expect(icalObject.events[0].aggEventIcalId).toEqual(summaryValue);
+    expect(icalObject.events[0].summary).toEqual(summaryValue);
   });
 });
