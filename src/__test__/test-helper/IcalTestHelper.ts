@@ -1,11 +1,20 @@
 import icalGenerator /* ical */ from "ical-generator";
 import { getVtimezoneComponent } from "@touch4it/ical-timezones";
+import { AggEvent } from "src/models/AggEvent";
+
+// notes on iCalGenerator, getVTimezoneComponent, and timezone:
+// const cal = iCalGenerator({});  : initializes
+// cal.timezone('America/New_York', getVTimezoneComponent) sets the default timezone
+//   for the calendar and sets a full definition of that timezone in the VTIMEZONE section
+// cal.createEvent ( { ..., timezone: 'Europe/Berlin' } ) sets the timezone for the event
+// . and adds the full timezone definition to the calendar
 
 export const londonTimeZoneId = "Europe/London";
 export const newYorkTimeZoneId = "America/New_York";
 
 export function createCalendarWithOneTimezone(timeZoneId: string): string {
   const cal = icalGenerator({});
+  // see notes on iCalGenerator, getVTimezoneComponent, and timezone
   cal.timezone({ name: timeZoneId, generator: getVtimezoneComponent });
   return cal.toString();
 }
@@ -15,15 +24,15 @@ export function createCalendarWithTwoTimezones(
   eventTimeZoneId: string
 ): string {
   const cal = icalGenerator({});
-  // this sets the default timezone id for the calendar.  A VTIMEZONE section will
-  // with the full definition for the default timezone will be added the ical text.
+
+  // see notes on iCalGenerator, getVTimezoneComponent, and timezone
   cal.timezone({ name: calendarTimeZoneId, generator: getVtimezoneComponent });
   const now = new Date();
   const getTimeToHourMultiplier = 1000 * 60 * 60;
-  // A VTIMEZONE section with the full definition for the event timezone will be added the ical text.
   const event = cal.createEvent({
     start: now,
     end: new Date(now.getTime() + getTimeToHourMultiplier),
+    // see notes on iCalGenerator, getVTimezoneComponent, and timezone
     timezone: eventTimeZoneId,
     summary: "My Event",
     description:
@@ -33,37 +42,20 @@ export function createCalendarWithTwoTimezones(
   return cal.toString();
 }
 
-interface NonRepeatingEventAttributes {
-  startDate: Date;
-  endDate: Date;
-  eventTimezoneId?: string;
-  dtStamp: Date;
-  created: Date;
-  location: string;
-  summary: string;
-  description?: string | null;
-}
-
-interface CombinedAttributes {
-  calendarTimeZoneId: string;
-  eventData: NonRepeatingEventAttributes;
-}
-
 export function createEventWithNonDefaultTimezone(
-  combinedAttributes: CombinedAttributes
+  calendarTimeZoneId: string,
+  eventData: AggEvent
 ) {
-  const { calendarTimeZoneId, eventData } = combinedAttributes;
   const cal = icalGenerator({});
-  // this sets the default timezone id for the calendar.  A VTIMEZONE section will
-  // with the full definition for the default timezone will be added the ical text.
+  // see notes on iCalGenerator, getVTimezoneComponent, and timezone
   cal.timezone({ name: calendarTimeZoneId, generator: getVtimezoneComponent });
   const now = new Date();
   const getTimeToHourMultiplier = 1000 * 60 * 60;
-  // A VTIMEZONE section with the full definition for the event timezone will be added the ical text.
   const event = cal.createEvent({
-    start: eventData.startDate,
-    end: eventData.endDate,
-    timezone: eventData.eventTimezoneId,
+    start: eventData.dtStart,
+    end: eventData.dtEnd,
+    // see notes on iCalGenerator, getVTimezoneComponent, and timezone
+    timezone: eventData.timezoneId,
     summary: eventData.summary,
     created: eventData.created,
     stamp: eventData.dtStamp,

@@ -10,7 +10,8 @@ export class AggEvent {
   location?: string;
   created?: Date;
   lastModified?: Date;
-  dtstamp?: Date;
+  timezoneId?: string;
+  dtStamp?: Date;
   exdates?: string; //
 
   constructor(aggEvent: AggEvent) {
@@ -24,8 +25,9 @@ export class AggEvent {
     this.recurrenceId = aggEvent.recurrenceId;
     this.created = aggEvent.created;
     this.lastModified = aggEvent.lastModified;
-    this.dtstamp = aggEvent.dtstamp;
+    this.dtStamp = aggEvent.dtStamp;
     this.exdates = aggEvent.exdates;
+    this.timezoneId = aggEvent.timezoneId;
   }
 }
 
