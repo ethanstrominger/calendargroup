@@ -65,12 +65,15 @@ TDD Cycles:
   - Stand every rotation (optionally stand while navigating)
 - Breaks – e.g., every _60_ min. (+/-) (remember to set timer)
 
-
 **IntelliJ Shortcuts:**
 
 - Double Shift - Search Everywhere in IntelliJ
 - Ctrl+K - Commit
 - Shift+F10 - Run All (in SimpleCarJava)
+
+**VS Code Shortcuts:**
+
+- F8 - Go to next problem
 
 **End of Session:**
 
