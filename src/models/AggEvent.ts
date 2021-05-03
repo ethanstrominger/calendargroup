@@ -1,28 +1,22 @@
 export class AggEvent {
-  readonly uniqueOccurenceId: string;
-  readonly originIcalUid: string;
-  readonly aggEventIcalId: string;
+  originIcalUid: string; // unique id of an original repeating event or stand alone
+  // id of the original repeating event for an occurence that is changed
+  recurrenceId?: string; // date string for the original date of a repeating occurence that was chagned
   summary: string;
-  readonly description?: string;
-  readonly location?: string;
-  readonly repeatingAggregatedEventIcalId?: string;
-  readonly dtStart: Date;
-  readonly dtEnd: Date;
-  readonly rrule?: string;
-  readonly recurrenceId?: Date;
-  readonly created?: Date;
-  readonly lastModified?: Date;
-  readonly dtstamp?: Date;
-  readonly exdate?: Date;
-  readonly sequence?: number;
+  dtStart: Date;
+  dtEnd: Date;
+  rrule?: string; // repeating rule of an original repeating event definition
+  description?: string;
+  location?: string;
+  created?: Date;
+  lastModified?: Date;
+  dtstamp?: Date;
+  exdates?: string; //
 
   constructor(aggEvent: AggEvent) {
     this.originIcalUid = aggEvent.originIcalUid;
-    this.aggEventIcalId = aggEvent.aggEventIcalId;
     this.summary = aggEvent.summary;
     this.description = aggEvent.description;
-    this.repeatingAggregatedEventIcalId =
-      aggEvent.repeatingAggregatedEventIcalId;
     this.dtStart = aggEvent.dtStart;
     this.dtEnd = aggEvent.dtEnd;
     this.location = aggEvent.location;
@@ -31,13 +25,7 @@ export class AggEvent {
     this.created = aggEvent.created;
     this.lastModified = aggEvent.lastModified;
     this.dtstamp = aggEvent.dtstamp;
-    this.exdate = aggEvent.exdate;
-    this.sequence = aggEvent.sequence;
-    if (this.recurrenceId) {
-      this.uniqueOccurenceId = this.originIcalUid + this.recurrenceId;
-    } else {
-      this.uniqueOccurenceId = this.originIcalUid;
-    }
+    this.exdates = aggEvent.exdates;
   }
 }
 

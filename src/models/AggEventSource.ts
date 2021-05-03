@@ -1,13 +1,9 @@
 import { AggEvent } from "./AggEvent";
 import { v4 as uuidv4 } from "uuid";
 
-export interface IAggEventSource {
-  aggEvents: { [key: string]: AggEvent };
-}
-
-export class AggEventSource implements IAggEventSource {
+export class AggEventSource {
   // C Field -
-  readonly aggEvents: { [key: string]: AggEvent } = {};
+  readonly aggEvents: AggEvent[] = [];
   readonly uuid: string = "";
   name: string;
   sourceType: string;
@@ -26,8 +22,7 @@ export class AggEventSource implements IAggEventSource {
     AggEventSource.aggEventSources[this.uuid] = this;
   }
 
-  addAggEvent = (aggEvent: AggEvent) =>
-    (this.aggEvents[aggEvent.uniqueOccurenceId] = aggEvent);
+  addAggEvent = (aggEvent: AggEvent) => this.aggEvents.push(aggEvent);
 
   addAggEvents = (aggEvents: AggEvent[]) =>
     aggEvents.map((aggEvent) => {

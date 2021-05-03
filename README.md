@@ -9,7 +9,7 @@ Version 2: Provide query capabilities for any calendar by date, time of day, onl
 # Technology
 
 - Backend: Typescript, Express, Jest
-- Front End: React, axios, Jest, SASS Potentially: tailwind? materialui?
+- Front End: React, axios, Jest
 - DB: TBD
 - Deployment: TBD
 

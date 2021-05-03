@@ -27,9 +27,7 @@ describe("AggEventSource CRUD", () => {
   it("Events can be added to a aggEventSource", () => {
     const currentTime = new Date();
     const aggEvent1 = new AggEvent({
-      uniqueOccurenceId: "1",
       originIcalUid: "1",
-      aggEventIcalId: "a icalid",
       summary: "a summary",
       description: "a description",
       dtStart: currentTime,
@@ -38,9 +36,7 @@ describe("AggEventSource CRUD", () => {
 
     const tomorrowTime = new Date(currentTime.getTime() + 1000 * 60 * 60 * 24);
     const aggEvent2 = new AggEvent({
-      uniqueOccurenceId: "2",
       originIcalUid: "2",
-      aggEventIcalId: "a icalid for event 2",
       summary: "a summary for event 2",
       description: "a description for event 2",
       dtStart: currentTime,
@@ -53,16 +49,14 @@ describe("AggEventSource CRUD", () => {
     );
     aggEventSource.addAggEvent(aggEvent1);
     aggEventSource.addAggEvent(aggEvent2);
-    expect(aggEvent1 === aggEventSource.aggEvents["1"]).toBeTruthy();
-    expect(aggEvent2 === aggEventSource.aggEvents["2"]).toBeTruthy();
+    expect(aggEvent1 === aggEventSource.aggEvents[0]).toBeTruthy();
+    expect(aggEvent2 === aggEventSource.aggEvents[1]).toBeTruthy();
   });
 
   it("An array of events can be added to a aggEventSource", () => {
     const currentTime = new Date();
     const aggEvent1 = new AggEvent({
-      uniqueOccurenceId: "x1",
       originIcalUid: "1",
-      aggEventIcalId: "a icalid",
       summary: "a summary",
       description: "a description",
       dtStart: currentTime,
@@ -71,9 +65,7 @@ describe("AggEventSource CRUD", () => {
 
     const tomorrowTime = new Date(currentTime.getTime() + 1000 * 60 * 60 * 24);
     const aggEvent2 = new AggEvent({
-      uniqueOccurenceId: "x",
       originIcalUid: "2",
-      aggEventIcalId: "a icalid for event 2",
       summary: "a summary for event 2",
       description: "a description for event 2",
       dtStart: currentTime,
@@ -86,7 +78,7 @@ describe("AggEventSource CRUD", () => {
       "https://example.com/events"
     );
     aggEventSource.addAggEvents(aggEventsArray);
-    expect(aggEvent1 === aggEventSource.aggEvents["1"]).toBeTruthy();
-    expect(aggEvent2 === aggEventSource.aggEvents["2"]).toBeTruthy();
+    expect(aggEvent1 === aggEventSource.aggEvents[0]).toBeTruthy();
+    expect(aggEvent2 === aggEventSource.aggEvents[1]).toBeTruthy();
   });
 });
