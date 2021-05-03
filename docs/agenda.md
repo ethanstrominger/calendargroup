@@ -23,7 +23,7 @@ Before Starting Project:
 
 - Set Timers for
   (1) Mob Timer (https://mobti.me/arrested-egg) (edit Navigator to say "Navigator (Stand)")  
-  (2) Agenda Timer(s), e.g., https://www.timeme.com/alarm-clock.htm?1xdchgajjzbibj4bgbj9cgbjJdgbkkegbkpfgbk4ggbkEhgblkigblzjgbl4kgb/Alarm+Clock
+  (2) Agenda Timer(s): e.g., use TTS Batch File (so can hear next agenda item out loud)
           Item	       Len	 Start
           Welcome	      5	 9:30 AM
           Review Notes 10	 9:35 AM
