@@ -1,61 +1,87 @@
 import { getIcalObjectFromText } from "../IcalUtils";
 import {
   createCalendarWithOneTimezone,
-  createCalendarWithTwoTimezones,
   createCalendarWithEvent,
-  londonTimeZoneId,
-  newYorkTimeZoneId,
+  londonTimezoneId,
+  newYorkTimezoneId,
 } from "./test-helper/IcalTestHelper";
 import { IcalObject } from "../IcalObject";
 
+function addHoursToDate(date: Date, hours: number) {
+  const getTimeToHourMultiplier = 1000 * 60 * 60;
+  return new Date(date.getHours() + hours);
+}
+
 describe("ical timezones", () => {
-  it("check you can get timezones from ical formatted text when one defined", () => {
-    const icalText = createCalendarWithOneTimezone(newYorkTimeZoneId);
+  it.skip(`given ical text with a default timezone of NY and no events, 
+  when you create an ical object,
+  then the default timezone for the object is NY`, () => {
+    const icalText = createCalendarWithOneTimezone(newYorkTimezoneId);
     const icalObject: IcalObject = getIcalObjectFromText(icalText);
-    expect(icalObject.timezoneIds[0]).toEqual(newYorkTimeZoneId);
+    expect(icalObject.defaultTimezoneId).toEqual(newYorkTimezoneId);
   });
 
-  it("check you can get timezones from ical formatted text when one defined", () => {
-    const icalText = createCalendarWithTwoTimezones(
-      newYorkTimeZoneId,
-      londonTimeZoneId
-    );
+  it(`given ical text with a default timezone of NY and no events, 
+      when you create an ical object,
+      then first timezoneId is NY`, () => {
+    const icalText = createCalendarWithOneTimezone(newYorkTimezoneId);
     const icalObject: IcalObject = getIcalObjectFromText(icalText);
-    expect(icalObject.timezoneIds.includes(newYorkTimeZoneId)).toEqual(true);
-    expect(icalObject.timezoneIds.includes(londonTimeZoneId)).toEqual(true);
+    expect(icalObject.timezoneIds[0]).toEqual(newYorkTimezoneId);
+  });
+
+  it(`given ical text with a default timezone and an event in a different timezone, 
+      when you create an ical object,
+      then both timezoneIds are included in iCalObject`, () => {
+    const startDateValue = new Date();
+    const endDateValue = addHoursToDate(startDateValue, 1);
+    const summaryValue = "A non-default timezone non-repeating event";
+    const defaultTimezoneId = londonTimezoneId;
+    const eventTimezoneId = newYorkTimezoneId;
+
+    const icalText = createCalendarWithEvent({
+      defaultTimezoneId: defaultTimezoneId,
+      eventTimezoneId: eventTimezoneId,
+      eventData: {
+        originIcalUid: "1",
+        dtStart: startDateValue,
+        dtEnd: endDateValue,
+        summary: summaryValue,
+      },
+    });
+
+    const icalObject: IcalObject = getIcalObjectFromText(icalText);
   });
 });
 
-function addHoursToDate(date: Date, hours: number) {
-  const getTimeToHourMultiplier = 1000 * 60 * 60;
-  return new Date(date.getTime() + 2 * getTimeToHourMultiplier);
-}
-
 describe("simple events", () => {
-  it("check event values get saved", () => {
+  it.skip(`given ical text with a default timezone and an event in a different timezone, 
+    when you create an ical object,
+    then you can get an event array which includes the event with the original values`, () => {
     const startDateValue = new Date();
     const endDateValue = addHoursToDate(startDateValue, 1);
     const dtStampValue = addHoursToDate(startDateValue, 2);
     const createdValue = addHoursToDate(startDateValue, 3);
-    const locationValue = "10 Mass Ave, Boston, MA";
-    const summaryValue = "A non-default timezone non-repeating event";
 
-    const icalText = createCalendarWithEvent(
-      {calendarTimeZoneId : londonTimeZoneId,
-      eventTimeZoneId : newYorkTimeZoneId,
-      eventData : {
-        originIcalUid: "1",
-        dtStart: startDateValue,
-        dtEnd: endDateValue,
-        dtStamp: dtStampValue,
-        created: createdValue,
-        location: locationValue,
-        summary: summaryValue,
-      }}
-    );
+    const eventData = {
+      originIcalUid: "1",
+      dtStart: startDateValue,
+      dtEnd: endDateValue,
+      dtStamp: dtStampValue,
+      created: createdValue,
+      location: "10 Mass Ave, Boston, MA",
+      summary: "Sample Event",
+    };
+
+    const icalText = createCalendarWithEvent({
+      defaultTimezoneId: londonTimezoneId,
+      eventTimezoneId: newYorkTimezoneId,
+      eventData: eventData,
+    });
 
     const icalObject: IcalObject = getIcalObjectFromText(icalText);
     const event = icalObject.events[0];
-    expect(icalObject.events[0].summary).toEqual(summaryValue);
+    for (const key of Object.keys(eventData)) {
+      expect(`${key}: ${eventData[key]}`).toEqual(`${key}: ${event[key]}`);
+    }
   });
 });

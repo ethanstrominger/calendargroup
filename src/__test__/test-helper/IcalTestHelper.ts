@@ -9,52 +9,32 @@ import { AggEvent } from "src/models/AggEvent";
 // cal.createEvent ( { ..., timezone: 'Europe/Berlin' } ) sets the timezone for the event
 // . and adds the full timezone definition to the calendar
 
-export const londonTimeZoneId = "Europe/London";
-export const newYorkTimeZoneId = "America/New_York";
+export const londonTimezoneId = "Europe/London";
+export const newYorkTimezoneId = "America/New_York";
 
-export function createCalendarWithOneTimezone(timeZoneId: string): string {
+export function createCalendarWithOneTimezone(timezoneId: string): string {
   const cal = icalGenerator({});
   // see notes on iCalGenerator, getVTimezoneComponent, and timezone
-  cal.timezone({ name: timeZoneId, generator: getVtimezoneComponent });
+  cal.timezone({ name: timezoneId, generator: getVtimezoneComponent });
   return cal.toString();
 }
 
-export function createCalendarWithTwoTimezones(
-  calendarTimeZoneId: string,
-  eventTimeZoneId: string
-): string {
+export function createCalendarWithEvent(data: {
+  defaultTimezoneId: string;
+  eventTimezoneId: string;
+  eventData: AggEvent;
+}) {
   const cal = icalGenerator({});
-
   // see notes on iCalGenerator, getVTimezoneComponent, and timezone
-  cal.timezone({ name: calendarTimeZoneId, generator: getVtimezoneComponent });
-  const now = new Date();
-  const getTimeToHourMultiplier = 1000 * 60 * 60;
-  const event = cal.createEvent({
-    start: now,
-    end: new Date(now.getTime() + getTimeToHourMultiplier),
-    // see notes on iCalGenerator, getVTimezoneComponent, and timezone
-    timezone: eventTimeZoneId,
-    summary: "My Event",
-    description:
-      "The quick brown fox jumped over the lazy dog and could not stop from jumping over the lazy dog because that is what lazy dogs and quick brown foxes like to do.  Really, I know this.  It is an amazing fact.  Okay, so let us see what what do",
-    organizer: "Sebastian Pekarek <mail@example.com>",
+  cal.timezone({
+    name: data.defaultTimezoneId,
+    generator: getVtimezoneComponent,
   });
-  return cal.toString();
-}
-
-export function createCalendarWithEvent(
-  data : {calendarTimeZoneId: string,
-  eventTimeZoneId: string,
-  eventData: AggEvent}
-) {
-  const cal = icalGenerator({});
-  // see notes on iCalGenerator, getVTimezoneComponent, and timezone
-  cal.timezone({ name: data.calendarTimeZoneId, generator: getVtimezoneComponent });
   cal.createEvent({
     start: data.eventData.dtStart,
     end: data.eventData.dtEnd,
     // see notes on iCalGenerator, getVTimezoneComponent, and timezone
-    timezone: data.eventTimeZoneId,
+    timezone: data.eventTimezoneId,
     summary: data.eventData.summary,
     created: data.eventData.created,
     stamp: data.eventData.dtStamp,
