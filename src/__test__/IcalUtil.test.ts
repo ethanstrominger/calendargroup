@@ -13,10 +13,13 @@ function addHoursToDate(date: Date, hours: number) {
 }
 
 describe("ical timezones", () => {
-  it.skip(`given ical text with a default timezone of NY and no events, 
+  it(`given ical text with a default timezone of NY and no events, 
   when you create an ical object,
   then the default timezone for the object is NY`, () => {
     const icalText = createCalendarWithOneTimezone(newYorkTimezoneId);
+    //const position = "BEGIN:VCALENDAR".length
+    //const x = icalText.substr(position,1);
+    console.log("Here's icalText as lines:", icalText.split(/\r?\n/))
     const icalObject: IcalObject = getIcalObjectFromText(icalText);
     expect(icalObject.defaultTimezoneId).toEqual(newYorkTimezoneId);
   });
@@ -50,11 +53,13 @@ describe("ical timezones", () => {
     });
 
     const icalObject: IcalObject = getIcalObjectFromText(icalText);
+    expect(icalObject.timezoneIds).toContain(newYorkTimezoneId);
+    expect(icalObject.timezoneIds).toContain(londonTimezoneId);
   });
 });
 
 describe("simple events", () => {
-  it.skip(`given ical text with a default timezone and an event in a different timezone, 
+  it(`given ical text with a default timezone and an event in a different timezone, 
     when you create an ical object,
     then you can get an event array which includes the event with the original values`, () => {
     const startDateValue = new Date();
