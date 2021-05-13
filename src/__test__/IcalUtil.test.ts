@@ -1,4 +1,5 @@
 import { getIcalObjectFromText } from "../IcalUtils";
+import { getIcalObjectFromText2 } from "../IcalUtils";
 import {
   createCalendarWithOneTimezone,
   createCalendarWithEvent,
@@ -49,7 +50,7 @@ describe("ical timezones", () => {
       },
     });
 
-    const icalObject: IcalObject = getIcalObjectFromText(icalText);
+    const icalObject: IcalObject = getIcalObjectFromText2(icalText);
     expect(icalObject.timezoneIds).toContain(newYorkTimezoneId);
     expect(icalObject.timezoneIds).toContain(londonTimezoneId);
   });

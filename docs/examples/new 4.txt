@@ -1,0 +1,4 @@
+
+ 
+  console.log
+    result IcalObject { timezoneIds: [ 'Europe/London', 'America/New_York' ] }
