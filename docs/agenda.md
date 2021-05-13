@@ -2,19 +2,20 @@
 
 **BEFORE MEETING**
 
-- Ethan: 
+- **Ethan:** 
   - Prep with specific background so that we can jump in on a new red-green-refactor with a clear requirement (and clear description of dependencies)
-  - Check branches, push.
+  - Check branches, push
   - Have snack and water on hand before meeting (if will need)
   - Turn off Slack
   - Set keyboard (for use with Windows remotely)
   - Restart computer before meeting (if still having problems after moving it from floor)
   - Discuss staying alert (snacks, standing,...)
-- Joel: 
+
+- **Joel:** 
   - Open timers (and modify if needed)
   - Open VS Code 
   - Open Command Prompt
-    - dir ____ (path)
+    - dir C:\Users\Joel\Documents\Projects\calendargroup\
     - npm test
   - Arrange windows (MobTi.me top left, Command bottom left, VSCode right fill)
 
