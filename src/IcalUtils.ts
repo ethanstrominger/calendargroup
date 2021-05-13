@@ -2,21 +2,6 @@ import icalParser /* ICAL */ from "ical.js";
 import { IcalObject } from "./IcalObject";
 import { sync, async } from "node-ical";
 
-// export function addTimezoneIfAbsent(
-//   timeString: string,
-//   defaultTimezone: string
-// ) {
-//   if (timeString.includes("TZID")) {
-//     return timeString;
-//   }
-
-//   const timeStringComponents = timeString.split(":");
-//   const prefix = timeStringComponents[0];
-//   let dateString = timeStringComponents[1];
-//   dateString = dateString.substring(0, dateString.length - 1);
-//   return prefix + ";TZID=" + defaultTimezone + ":" + dateString;
-// }
-
 export function getIcalObjectFromText(icalText: string): IcalObject {
   const iCalData = icalParser.parse(icalText);
   const iCalDataComponent = new icalParser.Component(iCalData);

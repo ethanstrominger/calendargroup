@@ -50,6 +50,8 @@ describe("ical timezones", () => {
     });
 
     const icalObject: IcalObject = getIcalObjectFromText(icalText);
+    expect(icalObject.timezoneIds).toContain(newYorkTimezoneId);
+    expect(icalObject.timezoneIds).toContain(londonTimezoneId);
   });
 });
 

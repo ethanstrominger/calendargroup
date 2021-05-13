@@ -1,3 +1,21 @@
+5/13/21 - Ethan & Joel
+Improve
+- Figure out system for synching code before we meet - add to agenda to check branches,...
+- Ethan prep with specific background so that we can jump in on a new red-green-refactor with a clear requirement (and clear description of dependencies)
+- Check in agenda timer batch file and Excel file; and improve (i.e., not batch)
+- Add to agenda: Set up command prompt window (placed under mobtimer window) with:
+  - dir ____ (path)
+  - npm test
+Feel
+- Guilty, bemused
+- Perplexed, frustrated, glad
+Liked
+- Worked through the issues
+- Working on real project
+- Liked that figured out branch problem
+- Liked getting environment more set up ahead of time
+
+
 5/3/21 - Ethan & Joel
 Improve 
 - Rename ICalUtil to ICalSerializer, change to class, and maybe rename method to Deserialize (to make consistent with other serializers); or maybe see if something on top of the parser works the way we want
