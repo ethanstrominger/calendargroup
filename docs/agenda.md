@@ -23,7 +23,7 @@
 
 Before Starting Project:
 
-- Pull (get latest)
+- Pull (get latest) and **make sure working in correct branch!**
 - npm install (in case packages added)
 
 - Review:
