@@ -14,7 +14,7 @@
 - **Joel:** 
   - Open timers (and modify if needed)
   - Open VS Code 
-  - Open Command Prompt
+  - Open Command Prompt and enter:
     - dir C:\Users\Joel\Documents\Projects\calendargroup\
     - npm test
   - Arrange windows (MobTi.me top left, Command bottom left, VSCode right fill)
