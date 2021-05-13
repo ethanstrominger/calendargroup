@@ -14,6 +14,7 @@ Liked
 - Working on real project
 - Liked that figured out branch problem
 - Liked getting environment more set up ahead of time
+- Liked making sample text files visible and adding to project
 
 
 5/3/21 - Ethan & Joel

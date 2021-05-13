@@ -2,13 +2,21 @@
 
 **BEFORE MEETING**
 
-- Have snack and water on hand before meeting (if will need)
-- Ethan: Turn off Slack
-- Discuss staying alert (snacks, standing,...)
-- Set Ethan's keyboard (for use with Windows remotely)
-- Ethan restart computer before meeting (if still having problems after moving it from floor)
-- Open timers (and modify if needed)
-- Open VS Code and in Terminal type npm test
+- Ethan: 
+  - Prep with specific background so that we can jump in on a new red-green-refactor with a clear requirement (and clear description of dependencies)
+  - Check branches, push.
+  - Have snack and water on hand before meeting (if will need)
+  - Turn off Slack
+  - Set keyboard (for use with Windows remotely)
+  - Restart computer before meeting (if still having problems after moving it from floor)
+  - Discuss staying alert (snacks, standing,...)
+- Joel: 
+  - Open timers (and modify if needed)
+  - Open VS Code 
+  - Open Command Prompt
+    - dir ____ (path)
+    - npm test
+  - Arrange windows (MobTi.me top left, Command bottom left, VSCode right fill)
 
 **AGENDA (during meeting)**
 
