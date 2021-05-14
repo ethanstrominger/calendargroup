@@ -1,0 +1,82 @@
+
+    BEGIN:VCALENDAR
+    VERSION:2.0
+    PRODID:-//sebbo.net//ical-generator//EN
+    BEGIN:VTIMEZONE
+    TZID:Europe/London
+    TZURL:http://tzurl.org/zoneinfo-outlook/Europe/London
+    X-LIC-LOCATION:Europe/London
+    BEGIN:DAYLIGHT
+    TZOFFSETFROM:+0000
+    TZOFFSETTO:+0100
+    TZNAME:BST
+    DTSTART:19700329T010000
+    RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+    END:DAYLIGHT
+    BEGIN:STANDARD
+    TZOFFSETFROM:+0100
+    TZOFFSETTO:+0000
+    TZNAME:GMT
+    DTSTART:19701025T020000
+    RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+    END:STANDARD
+    END:VTIMEZONE
+    BEGIN:VTIMEZONE
+    TZID:America/New_York
+    TZURL:http://tzurl.org/zoneinfo-outlook/America/New_York
+    X-LIC-LOCATION:America/New_York
+    BEGIN:DAYLIGHT
+    TZOFFSETFROM:-0500
+    TZOFFSETTO:-0400
+    TZNAME:EDT
+    DTSTART:19700308T020000
+    RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+    END:DAYLIGHT
+    BEGIN:STANDARD
+    TZOFFSETFROM:-0400
+    TZOFFSETTO:-0500
+    TZNAME:EST
+    DTSTART:19701101T020000
+    RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+    END:STANDARD
+    END:VTIMEZONE
+    TIMEZONE-ID:Europe/London
+    X-WR-TIMEZONE:Europe/London
+    BEGIN:VEVENT
+    UID:4e0a8866-3fc3-444d-bdda-35cf49b34b2d
+    SEQUENCE:0
+    DTSTAMP:20210513T110710
+    DTSTART;TZID=America/New_York:19691231T190000
+    DTEND;TZID=America/New_York:20210513T110710
+    SUMMARY:A non-default timezone non-repeating event
+    END:VEVENT
+    END:VCALENDAR
+
+      at getIcalObjectFromText2 (src/IcalUtils.ts:20:11)
+
+ 
+      at getIcalObjectFromText2 (src/IcalUtils.ts:26:11)
+
+ PASS  src/__test__/IcalUtil.test.ts
+  ical timezones
+    √ given ical text with a default timezone of NY and no events,
+      when you create an ical object,
+      then first timezoneId is NY (7 ms)
+    √ given ical text with a default timezone and an event in a different timezone,
+      when you create an ical object,
+      then both timezoneIds are included in iCalObject (95 ms)
+    ○ skipped given ical text with a default timezone of NY and no events,
+  when you create an ical object,
+  then the default timezone for the object is NY
+  simple events
+    ○ skipped given ical text with a default timezone and an event in a different timezone,
+    when you create an ical object,
+    then you can get an event array which includes the event with the original values
+
+Test Suites: 4 passed, 4 total
+Tests:       2 skipped, 10 passed, 12 total
+Snapshots:   0 total
+Time:        6.586 s
+Ran all test suites.
+
+Watch Usage: Press w to show more.

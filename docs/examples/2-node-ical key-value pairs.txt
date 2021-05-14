@@ -1,0 +1,76 @@
+ console.log
+    parsedCal {
+      '55c9c0c0-9534-48bd-906b-bd07d4834d50': {
+        type: 'VTIMEZONE',
+        params: [],
+        tzid: 'Europe/London',
+        tzurl: 'http://tzurl.org/zoneinfo-outlook/Europe/London',
+        'LIC-LOCATION': 'Europe/London',
+        '6097c42d-db42-4b0f-829f-f4f5c0f05f60': {
+          type: 'DAYLIGHT',
+          params: [],
+          tzoffsetfrom: '+0000',
+          tzoffsetto: '+0100',
+          tzname: 'BST',
+          start: 1970-03-29T06:00:00.000Z,
+          datetype: 'date-time',
+          rrule: 'RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU',
+          end: 1970-03-29T06:00:00.000Z
+        },
+        'dc2c788e-056a-4f9a-b5c5-296d5ed13505': {
+          type: 'STANDARD',
+          params: [],
+          tzoffsetfrom: '+0100',
+          tzoffsetto: '+0000',
+          tzname: 'GMT',
+          start: 1970-10-25T07:00:00.000Z,
+          datetype: 'date-time',
+          rrule: 'RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU',
+          end: 1970-10-25T07:00:00.000Z
+        },
+        end: 2021-05-14T15:07:10.319Z
+      },
+      'b59ad982-7ef8-426b-b06f-a88085a3f450': {
+        type: 'VTIMEZONE',
+        params: [],
+        tzid: 'America/New_York',
+        tzurl: 'http://tzurl.org/zoneinfo-outlook/America/New_York',
+        'LIC-LOCATION': 'America/New_York',
+        '738932dd-8fb1-4d66-b5dc-da209e86b0ed': {
+          type: 'DAYLIGHT',
+          params: [],
+          tzoffsetfrom: '-0500',
+          tzoffsetto: '-0400',
+          tzname: 'EDT',
+          start: 1970-03-08T07:00:00.000Z,
+          datetype: 'date-time',
+          rrule: 'RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU',
+          end: 1970-03-08T07:00:00.000Z
+        },
+        'fe4ce4fa-2c1d-41c1-80b0-6c2fb4683fe4': {
+          type: 'STANDARD',
+          params: [],
+          tzoffsetfrom: '-0400',
+          tzoffsetto: '-0500',
+          tzname: 'EST',
+          start: 1970-11-01T07:00:00.000Z,
+          datetype: 'date-time',
+          rrule: 'RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU',
+          end: 1970-11-01T07:00:00.000Z
+        },
+        end: 2021-05-14T15:07:10.322Z
+      },
+      '4e0a8866-3fc3-444d-bdda-35cf49b34b2d': {
+        type: 'VEVENT',
+        params: [],
+        uid: '4e0a8866-3fc3-444d-bdda-35cf49b34b2d',
+        sequence: '0',
+        dtstamp: 2021-05-13T15:07:10.000Z,
+        start: 1970-01-01T00:00:00.000Z { tz: 'America/New_York' },
+        datetype: 'date-time',
+        end: 2021-05-13T15:07:10.000Z { tz: 'America/New_York' },
+        summary: 'A non-default timezone non-repeating event'
+      }
+    }
+
+      at getIcalObjectFromText2 (src/IcalUtils.ts:22:11)

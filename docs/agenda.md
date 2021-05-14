@@ -2,19 +2,28 @@
 
 **BEFORE MEETING**
 
-- Have snack and water on hand before meeting (if will need)
-- Ethan: Turn off Slack
-- Discuss staying alert (snacks, standing,...)
-- Set Ethan's keyboard (for use with Windows remotely)
-- Ethan restart computer before meeting (if still having problems after moving it from floor)
-- Open timers (and modify if needed)
-- Open VS Code and in Terminal type npm test
+- **Ethan:** 
+  - Prep with specific background so that we can jump in on a new red-green-refactor with a clear requirement (and clear description of dependencies)
+  - Check branches, push
+  - Have snack and water on hand before meeting (if will need)
+  - Turn off Slack
+  - Set keyboard (for use with Windows remotely)
+  - Restart computer before meeting (if still having problems after moving it from floor)
+  - Discuss staying alert (snacks, standing,...)
+
+- **Joel:** 
+  - Open timers (and modify if needed)
+  - Open VS Code 
+  - Open Command Prompt and enter:
+    - dir C:\Users\Joel\Documents\Projects\calendargroup\
+    - npm test
+  - Arrange windows (MobTi.me top left, Command bottom left, VSCode right fill)
 
 **AGENDA (during meeting)**
 
 Before Starting Project:
 
-- Pull (get latest)
+- Pull (get latest) and **make sure working in correct branch!**
 - npm install (in case packages added)
 
 - Review:
@@ -82,5 +91,6 @@ TDD Cycles:
   - 4/22/2021: 9:45 AM (0:15 from start paired on algorithm edits; 1:30 from start paired on TDD) 
   - 4/29/2021: 10:05 connected, 10:18 looked at code, 10:22 started coding
   - 5/3/2021: staggered start, did a little at 9:45 AM, then explanation, then resumed around 10:00 AM
+  - 5/13/2021: 9:47
   - ...
 - **Stage, Commit, & Push** - so everyone has the latest code before leave
