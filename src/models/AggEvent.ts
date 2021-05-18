@@ -31,6 +31,8 @@ export class AggEvent {
   }
 }
 
+/*
+//"Realized at some point I had two; we should only be using one of them."
 export class ICalEvent {
   dtStart: Date;
   dtEnd: Date;
@@ -52,3 +54,4 @@ export class ICalEvent {
     this.description = iCalEvent.description;
   }
 }
+*/

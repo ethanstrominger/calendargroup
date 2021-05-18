@@ -1,5 +1,4 @@
 import { getIcalObjectFromText } from "../IcalUtils";
-import { getIcalObjectFromText2 } from "../IcalUtils";
 import {
   createCalendarWithOneTimezone,
   createCalendarWithEvent,
@@ -14,10 +13,13 @@ function addHoursToDate(date: Date, hours: number) {
 }
 
 describe("ical timezones", () => {
-  it.skip(`given ical text with a default timezone of NY and no events, 
+  it(`given ical text with a default timezone of NY and no events, 
   when you create an ical object,
   then the default timezone for the object is NY`, () => {
     const icalText = createCalendarWithOneTimezone(newYorkTimezoneId);
+    //const position = "BEGIN:VCALENDAR".length
+    //const x = icalText.substr(position,1);
+    console.log("Here's icalText as lines:", icalText.split(/\r?\n/))
     const icalObject: IcalObject = getIcalObjectFromText(icalText);
     expect(icalObject.defaultTimezoneId).toEqual(newYorkTimezoneId);
   });
@@ -50,7 +52,7 @@ describe("ical timezones", () => {
       },
     });
 
-    const icalObject: IcalObject = getIcalObjectFromText2(icalText);
+    const icalObject: IcalObject = getIcalObjectFromText(icalText);
     expect(icalObject.timezoneIds).toContain(newYorkTimezoneId);
     expect(icalObject.timezoneIds).toContain(londonTimezoneId);
   });
