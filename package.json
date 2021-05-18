@@ -25,7 +25,7 @@
   },
   "vsTest": {
     "testRoot": "./calendargroup/src"
-  }
+  },
   "engines": {
     "node": ">=0.11"
   }
