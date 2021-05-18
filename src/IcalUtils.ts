@@ -5,7 +5,6 @@ import { sync } from "node-ical";
 export function getIcalObjectFromText(icalText: string): IcalObject {
   const icalDataStructured = sync.parseICS(icalText);
   let icalLines = icalText.split(/\r?\n/);
-
   const icalObject = new IcalObject();
 
   for (const line of icalLines) {
@@ -43,7 +42,21 @@ export function getIcalObjectFromText2(icalText: string): IcalObject {
   const result = getIcalObjectFromText(icalText);
   console.log("result", result);
   return result;
-  // const icalObject = new IcalObject();
-  // icalObject.timezoneIds = timezoneIds;
-  // return icalObject;
 }
+// const icalObject = new IcalObject();
+// icalObject.timezoneIds = timezoneIds;
+// return icalObject;
+
+//   timeString: string,
+//   defaultTimezone: string
+// ) {
+//   if (timeString.includes("TZID")) {
+//     return timeString;
+//   }
+
+//   const timeStringComponents = timeString.split(":");
+//   const prefix = timeStringComponents[0];
+//   let dateString = timeStringComponents[1];
+//   dateString = dateString.substring(0, dateString.length - 1);
+//   return prefix + ";TZID=" + defaultTimezone + ":" + dateString;
+// }

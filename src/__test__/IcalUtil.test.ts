@@ -1,11 +1,8 @@
 import { getIcalObjectFromText } from "../IcalUtils";
-import {
-  createCalendarWithOneTimezone,
-  createCalendarWithEvent,
-  londonTimezoneId,
-  newYorkTimezoneId,
-} from "./test-helper/IcalTestHelper";
+import { createCalendarWithEvents as createCalendarWithEvents } from "./test-helper/IcalTestHelper";
 import { IcalObject } from "../IcalObject";
+import { ICAL_TEST_DATA as icalTestDataTwoTimezones } from "./test-helper/IcalData-events-in-newyork-and-berlin-timezones";
+import { ICAL_TEST_DATA as icalTestWithNoTimezones } from "./test-helper/IcalData-Google-events-with-no-timezone";
 
 function addHoursToDate(date: Date, hours: number) {
   const getTimeToHourMultiplier = 1000 * 60 * 60;
@@ -13,73 +10,72 @@ function addHoursToDate(date: Date, hours: number) {
 }
 
 describe("ical timezones", () => {
-  it(`given ical text with a default timezone of NY and no events, 
+  it(`given ical text where two events use timezone of NY and 
+  two events use Europe/Berlin
   when you create an ical object,
-  then the default timezone for the object is NY`, () => {
-    const icalText = createCalendarWithOneTimezone(newYorkTimezoneId);
-    //const position = "BEGIN:VCALENDAR".length
-    //const x = icalText.substr(position,1);
-    console.log("Here's icalText as lines:", icalText.split(/\r?\n/))
+  then the timezones are associated with the timezone`, () => {
+    const icalText = icalTestDataTwoTimezones.calData;
+    const expectedResults = icalTestDataTwoTimezones;
     const icalObject: IcalObject = getIcalObjectFromText(icalText);
-    expect(icalObject.defaultTimezoneId).toEqual(newYorkTimezoneId);
+    expect(icalObject.events[0].timezoneId).toEqual(
+      expectedResults[0].timezoneId
+    );
+    expect(icalObject.events[1].timezoneId).toEqual(
+      expectedResults[1].timezoneId
+    );
+    expect(icalObject.events[2].timezoneId).toEqual(
+      expectedResults[2].timezoneId
+    );
+    expect(icalObject.events[3].timezoneId).toEqual(
+      expectedResults[3].timezoneId
+    );
   });
+});
 
-  it(`given ical text with a default timezone of NY and no events, 
-      when you create an ical object,
-      then first timezoneId is NY`, () => {
-    const icalText = createCalendarWithOneTimezone(newYorkTimezoneId);
+describe("ical timezones", () => {
+  it.skip(`given ical text where no events  have timezone,
+  when you create an ical object,
+  then the timezone is undefined for each event`, () => {
+    const icalText = icalTestWithNoTimezones.calData;
     const icalObject: IcalObject = getIcalObjectFromText(icalText);
-    expect(icalObject.timezoneIds[0]).toEqual(newYorkTimezoneId);
-  });
-
-  it(`given ical text with a default timezone and an event in a different timezone, 
-      when you create an ical object,
-      then both timezoneIds are included in iCalObject`, () => {
-    const startDateValue = new Date();
-    const endDateValue = addHoursToDate(startDateValue, 1);
-    const summaryValue = "A non-default timezone non-repeating event";
-    const defaultTimezoneId = londonTimezoneId;
-    const eventTimezoneId = newYorkTimezoneId;
-
-    const icalText = createCalendarWithEvent({
-      defaultTimezoneId: defaultTimezoneId,
-      eventTimezoneId: eventTimezoneId,
-      eventData: {
-        originIcalUid: "1",
-        dtStart: startDateValue,
-        dtEnd: endDateValue,
-        summary: summaryValue,
-      },
+    expect(icalObject.events.length).toBeGreaterThan(0);
+    icalObject.events.forEach((event) => {
+      expect(event.timezoneId).toBeUndefined();
     });
-
-    const icalObject: IcalObject = getIcalObjectFromText(icalText);
-    expect(icalObject.timezoneIds).toContain(newYorkTimezoneId);
-    expect(icalObject.timezoneIds).toContain(londonTimezoneId);
   });
 });
 
 describe("simple events", () => {
-  it.skip(`given ical text with a default timezone and an event in a different timezone, 
+  it.skip(`given ical text with an event with relevant fields having data, 
     when you create an ical object,
-    then you can get an event array which includes the event with the original values`, () => {
+    then each event in icalObject.events has the correct values`, () => {
     const startDateValue = new Date();
     const endDateValue = addHoursToDate(startDateValue, 1);
     const dtStampValue = addHoursToDate(startDateValue, 2);
     const createdValue = addHoursToDate(startDateValue, 3);
 
-    const eventData = {
-      originIcalUid: "1",
-      dtStart: startDateValue,
-      dtEnd: endDateValue,
-      dtStamp: dtStampValue,
-      created: createdValue,
-      location: "10 Mass Ave, Boston, MA",
-      summary: "Sample Event",
-    };
+    const eventData = [
+      {
+        originIcalUid: "1",
+        dtStart: startDateValue,
+        dtEnd: endDateValue,
+        dtStamp: dtStampValue,
+        created: createdValue,
+        location: "10 Mass Ave, Boston, MA",
+        summary: "Sample Event",
+      },
+      {
+        originIcalUid: "2",
+        dtStart: addHoursToDate(startDateValue, 24),
+        dtEnd: addHoursToDate(endDateValue, 24),
+        dtStamp: addHoursToDate(dtStampValue, 24),
+        created: addHoursToDate(createdValue, 24),
+        location: "2030 Mass Ave, Lexington, MA",
+        summary: "Another Sample Event",
+      },
+    ];
 
-    const icalText = createCalendarWithEvent({
-      defaultTimezoneId: londonTimezoneId,
-      eventTimezoneId: newYorkTimezoneId,
+    const icalText = createCalendarWithEvents({
       eventData: eventData,
     });
 

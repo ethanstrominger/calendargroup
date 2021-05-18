@@ -9,6 +9,7 @@ import { AggEvent } from "src/models/AggEvent";
 // cal.createEvent ( { ..., timezone: 'Europe/Berlin' } ) sets the timezone for the event
 // . and adds the full timezone definition to the calendar
 
+export const berlinTimezoneId = "Europe/London";
 export const londonTimezoneId = "Europe/London";
 export const newYorkTimezoneId = "America/New_York";
 
@@ -19,26 +20,24 @@ export function createCalendarWithOneTimezone(timezoneId: string): string {
   return cal.toString();
 }
 
-export function createCalendarWithEvent(data: {
-  defaultTimezoneId: string;
-  eventTimezoneId: string;
-  eventData: AggEvent;
-}) {
+export function createCalendarWithEvents(data: { eventData: AggEvent[] }) {
   const cal = icalGenerator({});
   // see notes on iCalGenerator, getVTimezoneComponent, and timezone
   cal.timezone({
-    name: data.defaultTimezoneId,
+    name: newYorkTimezoneId,
     generator: getVtimezoneComponent,
   });
-  cal.createEvent({
-    start: data.eventData.dtStart,
-    end: data.eventData.dtEnd,
-    // see notes on iCalGenerator, getVTimezoneComponent, and timezone
-    timezone: data.eventTimezoneId,
-    summary: data.eventData.summary,
-    created: data.eventData.created,
-    stamp: data.eventData.dtStamp,
-    location: data.eventData.location,
-  });
+  data.eventData.forEach((event) =>
+    cal.createEvent({
+      start: event.dtStart,
+      end: event.dtEnd,
+      // see notes on iCalGenerator, getVTimezoneComponent, and timezone
+      timezone: event.timezoneId,
+      summary: event.summary,
+      created: event.created,
+      stamp: event.dtStamp,
+      location: event.location,
+    })
+  );
   return cal.toString();
 }
