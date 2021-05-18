@@ -1,26 +1,11 @@
-import icalParser /* ICAL */ from "ical.js";
 import { IcalObject } from "./IcalObject";
 import { sync } from "node-ical";
 
 export function getIcalObjectFromText(icalText: string): IcalObject {
-  const icalDataStructured = sync.parseICS(icalText);
-  let icalLines = icalText.split(/\r?\n/);
+  const icalData = sync.parseICS(icalText);
   const icalObject = new IcalObject();
 
-  for (const line of icalLines) {
-    if (line.substring(0, 13) == "X-WR-TIMEZONE") {
-      icalObject.defaultTimezoneId = line.substr(14);
-      break;
-    }
-  }
-
   let timezoneIds = [] as string[];
-  for (const timeZone of Object.values(icalDataStructured)) {
-    const tzid: string = timeZone["tzid"];
-    if (tzid) {
-      timezoneIds.push(tzid);
-    }
-  }
 
   icalObject.timezoneIds = timezoneIds;
   return icalObject;
@@ -40,23 +25,5 @@ export function getIcalObjectFromText2(icalText: string): IcalObject {
   // 4. rename sample files "new *.txt"
 
   const result = getIcalObjectFromText(icalText);
-  console.log("result", result);
   return result;
 }
-// const icalObject = new IcalObject();
-// icalObject.timezoneIds = timezoneIds;
-// return icalObject;
-
-//   timeString: string,
-//   defaultTimezone: string
-// ) {
-//   if (timeString.includes("TZID")) {
-//     return timeString;
-//   }
-
-//   const timeStringComponents = timeString.split(":");
-//   const prefix = timeStringComponents[0];
-//   let dateString = timeStringComponents[1];
-//   dateString = dateString.substring(0, dateString.length - 1);
-//   return prefix + ";TZID=" + defaultTimezone + ":" + dateString;
-// }
