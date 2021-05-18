@@ -1,5 +1,9 @@
- console.log
+icalValueArray = Object.values(parsedIcalText) extracts the value part of the key value
+pair into an array.
+
     calObjects [
+      -- TIMEZONE DETAILS ARE NOT NEEDED WHEN PARSING
+      -- WHEN THE ICALOBJECT IS GENERATED, THE GENERATOR WILL FETCH THE DETAILS
       {
         type: 'VTIMEZONE',
         params: [],
@@ -60,6 +64,7 @@
         },
         end: 2021-05-14T15:07:10.322Z
       },
+      -- AN EVENT
       {
         type: 'VEVENT',
         params: [],
