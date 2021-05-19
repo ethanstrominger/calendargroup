@@ -1,4 +1,8 @@
 
+    See also annotated ics markdown for indented version
+    The parser for this project does not need to parse details of "VTIMEZONE", only "VEVENT"
+    The generator needs to include the details.
+
     BEGIN:VCALENDAR
     VERSION:2.0
     PRODID:-//sebbo.net//ical-generator//EN
@@ -51,32 +55,3 @@
     SUMMARY:A non-default timezone non-repeating event
     END:VEVENT
     END:VCALENDAR
-
-      at getIcalObjectFromText2 (src/IcalUtils.ts:20:11)
-
- 
-      at getIcalObjectFromText2 (src/IcalUtils.ts:26:11)
-
- PASS  src/__test__/IcalUtil.test.ts
-  ical timezones
-    √ given ical text with a default timezone of NY and no events,
-      when you create an ical object,
-      then first timezoneId is NY (7 ms)
-    √ given ical text with a default timezone and an event in a different timezone,
-      when you create an ical object,
-      then both timezoneIds are included in iCalObject (95 ms)
-    ○ skipped given ical text with a default timezone of NY and no events,
-  when you create an ical object,
-  then the default timezone for the object is NY
-  simple events
-    ○ skipped given ical text with a default timezone and an event in a different timezone,
-    when you create an ical object,
-    then you can get an event array which includes the event with the original values
-
-Test Suites: 4 passed, 4 total
-Tests:       2 skipped, 10 passed, 12 total
-Snapshots:   0 total
-Time:        6.586 s
-Ran all test suites.
-
-Watch Usage: Press w to show more.

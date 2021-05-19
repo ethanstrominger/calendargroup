@@ -13,10 +13,42 @@ function addHoursToDate(date: Date, hours: number) {
   return new Date(date.getHours() + hours);
 }
 
-describe("simple events", () => {
+describe("fixed events", () => {
   it(`given ical text with an event with relevant fields having data, 
     when you create an ical object,
     then each event in icalObject.events has the correct values`, () => {
+    const startDateValue = new Date("2020-01-30");
+    const endDateValue = new Date("2020-01-30");
+    const dtStampValue = new Date("2020-01-18");
+    const createdValue = new Date("2020-01-02");
+
+    const eventData = [
+      {
+        originIcalUid: "1",
+        dtStart: startDateValue,
+        dtEnd: endDateValue,
+        dtStamp: dtStampValue,
+        created: createdValue,
+        location: "10 Mass Ave, Boston, MA",
+        summary: "Sample Event",
+      },
+    ];
+
+    const icalText = createCalendarWithEvents({
+      eventData: eventData,
+    });
+
+    const icalObject: IcalObject = getIcalObjectFromText(icalText);
+    expect(icalObject.events.length).toEqual(2);
+    const event = icalObject.events[0];
+    for (const key of Object.keys(eventData[0])) {
+      expect(`${key}: ${event[key]}`).toEqual(`${key}: ${eventData[0][key]}`);
+    }
+  });
+
+  it.skip(`given ical text with an event with relevant fields having data, 
+  when you create an ical object,
+  then each event in icalObject.events has the correct values`, () => {
     const startDateValue = new Date();
     const endDateValue = addHoursToDate(startDateValue, 1);
     const dtStampValue = addHoursToDate(startDateValue, 2);
@@ -48,9 +80,10 @@ describe("simple events", () => {
     });
 
     const icalObject: IcalObject = getIcalObjectFromText(icalText);
+    expect(icalObject.events.length).toEqual(2);
     const event = icalObject.events[0];
-    for (const key of Object.keys(eventData)) {
-      expect(`${key}: ${eventData[key]}`).toEqual(`${key}: ${event[key]}`);
+    for (const key of Object.keys(eventData[0])) {
+      expect(`${key}: ${eventData[0][key]}`).toEqual(`${key}: ${event[key]}`);
     }
   });
 
