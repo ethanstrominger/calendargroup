@@ -1,5 +1,5 @@
 export class AggEvent {
-  originIcalUid: string; // unique id of an original repeating event or stand alone
+  originIcalUid?: string; // unique id of an original repeating event or stand alone
   // id of the original repeating event for an occurence that is changed
   recurrenceId?: string; // date string for the original date of a repeating occurence that was chagned
   summary: string;

@@ -24,7 +24,16 @@ describe("fixed events", () => {
 
     const eventData = [
       {
-        originIcalUid: "1",
+        // originIcalUid: "1",
+        dtStart: startDateValue,
+        dtEnd: endDateValue,
+        dtStamp: dtStampValue,
+        created: createdValue,
+        location: "10 Mass Ave, Boston, MA",
+        summary: "Sample Event",
+      },
+      {
+        // originIcalUid: "2",
         dtStart: startDateValue,
         dtEnd: endDateValue,
         dtStamp: dtStampValue,
@@ -41,9 +50,14 @@ describe("fixed events", () => {
     const icalObject: IcalObject = getIcalObjectFromText(icalText);
     expect(icalObject.events.length).toEqual(2);
     const event = icalObject.events[0];
-    for (const key of Object.keys(eventData[0])) {
-      expect(`${key}: ${event[key]}`).toEqual(`${key}: ${eventData[0][key]}`);
-    }
+
+    eventData.forEach((eventItem, index) => {
+      for (const key of Object.keys(eventItem)) {
+        expect(`${key}: ${icalObject.events[index][key]}`).toEqual(
+          `${key}: ${eventItem[key]}`
+        );
+      }
+    });
   });
 
   it.skip(`given ical text with an event with relevant fields having data, 
