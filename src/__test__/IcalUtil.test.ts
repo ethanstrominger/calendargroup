@@ -13,8 +13,8 @@ function addHoursToDate(date: Date, hours: number) {
   return new Date(date.getHours() + hours);
 }
 
-describe("fixed events", () => {
-  it(`given ical text with an event with relevant fields having data, 
+describe("fixed non-repeating events events", () => {
+  it(`given ical text with repeating events and all values entered, 
     when you create an ical object,
     then each event in icalObject.events has the correct values`, () => {
     const startDateValue = new Date("2020-01-30");
@@ -24,7 +24,7 @@ describe("fixed events", () => {
 
     const eventData = [
       {
-        // originIcalUid: "1",
+        uid: "X1",
         dtStart: startDateValue,
         dtEnd: endDateValue,
         dtStamp: dtStampValue,
@@ -33,7 +33,7 @@ describe("fixed events", () => {
         summary: "Sample Event",
       },
       {
-        // originIcalUid: "2",
+        uid: "X2",
         dtStart: startDateValue,
         dtEnd: endDateValue,
         dtStamp: dtStampValue,
@@ -70,7 +70,7 @@ describe("fixed events", () => {
 
     const eventData = [
       {
-        originIcalUid: "1",
+        uid: "1",
         dtStart: startDateValue,
         dtEnd: endDateValue,
         dtStamp: dtStampValue,
@@ -79,7 +79,7 @@ describe("fixed events", () => {
         summary: "Sample Event",
       },
       {
-        originIcalUid: "2",
+        uid: "2",
         dtStart: addHoursToDate(startDateValue, 24),
         dtEnd: addHoursToDate(endDateValue, 24),
         dtStamp: addHoursToDate(dtStampValue, 24),
@@ -112,7 +112,7 @@ describe("fixed events", () => {
 
       const eventData = [
         {
-          originIcalUid: "1",
+          uid: "1",
           dtStart: startDateValue,
           dtEnd: endDateValue,
           dtStamp: dtStampValue,
@@ -121,7 +121,7 @@ describe("fixed events", () => {
           summary: "Sample Event",
         },
         {
-          originIcalUid: "2",
+          uid: "2",
           dtStart: addHoursToDate(startDateValue, 24),
           dtEnd: addHoursToDate(endDateValue, 24),
           dtStamp: addHoursToDate(dtStampValue, 24),

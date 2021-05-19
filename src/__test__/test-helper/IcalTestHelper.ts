@@ -20,6 +20,7 @@ export function createCalendarWithEvents(data: { eventData: AggEvent[] }) {
   });
   data.eventData.forEach((event) =>
     cal.createEvent({
+      id: event.uid,
       start: event.dtStart,
       end: event.dtEnd,
       // see notes on iCalGenerator, getVTimezoneComponent, and timezone

@@ -27,7 +27,7 @@ describe("AggEventSource CRUD", () => {
   it("Events can be added to a aggEventSource", () => {
     const currentTime = new Date();
     const aggEvent1 = new AggEvent({
-      originIcalUid: "1",
+      uid: "1",
       summary: "a summary",
       description: "a description",
       dtStart: currentTime,
@@ -36,7 +36,7 @@ describe("AggEventSource CRUD", () => {
 
     const tomorrowTime = new Date(currentTime.getTime() + 1000 * 60 * 60 * 24);
     const aggEvent2 = new AggEvent({
-      originIcalUid: "2",
+      uid: "2",
       summary: "a summary for event 2",
       description: "a description for event 2",
       dtStart: currentTime,
@@ -56,7 +56,7 @@ describe("AggEventSource CRUD", () => {
   it("An array of events can be added to a aggEventSource", () => {
     const currentTime = new Date();
     const aggEvent1 = new AggEvent({
-      originIcalUid: "1",
+      uid: "1",
       summary: "a summary",
       description: "a description",
       dtStart: currentTime,
@@ -65,7 +65,7 @@ describe("AggEventSource CRUD", () => {
 
     const tomorrowTime = new Date(currentTime.getTime() + 1000 * 60 * 60 * 24);
     const aggEvent2 = new AggEvent({
-      originIcalUid: "2",
+      uid: "2",
       summary: "a summary for event 2",
       description: "a description for event 2",
       dtStart: currentTime,
