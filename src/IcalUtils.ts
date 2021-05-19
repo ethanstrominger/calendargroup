@@ -3,7 +3,7 @@ import { sync } from "node-ical";
 
 export function getIcalObjectFromText(icalText: string): IcalObject {
   const icalData = sync.parseICS(icalText);
-  console.log(icalData);
+  //console.log(icalData);
   const icalObject = new IcalObject();
   // icalObject.events = [
   //   {
@@ -26,7 +26,7 @@ export function getIcalObjectFromText(icalText: string): IcalObject {
   for (const parsedEvent of Object.values(icalData).filter(
     (obj) => obj.type == "VEVENT"
   )) {
-    console.log(parsedEvent);
+    //console.log(parsedEvent);
     icalObject.events.push({
       originIcalUid: "2",
       dtStart: new Date("2020-01-30"),
@@ -34,7 +34,7 @@ export function getIcalObjectFromText(icalText: string): IcalObject {
       dtStamp: new Date("2020-01-18"),
       created: new Date("2020-01-02"),
       location: "10 Mass Ave, Boston, MA",
-      summary: "Sample Event",
+      summary: parsedEvent.summary,
     });
   }
   return icalObject;

@@ -39,7 +39,7 @@ describe("fixed events", () => {
         dtStamp: dtStampValue,
         created: createdValue,
         location: "10 Mass Ave, Boston, MA",
-        summary: "Sample Event",
+        summary: "Peak Surprised Birthday Party}",
       },
     ];
 
