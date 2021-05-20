@@ -27,10 +27,10 @@ echo . . .
 call:speak "Time to Review Notes for 10 minutes"
 timeout %_10MinuteTimeout%
 echo . . .
-call:speak "Time to Code for 25 minutes"
+call:speak "Time to Code with Red Green Refactor; do full cycles of TDD for 25 minutes"
 timeout %_25MinuteTimeout%
 echo . . .
-call:speak "Time for Retro for 5 minutes"
+call:speak "Time for Retro and Red Green Refactor Start Time Verification for 5 minutes"
 timeout %_5MinuteTimeout%
 echo . . .
 call:speak "Time to Code for 15 minutes"

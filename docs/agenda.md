@@ -23,7 +23,7 @@
 
 Before Starting Project:
 
-- Pull (get latest) and **make sure working in correct branch!**
+- Pull (get latest) and **make sure working in correct branch!** (verify Git History shows expected checkins from week)
 - npm install (in case packages added)
 
 - Review:
@@ -36,7 +36,7 @@ Before Starting Project:
           Item	       Len	 Start
           Welcome	      5	 9:30 AM
           Review Notes 10	 9:35 AM
-          Coding	     25	 9:45 AM
+          Coding w/TDD	     25	 9:45 AM
           Retro	        5	10:10 AM
           Coding	     15	10:15 AM
           Break        10	10:30 AM
@@ -53,7 +53,9 @@ Before Starting Project:
 - Start reviewing this doc within 5 min. of session start time and coding within 10-15 min.
   - Prefer to start with a coding task and get through red-green-refactor (full cycle)
   - Arrange times to talk about outside projects, etc. (e.g., Reach for Help)
-  - Be prepared to time how much time we're coding & try to increase
+  - Be prepared to time how much time we're coding & try to increase - record real 
+    (red-green-refactor) coding
+  - Avoid research (non-TDD work) until after the break (to make sure we do full-cycle TDD asap)
 
 TDD Cycles:
 
@@ -91,7 +93,7 @@ TDD Cycles:
   - 4/22/2021: 9:45 AM (0:15 from start paired on algorithm edits; 1:30 from start paired on TDD) 
   - 4/29/2021: 10:05 connected, 10:18 looked at code, 10:22 started coding
   - 5/3/2021: staggered start, did a little at 9:45 AM, then explanation, then resumed around 10:00 AM
-  - 5/13/2021: 9:47
-  - 5/20/2021: 9:48
+  - 5/13/2021: 9:47 (but not real full-cycle TDD coding)
+  - 5/20/2021: 9:48 (but not real full-cycle TDD coding)
   - ...
 - **Stage, Commit, & Push** - so everyone has the latest code before leave

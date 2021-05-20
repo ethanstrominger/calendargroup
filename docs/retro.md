@@ -1,3 +1,7 @@
+TO START EACH RETRO, ASK:
+- "Did we do any rounds of red-green-refactor [RGR] and when did that really start?"
+  (And write down when/if that happened)
+
 5/20/21 - Ethan & Joel
 Improve
 - Add to agenda before start coding: check Git History to make sure have pushed what expected previously
