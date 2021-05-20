@@ -1,26 +1,26 @@
 import { getIcalObjectFromText } from "../IcalUtils";
 import {
-  berlinTimezoneId,
+  berlinTzid,
   createCalendarWithEvents as createCalendarWithEvents,
-  newYorkTimezoneId,
+  newYorkTzid,
 } from "./test-helper/IcalTestHelper";
 import { IcalObject } from "../IcalObject";
-import { ICAL_TEST_DATA as icalTestDataTwoTimezones } from "./test-helper/IcalData-events-in-newyork-and-berlin-timezones";
-import { ICAL_TEST_DATA as icalTestWithNoTimezones } from "./test-helper/IcalData-Google-events-with-no-timezone";
 
 function addHoursToDate(date: Date, hours: number) {
   const getTimeToHourMultiplier = 1000 * 60 * 60;
   return new Date(date.getHours() + hours);
 }
 
-describe("fixed non-repeating events events", () => {
-  it(`given ical text with non-repeating events and all values entered, 
+describe("Events", () => {
+  it(`non-repeating, all values:
+    given ical text with non-repeating events and all values entered, 
     when you create an ical object,
     then each event in icalObject.events has the correct values`, () => {
-    const startDateValue = new Date("2020-01-30");
-    const endDateValue = new Date("2020-01-30");
-    const dtStampValue = new Date("2020-01-18");
-    const createdValue = new Date("2020-01-02");
+    const startDateValue = new Date("2020-02-30T18:00:00");
+    const endDateValue = new Date("2020-02-30T21:00:00");
+    const dtStampValue = new Date("2020-02-15T15:00:03");
+    const createdValue = new Date("2020-02-15T14:00:01");
+    console.log("debug", startDateValue);
 
     const eventData = [
       {
@@ -31,7 +31,7 @@ describe("fixed non-repeating events events", () => {
         created: createdValue,
         location: "10 Mass Ave, Boston, MA",
         summary: "Sample Event",
-        timezoneId: newYorkTimezoneId,
+        tzid: newYorkTzid,
       },
       {
         uid: "X2",
@@ -40,8 +40,8 @@ describe("fixed non-repeating events events", () => {
         dtStamp: dtStampValue,
         created: createdValue,
         location: "10 Mass Ave, Boston, MA",
-        summary: "Peak Surprised Birthday Party}",
-        timezoneId: newYorkTimezoneId,
+        summary: "Peak's Surprise Birthday Party",
+        tzid: newYorkTzid,
       },
     ];
 
@@ -139,7 +139,7 @@ describe("fixed non-repeating events events", () => {
 
       expect(icalObject.events.length).toBeGreaterThan(0);
       icalObject.events.forEach((event) => {
-        expect(event.timezoneId).toBeUndefined();
+        expect(event.tzid).toBeUndefined();
       });
     });
   });

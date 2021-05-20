@@ -10,7 +10,7 @@ export class AggEvent {
   location?: string;
   created?: Date;
   lastModified?: Date;
-  timezoneId?: string;
+  tzid?: string;
   dtStamp?: Date;
   exdates?: string; //
 
@@ -27,6 +27,6 @@ export class AggEvent {
     this.lastModified = aggEvent.lastModified;
     this.dtStamp = aggEvent.dtStamp;
     this.exdates = aggEvent.exdates;
-    this.timezoneId = aggEvent.timezoneId;
+    this.tzid = aggEvent.tzid;
   }
 }

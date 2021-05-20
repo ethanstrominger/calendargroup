@@ -2,9 +2,9 @@ import icalGenerator /* ical */ from "ical-generator";
 import { getVtimezoneComponent } from "@touch4it/ical-timezones";
 import { AggEvent } from "src/models/AggEvent";
 
-export const berlinTimezoneId = "Europe/London";
-export const londonTimezoneId = "Europe/London";
-export const newYorkTimezoneId = "America/New_York";
+export const berlinTzid = "Europe/London";
+export const londonTzid = "Europe/London";
+export const newYorkTzid = "America/New_York";
 
 export function createCalendarWithEvents(data: { eventData: AggEvent[] }) {
   const cal = icalGenerator({});
@@ -24,7 +24,7 @@ export function createCalendarWithEvents(data: { eventData: AggEvent[] }) {
       start: event.dtStart,
       end: event.dtEnd,
       // see notes on iCalGenerator, getVTimezoneComponent, and timezone
-      timezone: event.timezoneId,
+      timezone: event.tzid,
       summary: event.summary,
       created: event.created,
       stamp: event.dtStamp,

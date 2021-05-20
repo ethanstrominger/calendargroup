@@ -1,10 +1,10 @@
-import { newYorkTimezoneId, berlinTimezoneId } from "./IcalTestHelper";
+import { newYorkTzid, berlinTzid } from "./IcalTestHelper";
 
 const expectedResults = [
-  { timezone: newYorkTimezoneId },
-  { timezone: berlinTimezoneId },
-  { timezone: newYorkTimezoneId },
-  { timezone: berlinTimezoneId },
+  { timezone: newYorkTzid },
+  { timezone: berlinTzid },
+  { timezone: newYorkTzid },
+  { timezone: berlinTzid },
 ];
 export const ICAL_TEST_DATA = {
   testName: "Google Calendar with no timezones",
