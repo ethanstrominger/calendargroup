@@ -1,15 +1,17 @@
-TO DO:  
-- WIP: Test given valid ics formatted text, you can derive the timezone and event objects.    
+**TO DO:**
+- **WIP:** Try opening this project in **Visual Studio** (may require something different) 
+- Discuss what to work on / refine backlog (this to-do list)
+- **WIP:** Test given valid ics formatted text, you can derive the timezone and event objects.    
   - We generated ICS text using ical generator, but still need to parse and return it  
-- Add Agenda TTS batch file to source control and add End of Session reminders to TTS
-- (Joel) Try opening this project in Visual Studio (may require something different) 
-- Modify mob timer source code to add "stand" reminder (1) text, (2) text to speech (TTS) 
+- Add to Agenda TTS batch file: **TTS End of Session reminders**
+- Modify **mob timer** source code to add "stand" reminder (1) text, (2) text to speech (TTS) 
   [and consider other improvements]
-- Add license  
+- Add **license**
 
-DONE:
+**DONE:**
+- Add Agenda TTS batch file to source control 
 - Created Sample Aggregators json file
 - Algorithm - Event fields to take/keep, etc.
 
-PROBABLY NOT, BUT MAYBE SOMETIME:
+**PROBABLY NOT, BUT MAYBE SOMETIME:**
 - Try Autoformat feature in Excel on CSV

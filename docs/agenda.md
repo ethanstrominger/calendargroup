@@ -15,11 +15,11 @@
   - Open timers (and modify if needed)
   - Open VS Code 
   - Open Command Prompt and enter:
-    - dir C:\Users\Joel\Documents\Projects\calendargroup\
+    - cd C:\Users\Joel\Documents\Projects\calendargroup\
     - npm test
   - Arrange windows (MobTi.me top left, Command bottom left, VSCode right fill)
 
-**AGENDA (during meeting)**
+**AGENDA (during meeting)** 
 
 Before Starting Project:
 
