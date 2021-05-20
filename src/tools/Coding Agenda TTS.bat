@@ -15,6 +15,8 @@ SET /A _45MinuteTimeout = 45*sixtySeconds
 SET /A _50MinuteTimeout = 50*sixtySeconds
 SET /A _55MinuteTimeout = 55*sixtySeconds
 
+call:speak "Coding Agenda"
+
 SET /P "_Delay=Enter number of minutes until meeting will start: "
 SET /A _MinutesUntilMeeting = %_Delay%*sixtySeconds
 timeout %_MinutesUntilMeeting%
