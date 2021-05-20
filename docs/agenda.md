@@ -92,5 +92,6 @@ TDD Cycles:
   - 4/29/2021: 10:05 connected, 10:18 looked at code, 10:22 started coding
   - 5/3/2021: staggered start, did a little at 9:45 AM, then explanation, then resumed around 10:00 AM
   - 5/13/2021: 9:47
+  - 5/20/2021: 9:48
   - ...
 - **Stage, Commit, & Push** - so everyone has the latest code before leave

@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "test": "jest --watchAll --verbose"
+    "test": "jest --watchAll --verbose",
+    "build": "tsc --build",
+    "clean": "tsc --build --clean"
   },
   "devDependencies": {
     "@babel/core": "^7.14.0",
@@ -14,9 +16,11 @@
   },
   "dependencies": {
     "@touch4it/ical-timezones": "^1.6.0",
+    "dayjs": "^1.10.4",
     "fs": "^0.0.1-security",
     "ical-generator": "^2.0.0",
     "ical.js": "^1.4.0",
+    "jest-editor-support": "^28.2.0",
     "moment": "^2.29.1",
     "node-ical": "^0.13.0",
     "tsc": "^1.20150623.0",
@@ -24,7 +28,7 @@
     "xmlhttprequest": "^1.8.0"
   },
   "vsTest": {
-    "testRoot": "./calendargroup/src"
+    "testRoot": "./src"
   },
   "engines": {
     "node": ">=0.11"

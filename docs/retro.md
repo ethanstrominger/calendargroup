@@ -1,3 +1,31 @@
+5/20/21 - Ethan & Joel
+Improve
+- Add to agenda before start coding: check Git History to make sure have pushed what expected previously
+- Revisit bolding in the agenda
+- Start real coding at least by after the break (10:40)
+- VS issues 
+    - Powershell Window:
+        - Searching
+    - Test Explorer (if not working well, we can use powershell instead):
+        - need to compile before run (or is there a setting to fix this?)
+        - it.skip caused failures rather than skips
+        - didn't see details of the failures
+    - Takes a long time to load when open VS
+    - Need to see what advantages are (e.g., if get Test Explorer working well;...)
+    - Auto-save (check settings)
+
+Feel
+- 1st retro: 
+    - Calm (somewhat), neutral
+    - +1
+- 2nd retro:
+    - Aggravated
+
+Liked
+- Got build to work in VS; and didn't take too long to figure out that didn't push before meeting
+- Trying VS (instead of VS Code) 
+
+
 5/13/21 - Ethan & Joel
 Improve
 - Figure out system for synching code before we meet - add to agenda to check branches,...

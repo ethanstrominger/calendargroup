@@ -14,7 +14,7 @@ function addHoursToDate(date: Date, hours: number) {
 }
 
 describe("fixed non-repeating events events", () => {
-  it(`given ical text with repeating events and all values entered, 
+  it(`given ical text with non-repeating events and all values entered, 
     when you create an ical object,
     then each event in icalObject.events has the correct values`, () => {
     const startDateValue = new Date("2020-01-30");
@@ -31,6 +31,7 @@ describe("fixed non-repeating events events", () => {
         created: createdValue,
         location: "10 Mass Ave, Boston, MA",
         summary: "Sample Event",
+        timezoneId: newYorkTimezoneId,
       },
       {
         uid: "X2",
@@ -40,6 +41,7 @@ describe("fixed non-repeating events events", () => {
         created: createdValue,
         location: "10 Mass Ave, Boston, MA",
         summary: "Peak Surprised Birthday Party}",
+        timezoneId: newYorkTimezoneId,
       },
     ];
 
@@ -49,8 +51,6 @@ describe("fixed non-repeating events events", () => {
 
     const icalObject: IcalObject = getIcalObjectFromText(icalText);
     expect(icalObject.events.length).toEqual(2);
-    const event = icalObject.events[0];
-
     eventData.forEach((eventItem, index) => {
       for (const key of Object.keys(eventItem)) {
         expect(`${key}: ${icalObject.events[index][key]}`).toEqual(
