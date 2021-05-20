@@ -10,6 +10,7 @@
     - Powershell Window:
         - Searching
     - Test Explorer (if not working well, we can use powershell instead):
+        - didn't see all the tests (might need to change the config path or add?...)
         - need to compile before run (or is there a setting to fix this?)
         - it.skip caused failures rather than skips
         - didn't see details of the failures

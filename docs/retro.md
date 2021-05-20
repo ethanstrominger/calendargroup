@@ -3,6 +3,9 @@ Improve
 - Add to agenda before start coding: check Git History to make sure have pushed what expected previously
 - Revisit bolding in the agenda
 - Start real coding at least by after the break (10:40)
+- Agenda: Start every retro with: "Did we code (did rounds of red-green-refactor [RGR]) and when did that 
+    really start?" And record it / revise it. Always do RGR first and anything else after that if time permits
+    (i.e., allocate specific time in 2nd half for research, but skip if no RGR completed).
 - VS issues 
     - Powershell Window:
         - Searching
