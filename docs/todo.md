@@ -1,5 +1,5 @@
 **TO DO:**
-- Test  events with no timezone (expect green)
+- WIP: Test events with no timezone. Next: Refactor this (already green)
 - Make the timezone test pass (currently red)
 - Test event with only required fields
 - Test that timezone details are included
