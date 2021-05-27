@@ -1,9 +1,9 @@
-import { getIcalObjectFromText } from "../IcalUtils";
+import { createCalendarWithEvents, getIcalObjectFromText } from "../IcalUtils";
 import {
   berlinTzid,
-  createCalendarWithEvents as createCalendarWithEvents,
   expectObjectArrayToBeTheSame,
   getEventAllValuesDefaultTimezone,
+  getEventAllValuesNoTimezone,
   IEventCreateInput,
   newYorkTzid,
 } from "./test-helper/IcalTestHelper";
@@ -44,6 +44,22 @@ describe("Events", () => {
       input: IEventCreateInput[];
       expected: AggEvent[];
     } = getEventAllValuesDefaultTimezone();
+
+    const icalText = createCalendarWithEvents({
+      eventData: inputExpectedEvents.input,
+    });
+
+    const icalObject: IcalObject = getIcalObjectFromText(icalText);
+    expect(icalObject.events.length).toEqual(1);
+
+    expectObjectArrayToBeTheSame(inputExpectedEvents, icalObject);
+  });
+
+  it("non-repeating, all values, no timezone", () => {
+    const inputExpectedEvents: {
+      input: IEventCreateInput[];
+      expected: AggEvent[];
+    } = getEventAllValuesNoTimezone();
 
     const icalText = createCalendarWithEvents({
       eventData: inputExpectedEvents.input,
