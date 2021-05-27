@@ -2,6 +2,31 @@ TO START EACH RETRO, ASK:
 - "Did we do any rounds of red-green-refactor [RGR] and when did that really start?"
   (And write down when/if that happened)
 
+5/27/21 - Ethan & Joel
+2nd
+Improve
+- Joel: Wants to understand (or at least try walking through and explaining himself) all the code in the test and paths through the production code (and refactor as we go for undertandability: fewer lines, less duplication, more digestible). Start with with this refactoring for understandability rather than waiting to get to green.
+Feel
+- Somewhat disappointed but not resigned
+- Stuck
+Like
+- Small amount of refactoring and simplification (e.g., only needed one event not two for a particular test) for ease of understand. Do more!!!
+- Configuring jest to run just the test(s) we wanted, e.g.: npm test -t Util
+
+1st
+Improve
+- Start on greenfield task as much as possible and if not, start by having the unfamiliar person describe what's going on.
+- Joel: get **Git Client** (has unix, can search etc. - replaces command prompt); when use, document which commands are used
+Feel
+- Frenetic
+- Mix of hope and dread
+Like
+- Prepped ahead of time, so could readily update to-do list with clear tasks 
+- Agenda checklist before meeting items
+
+
+
+
 5/20/21 - Ethan & Joel
 Improve
 - Add to agenda before start coding: check Git History to make sure have pushed what expected previously

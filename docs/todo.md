@@ -1,7 +1,8 @@
 **TO DO:**
-- Discuss what to work on / refine backlog (this to-do list)
-- **WIP:** Test given valid ics formatted text, you can derive the timezone and event objects.    
-  - We generated ICS text using ical generator, but still need to parse and return it  
+- Test  events with no timezone (expect green)
+- Make the timezone test pass (currently red)
+- Test event with only required fields
+- Test that timezone details are included
 - Add to Agenda TTS batch file: **TTS End of Session reminders**
 - Modify **mob timer** source code to add "stand" reminder (1) text, (2) text to speech (TTS) 
   [and consider other improvements]

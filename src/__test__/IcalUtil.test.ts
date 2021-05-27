@@ -15,11 +15,11 @@ function addHoursToDate(date: Date, hours: number) {
 }
 
 describe("Events", () => {
-  it(`non-repeating, all values, timezone:
+  it(`non-repeating, all values, no timezone:
     given ical text with non-repeating events and all values entered, 
     when you create an ical object,
     then each event in icalObject.events has the correct values`, () => {
-    const dtStartString = "2020-02- 18:00";
+    const dtStartString = "2020-02-15 18:00";    
     const dtEndString = "2020-02-15 21:00";
     const dtStampValue = new Date("2020-02-15 15:00:03");
     const createdValue = new Date("2020-02-15 14:00:01");
@@ -28,39 +28,20 @@ describe("Events", () => {
         uid: "X1",
         dtStartString: dtStartString,
         dtEndString: dtEndString,
-        tzId: newYorkTzid,
         dtStamp: dtStampValue,
         created: createdValue,
+        tzId: "America/New_York",
         location: "10 Mass Ave, Boston, MA",
         summary: "Sample Event",
-      },
-      {
-        uid: "X2",
-        dtStartString: dtStartString,
-        dtEndString: dtEndString,
-        tzId: berlinTzid,
-        dtStamp: dtStampValue,
-        created: createdValue,
-        location: "10 Mass Ave, Boston, MA",
-        summary: "Peak's Surprise Birthday Party",
       },
     ];
 
     const expectedResults: AggEvent[] = inputEvents.map((inputEvent) => {
-      console.log(
-        "debug4",
-        dtStartString,
-        moment.tz("2013-11-18 11:55", inputEvent.tzId).toDate(),
-        moment.tz(inputEvent.dtStartString, inputEvent.tzId),
-        "x",
-        moment.tz("2013-11-18 11:55", "Asia/Taipei"),
-        inputEvent.tzId
-      );
+      console.log("*** debug! ***", moment.tz(inputEvent.dtStartString, inputEvent.tzId).toDate())
       return {
         uid: inputEvent.uid,
         dtStart: moment.tz(inputEvent.dtStartString, inputEvent.tzId).toDate(),
         dtEnd: moment.tz(inputEvent.dtEndString, inputEvent.tzId).toDate(),
-        tzId: inputEvent.tzId,
         dtStamp: inputEvent.dtStamp,
         created: inputEvent.created,
         summary: inputEvent.summary,
@@ -73,7 +54,7 @@ describe("Events", () => {
     });
 
     const icalObject: IcalObject = getIcalObjectFromText(icalText);
-    expect(icalObject.events.length).toEqual(2);
+    expect(icalObject.events.length).toEqual(1);
 
     expectedResults.forEach((expectedEvent, index) => {
       for (const key of Object.keys(expectedEvent)) {
@@ -83,6 +64,66 @@ describe("Events", () => {
       }
     });
   });
+
+  it.skip(`non-repeating, all values, timezone:
+  given ical text with non-repeating events and all values entered, 
+  when you create an ical object,
+  then each event in icalObject.events has the correct values`, () => {
+  const dtStartString = "2020-02- 18:00";
+  const dtEndString = "2020-02-15 21:00";
+  const dtStampValue = new Date("2020-02-15 15:00:03");
+  const createdValue = new Date("2020-02-15 14:00:01");
+  const inputEvents: ICreateEvents[] = [
+    {
+      uid: "X1",
+      dtStartString: dtStartString,
+      dtEndString: dtEndString,
+      tzId: newYorkTzid,
+      dtStamp: dtStampValue,
+      created: createdValue,
+      location: "10 Mass Ave, Boston, MA",
+      summary: "Sample Event",
+    },
+    {
+      uid: "X2",
+      dtStartString: dtStartString,
+      dtEndString: dtEndString,
+      tzId: berlinTzid,
+      dtStamp: dtStampValue,
+      created: createdValue,
+      location: "10 Mass Ave, Boston, MA",
+      summary: "Peak's Surprise Birthday Party",
+    },
+  ];
+
+  const expectedResults: AggEvent[] = inputEvents.map((inputEvent) => {
+    return {
+      uid: inputEvent.uid,
+      dtStart: moment.tz(inputEvent.dtStartString, inputEvent.tzId).toDate(),
+      dtEnd: moment.tz(inputEvent.dtEndString, inputEvent.tzId).toDate(),
+      tzId: inputEvent.tzId,
+      dtStamp: inputEvent.dtStamp,
+      created: inputEvent.created,
+      summary: inputEvent.summary,
+      location: inputEvent.location,
+    };
+  });
+
+  const icalText = createCalendarWithEvents({
+    eventData: inputEvents,
+  });
+
+  const icalObject: IcalObject = getIcalObjectFromText(icalText);
+  expect(icalObject.events.length).toEqual(2);
+
+  expectedResults.forEach((expectedEvent, index) => {
+    for (const key of Object.keys(expectedEvent)) {
+      expect(`${key}: ${icalObject.events[index][key]}`).toEqual(
+        `${key}: ${expectedEvent[key]}`
+      );
+    }
+  });
+});
 
   it.skip(`given ical text with an event with relevant fields having data, 
   when you create an ical object,

@@ -26,6 +26,8 @@ export function createCalendarWithEvents(data: { eventData: ICreateEvents[] }) {
   // cal.createEvent ( { ..., timezone: 'Europe/Berlin' } ) sets the timezone for the event
   // and adds the full timezone definition to the calendar
 
+  console.log("*** debug start!!! ***");
+
   data.eventData.forEach((event) => {
     // const offsetLocalMachin = event.dtStart.getTimezoneOffset();
     // let dt;
@@ -36,6 +38,7 @@ export function createCalendarWithEvents(data: { eventData: ICreateEvents[] }) {
     // console.log("debug diff", v1, v2, v3);
 
     const dtStart = new Date(event.dtStartString);
+    console.log("*** debug!!! ***", dtStart, event.dtStartString)
     const dtEnd = new Date(event.dtEndString);
     cal.createEvent({
       id: event.uid,

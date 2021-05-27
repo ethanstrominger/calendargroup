@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "jest --watchAll --verbose",
+    "test": "jest",
     "build": "tsc --build",
     "clean": "tsc --build --clean"
   },

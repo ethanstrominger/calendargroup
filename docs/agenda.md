@@ -4,7 +4,7 @@
 
 - **Ethan:** 
   - Prep with specific background so that we can jump in on a new red-green-refactor with a clear requirement (and clear description of dependencies)
-  - Check branches, push
+  - Check branches, push, & verify changes appear on GitHub
   - Have snack and water on hand before meeting (if will need)
   - Turn off Slack
   - Set keyboard (for use with Windows remotely)
@@ -36,7 +36,7 @@ Before Starting Project:
           Item	       Len	 Start
           Welcome	      5	 9:30 AM
           Review Notes 10	 9:35 AM
-          Coding w/TDD	     25	 9:45 AM
+          Coding w/TDD 25	 9:45 AM
           Retro	        5	10:10 AM
           Coding	     15	10:15 AM
           Break        10	10:30 AM
@@ -85,6 +85,7 @@ TDD Cycles:
 **VS Code Shortcuts:**
 
 - F8 - Go to next problem
+- Ctrl+Shift+P, F1 - Show Command Palette
 
 **End of Session:**
 
@@ -95,5 +96,6 @@ TDD Cycles:
   - 5/3/2021: staggered start, did a little at 9:45 AM, then explanation, then resumed around 10:00 AM
   - 5/13/2021: 9:47 (but not real full-cycle TDD coding)
   - 5/20/2021: 9:48 (but not real full-cycle TDD coding)
+  - 5/27/2021: 9:55 (tried but didn't quite get through one full cycle; we got to green but didn't finish refactoring, and didn't create a new red test)
   - ...
 - **Stage, Commit, & Push** - so everyone has the latest code before leave
