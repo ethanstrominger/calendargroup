@@ -2,12 +2,14 @@ import { getIcalObjectFromText } from "../IcalUtils";
 import {
   berlinTzid,
   createCalendarWithEvents as createCalendarWithEvents,
+  expectObjectArrayToBeTheSame,
+  getEventAllValuesDefaultTimezone,
   ICreateEvents,
   newYorkTzid,
 } from "./test-helper/IcalTestHelper";
 import { IcalObject } from "../IcalObject";
 import { AggEvent } from "src/models/AggEvent";
-import moment from "moment-timezone";
+import moment, { defineLocale } from "moment-timezone";
 
 function addHoursToDate(date: Date, hours: number) {
   const getTimeToHourMultiplier = 1000 * 60 * 60;
@@ -19,7 +21,26 @@ describe("Events", () => {
     given ical text with non-repeating events and all values entered, 
     when you create an ical object,
     then each event in icalObject.events has the correct values`, () => {
-    const dtStartString = "2020-02-15 18:00";    
+    const inputExpectedEvents: {
+      input: ICreateEvents[];
+      expected: AggEvent[];
+    } = getEventAllValuesDefaultTimezone();
+
+    const icalText = createCalendarWithEvents({
+      eventData: inputExpectedEvents.input,
+    });
+
+    const icalObject: IcalObject = getIcalObjectFromText(icalText);
+    expect(icalObject.events.length).toEqual(1);
+
+    expectObjectArrayToBeTheSame(inputExpectedEvents, icalObject);
+  });
+
+  it.skip(`non-repeating, all values, timezone:
+  given ical text with non-repeating events and all values entered, 
+  when you create an ical object,
+  then each event in icalObject.events has the correct values`, () => {
+    const dtStartString = "2020-02- 18:00";
     const dtEndString = "2020-02-15 21:00";
     const dtStampValue = new Date("2020-02-15 15:00:03");
     const createdValue = new Date("2020-02-15 14:00:01");
@@ -28,20 +49,30 @@ describe("Events", () => {
         uid: "X1",
         dtStartString: dtStartString,
         dtEndString: dtEndString,
+        tzId: newYorkTzid,
         dtStamp: dtStampValue,
         created: createdValue,
-        tzId: "America/New_York",
         location: "10 Mass Ave, Boston, MA",
         summary: "Sample Event",
+      },
+      {
+        uid: "X2",
+        dtStartString: dtStartString,
+        dtEndString: dtEndString,
+        tzId: berlinTzid,
+        dtStamp: dtStampValue,
+        created: createdValue,
+        location: "10 Mass Ave, Boston, MA",
+        summary: "Peak's Surprise Birthday Party",
       },
     ];
 
     const expectedResults: AggEvent[] = inputEvents.map((inputEvent) => {
-      console.log("*** debug! ***", moment.tz(inputEvent.dtStartString, inputEvent.tzId).toDate())
       return {
         uid: inputEvent.uid,
         dtStart: moment.tz(inputEvent.dtStartString, inputEvent.tzId).toDate(),
         dtEnd: moment.tz(inputEvent.dtEndString, inputEvent.tzId).toDate(),
+        tzId: inputEvent.tzId,
         dtStamp: inputEvent.dtStamp,
         created: inputEvent.created,
         summary: inputEvent.summary,
@@ -54,7 +85,7 @@ describe("Events", () => {
     });
 
     const icalObject: IcalObject = getIcalObjectFromText(icalText);
-    expect(icalObject.events.length).toEqual(1);
+    expect(icalObject.events.length).toEqual(2);
 
     expectedResults.forEach((expectedEvent, index) => {
       for (const key of Object.keys(expectedEvent)) {
@@ -65,66 +96,6 @@ describe("Events", () => {
     });
   });
 
-  it.skip(`non-repeating, all values, timezone:
-  given ical text with non-repeating events and all values entered, 
-  when you create an ical object,
-  then each event in icalObject.events has the correct values`, () => {
-  const dtStartString = "2020-02- 18:00";
-  const dtEndString = "2020-02-15 21:00";
-  const dtStampValue = new Date("2020-02-15 15:00:03");
-  const createdValue = new Date("2020-02-15 14:00:01");
-  const inputEvents: ICreateEvents[] = [
-    {
-      uid: "X1",
-      dtStartString: dtStartString,
-      dtEndString: dtEndString,
-      tzId: newYorkTzid,
-      dtStamp: dtStampValue,
-      created: createdValue,
-      location: "10 Mass Ave, Boston, MA",
-      summary: "Sample Event",
-    },
-    {
-      uid: "X2",
-      dtStartString: dtStartString,
-      dtEndString: dtEndString,
-      tzId: berlinTzid,
-      dtStamp: dtStampValue,
-      created: createdValue,
-      location: "10 Mass Ave, Boston, MA",
-      summary: "Peak's Surprise Birthday Party",
-    },
-  ];
-
-  const expectedResults: AggEvent[] = inputEvents.map((inputEvent) => {
-    return {
-      uid: inputEvent.uid,
-      dtStart: moment.tz(inputEvent.dtStartString, inputEvent.tzId).toDate(),
-      dtEnd: moment.tz(inputEvent.dtEndString, inputEvent.tzId).toDate(),
-      tzId: inputEvent.tzId,
-      dtStamp: inputEvent.dtStamp,
-      created: inputEvent.created,
-      summary: inputEvent.summary,
-      location: inputEvent.location,
-    };
-  });
-
-  const icalText = createCalendarWithEvents({
-    eventData: inputEvents,
-  });
-
-  const icalObject: IcalObject = getIcalObjectFromText(icalText);
-  expect(icalObject.events.length).toEqual(2);
-
-  expectedResults.forEach((expectedEvent, index) => {
-    for (const key of Object.keys(expectedEvent)) {
-      expect(`${key}: ${icalObject.events[index][key]}`).toEqual(
-        `${key}: ${expectedEvent[key]}`
-      );
-    }
-  });
-});
-
   it.skip(`given ical text with an event with relevant fields having data, 
   when you create an ical object,
   then each event in icalObject.events has the correct values`, () => {
@@ -133,26 +104,7 @@ describe("Events", () => {
     const dtStampValue = addHoursToDate(startDateValue, 2);
     const createdValue = addHoursToDate(startDateValue, 3);
 
-    const eventData = [
-      {
-        uid: "1",
-        dtStart: startDateValue,
-        dtEnd: endDateValue,
-        dtStamp: dtStampValue,
-        created: createdValue,
-        location: "10 Mass Ave, Boston, MA",
-        summary: "Sample Event",
-      },
-      {
-        uid: "2",
-        dtStart: addHoursToDate(startDateValue, 24),
-        dtEnd: addHoursToDate(endDateValue, 24),
-        dtStamp: addHoursToDate(dtStampValue, 24),
-        created: addHoursToDate(createdValue, 24),
-        location: "2030 Mass Ave, Lexington, MA",
-        summary: "Another Sample Event",
-      },
-    ];
+    const eventData = [];
 
     const icalText = createCalendarWithEvents({
       eventData: eventData,
@@ -175,26 +127,7 @@ describe("Events", () => {
       const dtStampValue = addHoursToDate(startDateValue, 2);
       const createdValue = addHoursToDate(startDateValue, 3);
 
-      const eventData = [
-        {
-          uid: "1",
-          dtStart: startDateValue,
-          dtEnd: endDateValue,
-          dtStamp: dtStampValue,
-          created: createdValue,
-          location: "10 Mass Ave, Boston, MA",
-          summary: "Sample Event",
-        },
-        {
-          uid: "2",
-          dtStart: addHoursToDate(startDateValue, 24),
-          dtEnd: addHoursToDate(endDateValue, 24),
-          dtStamp: addHoursToDate(dtStampValue, 24),
-          created: addHoursToDate(createdValue, 24),
-          location: "2030 Mass Ave, Lexington, MA",
-          summary: "Another Sample Event",
-        },
-      ];
+      const eventData = [];
 
       const icalText = createCalendarWithEvents({
         eventData: eventData,

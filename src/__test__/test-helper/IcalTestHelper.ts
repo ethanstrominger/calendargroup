@@ -1,4 +1,7 @@
 import icalGenerator /* ical */ from "ical-generator";
+import moment from "moment";
+import { IcalObject } from "src/IcalObject";
+import { AggEvent } from "src/models/AggEvent";
 // import { getVtimezoneComponent } from "@touch4it/ical-timezones";
 // import { AggEvent } from "src/models/AggEvent";
 
@@ -17,6 +20,68 @@ export interface ICreateEvents {
   summary: string;
 }
 
+export function expectObjectArrayToBeTheSame(
+  inputExpectedEvents: { input: ICreateEvents[]; expected: AggEvent[] },
+  icalObject: IcalObject
+) {
+  inputExpectedEvents.expected.forEach((expectedEvent, index) => {
+    expectObjectToBeSame(expectedEvent, icalObject, index);
+  });
+}
+
+export function expectObjectToBeSame(
+  expectedEvent: AggEvent,
+  icalObject: IcalObject,
+  index: number
+) {
+  for (const key of Object.keys(expectedEvent)) {
+    expect(`${key}: ${icalObject.events[index][key]}`).toEqual(
+      `${key}: ${expectedEvent[key]}`
+    );
+  }
+}
+
+export function getEventAllValuesDefaultTimezone(): {
+  input: ICreateEvents[];
+  expected: AggEvent[];
+} {
+  const defaultTzid = Intl.DateTimeFormat()
+    .resolvedOptions()
+    .timeZone.toString();
+  const input = [
+    {
+      uid: "X1",
+      dtStartString: "2020-02-15 18:00",
+      dtEndString: "2020-02-15 21:00",
+      dtStamp: new Date("2020-02-15 15:00:03"),
+      created: new Date("2020-02-15 14:00:01"),
+      tzId: defaultTzid,
+      location: "2030 Mass Ave, Lexington, MA",
+      summary: "Sample Event",
+    },
+  ];
+  const expected: AggEvent[] = input.map((inputEvent) => {
+    console.log(
+      "*** debug! ***",
+      moment.tz(inputEvent.dtStartString, inputEvent.tzId).toDate()
+    );
+    return {
+      uid: inputEvent.uid,
+      dtStart: moment.tz(inputEvent.dtStartString, inputEvent.tzId).toDate(),
+      dtEnd: moment.tz(inputEvent.dtEndString, inputEvent.tzId).toDate(),
+      dtStamp: inputEvent.dtStamp,
+      created: inputEvent.created,
+      summary: inputEvent.summary,
+      location: inputEvent.location,
+    };
+  });
+
+  return {
+    expected: expected,
+    input: input,
+  };
+}
+
 export function createCalendarWithEvents(data: { eventData: ICreateEvents[] }) {
   const cal = icalGenerator({});
   // Notes on iCalGenerator, getVTimezoneComponent, and timezone:
@@ -26,19 +91,8 @@ export function createCalendarWithEvents(data: { eventData: ICreateEvents[] }) {
   // cal.createEvent ( { ..., timezone: 'Europe/Berlin' } ) sets the timezone for the event
   // and adds the full timezone definition to the calendar
 
-  console.log("*** debug start!!! ***");
-
   data.eventData.forEach((event) => {
-    // const offsetLocalMachin = event.dtStart.getTimezoneOffset();
-    // let dt;
-    // dt = new Date("2020-05-15T18:00");
-    // const v1 = moment.utc(dt).tz(berlinTzid);
-    // const v2 = moment.utc(v1);
-    // const v3 = moment(dt);
-    // console.log("debug diff", v1, v2, v3);
-
     const dtStart = new Date(event.dtStartString);
-    console.log("*** debug!!! ***", dtStart, event.dtStartString)
     const dtEnd = new Date(event.dtEndString);
     cal.createEvent({
       id: event.uid,
