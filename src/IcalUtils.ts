@@ -1,17 +1,7 @@
 import { IcalObject } from "./IcalObject";
 import { DateWithTimeZone, TimeZoneDef, sync } from "node-ical";
 import icalGenerator /* ical */ from "ical-generator";
-
-export interface IEventCreateInput {
-  uid: string;
-  dtStartString: string;
-  dtEndString: string;
-  tzId?: string;
-  dtStamp: Date;
-  created: Date;
-  location: string;
-  summary: string;
-}
+import { IEventCreateInput } from "./IEventCreateInput";
 
 export function createCalendarWithEvents(data: {
   eventData: IEventCreateInput[];

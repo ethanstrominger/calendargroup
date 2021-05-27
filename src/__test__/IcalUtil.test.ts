@@ -1,10 +1,10 @@
 import { createCalendarWithEvents, getIcalObjectFromText } from "../IcalUtils";
+import { IEventCreateInput } from "src/IEventCreateInput";
 import {
   berlinTzid,
   expectObjectArrayToBeTheSame,
   getEventAllValuesDefaultTimezone,
   getEventAllValuesNoTimezone,
-  IEventCreateInput,
   newYorkTzid,
 } from "./test-helper/IcalTestHelper";
 import { IcalObject } from "../IcalObject";

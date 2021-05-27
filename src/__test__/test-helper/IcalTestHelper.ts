@@ -1,6 +1,6 @@
 import moment from "moment";
 import { IcalObject } from "src/IcalObject";
-import { IEventCreateInput } from "src/IcalUtils";
+import { IEventCreateInput } from "src/IEventCreateInput";
 import { AggEvent } from "src/models/AggEvent";
 // import { getVtimezoneComponent } from "@touch4it/ical-timezones";
 // import { AggEvent } from "src/models/AggEvent";
