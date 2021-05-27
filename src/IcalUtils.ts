@@ -1,5 +1,6 @@
 import { IcalObject } from "./IcalObject";
 import { DateWithTimeZone, TimeZoneDef, sync } from "node-ical";
+import moment from "moment-timezone";
 
 export function getIcalObjectFromText(icalText: string): IcalObject {
   const icalData = sync.parseICS(icalText);
@@ -8,6 +9,24 @@ export function getIcalObjectFromText(icalText: string): IcalObject {
   for (const parsedEvent of Object.values(icalData).filter(
     (obj) => obj.type == "VEVENT"
   )) {
+    // const startDateWithTimeZone = parsedEvent.start as DateWithTimeZone;
+    // const startTypeMoment = moment(startDateWithTimeZone)
+    //   .tz(startDateWithTimeZone.tz)
+    //   .format();
+    // const startStringWithoutTz = startTypeMoment.split("+")[0].toString();
+    // const originalDate = moment.tz(
+    //   startStringWithoutTz,
+    //   startDateWithTimeZone.tz
+    // );
+    // console.log(startStringWithoutTz, originalDate, startDateWithTimeZone);
+
+    // console.log(
+    //   "Debug x",
+    //   startDateWithTimeZone.tz,
+    //   startStringWithoutTz,
+    //   originalDate.toDate(),
+    //   startDateWithTimeZone
+    // );
     //console.log(parsedEvent);
     icalObject.events.push({
       uid: parsedEvent.uid.toString(),
