@@ -9,7 +9,7 @@ export const berlinTzid = "Europe/Berlin";
 export const londonTzid = "Europe/London";
 export const newYorkTzid = "America/New_York";
 
-export interface ICreateEvents {
+export interface IEventCreateInput {
   uid: string;
   dtStartString: string;
   dtEndString: string;
@@ -21,7 +21,7 @@ export interface ICreateEvents {
 }
 
 export function expectObjectArrayToBeTheSame(
-  inputExpectedEvents: { input: ICreateEvents[]; expected: AggEvent[] },
+  inputExpectedEvents: { input: IEventCreateInput[]; expected: AggEvent[] },
   icalObject: IcalObject
 ) {
   inputExpectedEvents.expected.forEach((expectedEvent, index) => {
@@ -42,7 +42,7 @@ export function expectObjectToBeSame(
 }
 
 export function getEventAllValuesDefaultTimezone(): {
-  input: ICreateEvents[];
+  input: IEventCreateInput[];
   expected: AggEvent[];
 } {
   const defaultTzid = Intl.DateTimeFormat()
@@ -65,15 +65,7 @@ export function getEventAllValuesDefaultTimezone(): {
       "*** debug! ***",
       moment.tz(inputEvent.dtStartString, inputEvent.tzId).toDate()
     );
-    return {
-      uid: inputEvent.uid,
-      dtStart: moment.tz(inputEvent.dtStartString, inputEvent.tzId).toDate(),
-      dtEnd: moment.tz(inputEvent.dtEndString, inputEvent.tzId).toDate(),
-      dtStamp: inputEvent.dtStamp,
-      created: inputEvent.created,
-      summary: inputEvent.summary,
-      location: inputEvent.location,
-    };
+    return getExpected(inputEvent);
   });
 
   return {
@@ -82,7 +74,22 @@ export function getEventAllValuesDefaultTimezone(): {
   };
 }
 
-export function createCalendarWithEvents(data: { eventData: ICreateEvents[] }) {
+function getExpected(inputEvent: IEventCreateInput): AggEvent {
+  return {
+    uid: inputEvent.uid,
+    dtStart: moment.tz(inputEvent.dtStartString, inputEvent.tzId).toDate(),
+    dtEnd: moment.tz(inputEvent.dtEndString, inputEvent.tzId).toDate(),
+    tzid: inputEvent.tzId,
+    dtStamp: inputEvent.dtStamp,
+    created: inputEvent.created,
+    summary: inputEvent.summary,
+    location: inputEvent.location,
+  };
+}
+
+export function createCalendarWithEvents(data: {
+  eventData: IEventCreateInput[];
+}) {
   const cal = icalGenerator({});
   // Notes on iCalGenerator, getVTimezoneComponent, and timezone:
   // const cal = iCalGenerator({});  : initializes

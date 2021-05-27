@@ -4,7 +4,7 @@ import {
   createCalendarWithEvents as createCalendarWithEvents,
   expectObjectArrayToBeTheSame,
   getEventAllValuesDefaultTimezone,
-  ICreateEvents,
+  IEventCreateInput,
   newYorkTzid,
 } from "./test-helper/IcalTestHelper";
 import { IcalObject } from "../IcalObject";
@@ -17,12 +17,31 @@ function addHoursToDate(date: Date, hours: number) {
 }
 
 describe("Events", () => {
-  it(`non-repeating, all values, no timezone:
+  it(`non-repeating, all values, default timezone:
     given ical text with non-repeating events and all values entered, 
     when you create an ical object,
     then each event in icalObject.events has the correct values`, () => {
     const inputExpectedEvents: {
-      input: ICreateEvents[];
+      input: IEventCreateInput[];
+      expected: AggEvent[];
+    } = getEventAllValuesDefaultTimezone();
+
+    const icalText = createCalendarWithEvents({
+      eventData: inputExpectedEvents.input,
+    });
+
+    const icalObject: IcalObject = getIcalObjectFromText(icalText);
+    expect(icalObject.events.length).toEqual(1);
+
+    expectObjectArrayToBeTheSame(inputExpectedEvents, icalObject);
+  });
+
+  it(`non-repeating, all values, non-default timezone:
+  given ical text with non-repeating events and all values entered, 
+  when you create an ical object,
+  then each event in icalObject.events has the correct values`, () => {
+    const inputExpectedEvents: {
+      input: IEventCreateInput[];
       expected: AggEvent[];
     } = getEventAllValuesDefaultTimezone();
 
@@ -44,7 +63,7 @@ describe("Events", () => {
     const dtEndString = "2020-02-15 21:00";
     const dtStampValue = new Date("2020-02-15 15:00:03");
     const createdValue = new Date("2020-02-15 14:00:01");
-    const inputEvents: ICreateEvents[] = [
+    const inputEvents: IEventCreateInput[] = [
       {
         uid: "X1",
         dtStartString: dtStartString,
