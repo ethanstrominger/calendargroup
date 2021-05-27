@@ -14,17 +14,16 @@ export function expectObjectArrayToBeTheSame(
   icalObject: IcalObject
 ) {
   inputExpectedEvents.expected.forEach((expectedEvent, index) => {
-    expectObjectToBeSame(expectedEvent, icalObject, index);
+    expectObjectToBeSame(expectedEvent, icalObject.events[index]);
   });
 }
 
 export function expectObjectToBeSame(
   expectedEvent: AggEvent,
-  icalObject: IcalObject,
-  index: number
+  actualEvent: AggEvent
 ) {
   for (const key of Object.keys(expectedEvent)) {
-    expect(`${key}: ${icalObject.events[index][key]}`).toEqual(
+    expect(`${key}: ${actualEvent[key]}`).toEqual(
       `${key}: ${expectedEvent[key]}`
     );
   }
@@ -115,22 +114,17 @@ export function getEventAllValuesNoTimezone(): {
   };
 }
 export function getEventRequiredValuesNoTimezone(): {
-  input: IEventCreateInput[];
-  expected: AggEvent[];
+  input: IEventCreateInput;
+  expected: AggEvent;
 } {
-  const nonDefaultTTzid =
-    DEFAULT_TZID === newYorkTzid ? berlinTzid : newYorkTzid;
-  const input = [
-    {
-      uid: "X1",
-      dtStartString: "2020-02-15 18:00",
-      dtEndString: "2020-02-15 21:00",
-      summary: "Sample Event",
-    },
-  ];
-  const expected: AggEvent[] = input.map((inputEvent) => {
-    return getExpected(inputEvent);
-  });
+  const input = {
+    uid: "X1",
+    dtStartString: "2020-02-15 18:00",
+    dtEndString: "2020-02-15 21:00",
+    summary: "Sample Event",
+  };
+
+  const expected: AggEvent = getExpected(input);
 
   return {
     expected: expected,
@@ -163,4 +157,16 @@ function getExpected(inputEvent: IEventCreateInput): AggEvent {
   }
 
   return expected;
+}
+
+export function getMultipleEvents(): {
+  input: IEventCreateInput;
+  expected: AggEvent;
+}[] {
+  return [
+    getEventAllValuesDefaultTimezone(),
+    getEventAllValuesNoTimezone(),
+    getEventAllValuesNoTimezone(),
+    getEventRequiredValuesNoTimezone(),
+  ];
 }

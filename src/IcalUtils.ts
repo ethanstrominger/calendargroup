@@ -2,6 +2,7 @@ import { IcalObject } from "./IcalObject";
 import { DateWithTimeZone, TimeZoneDef, sync } from "node-ical";
 import icalGenerator /* ical */ from "ical-generator";
 import { IEventCreateInput } from "./IEventCreateInput";
+import { getVtimezoneComponent } from "@touch4it/ical-timezones";
 
 const DEFAULT_TZID = Intl.DateTimeFormat()
   .resolvedOptions()
@@ -11,12 +12,9 @@ export function createCalendarWithEvents(data: {
   eventData: IEventCreateInput[];
 }) {
   const cal = icalGenerator({});
-  // Notes on iCalGenerator, getVTimezoneComponent, and timezone:
-  // const cal = iCalGenerator({});  : initializes
-  // cal.timezone('America/New_York', getVTimezoneComponent) sets the default timezone
-  //   for the calendar and sets a full definition of that timezone in the VTIMEZONE section
-  // cal.createEvent ( { ..., timezone: 'Europe/Berlin' } ) sets the timezone for the event
-  // and adds the full timezone definition to the calendar
+  // cal.timezone with getVTimezoneComponent ensures timezone details created for
+  // the event timezones.
+  cal.timezone({ name: DEFAULT_TZID, generator: getVtimezoneComponent });
 
   data.eventData.forEach((event) => {
     const dtStart = new Date(event.dtStartString);

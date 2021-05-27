@@ -6,6 +6,7 @@ import {
   getEventAllValuesDefaultTimezone,
   getEventAllValuesNoTimezone,
   getEventRequiredValuesNoTimezone,
+  getMultipleEvents,
   newYorkTzid,
 } from "./test-helper/IcalTestHelper";
 import { IcalObject } from "../IcalObject";
@@ -68,17 +69,38 @@ describe("Events", () => {
 
   it("non-repeating, required values, no timezone", () => {
     const inputExpectedEvents: {
-      input: IEventCreateInput[];
-      expected: AggEvent[];
+      input: IEventCreateInput;
+      expected: AggEvent;
     } = getEventRequiredValuesNoTimezone();
 
     const icalText = createCalendarWithEvents({
-      eventData: inputExpectedEvents.input,
+      eventData: [inputExpectedEvents.input],
     });
 
     const icalObject: IcalObject = getIcalObjectFromText(icalText);
     expect(icalObject.events.length).toEqual(1);
-
-    expectObjectArrayToBeTheSame(inputExpectedEvents, icalObject);
+    expectObjectArrayToBeTheSame(
+      {
+        input: [inputExpectedEvents.input],
+        expected: [inputExpectedEvents.expected],
+      },
+      icalObject
+    );
   });
+
+  // it("multiple events", () => {
+  //   const inputExpectedEvents: {
+  //     input: IEventCreateInput;
+  //     expected: AggEvent;
+  //   } = getMultipleEvents();
+
+  //   const icalText = createCalendarWithEvents({
+  //     eventData: inputExpectedEvents.input,
+  //   });
+
+  //   const icalObject: IcalObject = getIcalObjectFromText(icalText);
+  //   expect(icalObject.events.length).toEqual(1);
+
+  //   expectObjectArrayToBeTheSame(inputExpectedEvents, icalObject);
+  // });
 });
