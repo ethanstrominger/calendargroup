@@ -19,6 +19,12 @@
     - npm test
   - Arrange windows (MobTi.me top left, Command bottom left, VSCode right fill)
 
+- **Key Reminders / New Agreements:**
+  - Prefer start on new Red Green Refactor (rather than debugging/fixing unfixed red test from previous session or between-session non-pair coded changes). 
+  - Otherwise:
+    - 1. Unfamiliar person describes what's going on and
+    - 2. Refactor & simplify for understanding as we go (rather than waiting for getting to green)
+
 **AGENDA (during meeting)** 
 
 Before Starting Project:
@@ -56,6 +62,7 @@ Before Starting Project:
   - Be prepared to time how much time we're coding & try to increase - record real 
     (red-green-refactor) coding
   - Avoid research (non-TDD work) until after the break (to make sure we do full-cycle TDD asap)
+  - When coding: Start on greenfield task as much as possible and if not, start by having the unfamiliar person describe what's going on and refactor & simplify for understanding as we go (rather than waiting for getting to green)
 
 TDD Cycles:
 
@@ -96,6 +103,6 @@ TDD Cycles:
   - 5/3/2021: staggered start, did a little at 9:45 AM, then explanation, then resumed around 10:00 AM
   - 5/13/2021: 9:47 (but not real full-cycle TDD coding)
   - 5/20/2021: 9:48 (but not real full-cycle TDD coding)
-  - 5/27/2021: 9:55 (tried but didn't quite get through one full cycle; we got to green but didn't finish refactoring, and didn't create a new red test)
+  - 5/27/2021: 9:55 (tried but didn't quite get through one full cycle; we got to green but didn't finish refactoring, and didn't create a new red test; i.e., out of the 3 steps, we did 1.2 approx. [the green step was completed and we did about 20% of the refactoring step])
   - ...
-- **Stage, Commit, & Push** - so everyone has the latest code before leave
+- **(Stage,) Commit, & Push** - so everyone has the latest code before leave
