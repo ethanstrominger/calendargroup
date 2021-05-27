@@ -3,6 +3,10 @@ import { DateWithTimeZone, TimeZoneDef, sync } from "node-ical";
 import icalGenerator /* ical */ from "ical-generator";
 import { IEventCreateInput } from "./IEventCreateInput";
 
+const DEFAULT_TZID = Intl.DateTimeFormat()
+  .resolvedOptions()
+  .timeZone.toString();
+
 export function createCalendarWithEvents(data: {
   eventData: IEventCreateInput[];
 }) {
@@ -17,11 +21,12 @@ export function createCalendarWithEvents(data: {
   data.eventData.forEach((event) => {
     const dtStart = new Date(event.dtStartString);
     const dtEnd = new Date(event.dtEndString);
+    const tzId = event.tzId ? event.tzId : DEFAULT_TZID;
     cal.createEvent({
       id: event.uid,
       start: dtStart,
       end: dtEnd,
-      timezone: event.tzId,
+      timezone: tzId,
       summary: event.summary,
       created: event.created,
       stamp: event.dtStamp,

@@ -114,17 +114,53 @@ export function getEventAllValuesNoTimezone(): {
     input: input,
   };
 }
+export function getEventRequiredValuesNoTimezone(): {
+  input: IEventCreateInput[];
+  expected: AggEvent[];
+} {
+  const nonDefaultTTzid =
+    DEFAULT_TZID === newYorkTzid ? berlinTzid : newYorkTzid;
+  const input = [
+    {
+      uid: "X1",
+      dtStartString: "2020-02-15 18:00",
+      dtEndString: "2020-02-15 21:00",
+      summary: "Sample Event",
+    },
+  ];
+  const expected: AggEvent[] = input.map((inputEvent) => {
+    return getExpected(inputEvent);
+  });
+
+  return {
+    expected: expected,
+    input: input,
+  };
+}
 
 function getExpected(inputEvent: IEventCreateInput): AggEvent {
   const tzId = inputEvent.tzId ? inputEvent.tzId : DEFAULT_TZID;
-  return {
+  const expected = {
     uid: inputEvent.uid,
-    dtStart: moment.tz(inputEvent.dtStartString, inputEvent.tzId).toDate(),
-    dtEnd: moment.tz(inputEvent.dtEndString, inputEvent.tzId).toDate(),
-    tzid: inputEvent.tzId,
-    dtStamp: inputEvent.dtStamp,
+    dtStart: moment.tz(inputEvent.dtStartString, tzId).toDate(),
+    dtEnd: moment.tz(inputEvent.dtEndString, tzId).toDate(),
+    tzid: tzId,
     created: inputEvent.created,
     summary: inputEvent.summary,
     location: inputEvent.location,
   };
+
+  if (!inputEvent.dtStamp) {
+    delete inputEvent.dtStamp;
+  }
+
+  if (!inputEvent.created) {
+    delete inputEvent.created;
+  }
+
+  if (!inputEvent.location) {
+    delete inputEvent.location;
+  }
+
+  return expected;
 }
