@@ -40,65 +40,50 @@ export function verifyEventFromInput(input: IEventCreateInput) {
   expect(icalObject.events.length).toEqual(1);
   expectObjectToBeSimilar(expected, actual);
 }
-
-export function getEventAllValuesDefaultTimezone(): IEventCreateInput {
-  const input = {
-    uid: "X1",
-    dtStartString: "2020-02-15 18:00",
-    dtEndString: "2020-02-15 21:00",
-    dtStamp: new Date("2020-02-15 15:00:03"),
-    created: new Date("2020-02-15 14:00:01"),
-    tzId: DEFAULT_TZID,
-    location: "2030 Mass Ave, Lexington, MA",
-    summary: "Sample Event",
-  };
-  return input;
-}
-
 const DEFAULT_TZID = Intl.DateTimeFormat()
   .resolvedOptions()
   .timeZone.toString();
 
-export function getEventAllValuesNonDefaultTimezone(): IEventCreateInput {
-  const nonDefaultTzid =
-    DEFAULT_TZID === newYorkTzid ? berlinTzid : newYorkTzid;
-  const input = {
-    uid: "X1",
-    dtStartString: "2020-02-15 18:00",
-    dtEndString: "2020-02-15 21:00",
-    dtStamp: new Date("2020-02-15 15:00:03"),
-    created: new Date("2020-02-15 14:00:01"),
-    tzId: nonDefaultTzid,
-    location: "2030 Mass Ave, Lexington, MA",
-    summary: "Sample Event",
-  };
-  return input;
-}
+const NON_DEFAULT_TZID =
+  DEFAULT_TZID === newYorkTzid ? berlinTzid : newYorkTzid;
 
-export function getEventAllValuesNoTimezone(): IEventCreateInput {
-  const input = {
-    uid: "X1",
-    dtStartString: "2020-02-15 18:00",
-    dtEndString: "2020-02-15 21:00",
-    dtStamp: new Date("2020-02-15 15:00:03"),
-    created: new Date("2020-02-15 14:00:01"),
-    location: "2030 Mass Ave, Lexington, MA",
-    summary: "Sample Event",
-  };
-  return input;
-}
-export function getEventRequiredValuesNoTimezone(): IEventCreateInput {
-  const input = {
-    uid: "X1",
-    dtStartString: "2020-02-15 18:00",
-    dtEndString: "2020-02-15 21:00",
-    summary: "Sample Event",
-  };
+export const EVENT_ALL_VALUES_DEFAULT_TZID: IEventCreateInput = {
+  uid: "X1",
+  dtStartString: "2020-02-15 18:00",
+  dtEndString: "2020-02-15 21:00",
+  dtStamp: new Date("2020-02-15 15:00:03"),
+  created: new Date("2020-02-15 14:00:01"),
+  tzId: DEFAULT_TZID,
+  location: "2030 Mass Ave, Lexington, MA",
+  summary: "Sample Event",
+};
 
-  const expected: AggEvent = getExpected(input);
+export const EVENT_ALL_VALUES_NON_DEFAULT_TZID: IEventCreateInput = {
+  uid: "X1",
+  dtStartString: "2020-02-15 18:00",
+  dtEndString: "2020-02-15 21:00",
+  dtStamp: new Date("2020-02-15 15:00:03"),
+  created: new Date("2020-02-15 14:00:01"),
+  tzId: NON_DEFAULT_TZID,
+  location: "2030 Mass Ave, Lexington, MA",
+  summary: "Sample Event",
+};
+export const EVENT_ALL_VALUES_NO_TZID: IEventCreateInput = {
+  uid: "X1",
+  dtStartString: "2020-02-15 18:00",
+  dtEndString: "2020-02-15 21:00",
+  dtStamp: new Date("2020-02-15 15:00:03"),
+  created: new Date("2020-02-15 14:00:01"),
+  location: "2030 Mass Ave, Lexington, MA",
+  summary: "Sample Event",
+};
 
-  return input;
-}
+export const EVENT_REQUIRED_VALUES_NO_TZID: IEventCreateInput = {
+  uid: "X1",
+  dtStartString: "2020-02-15 18:00",
+  dtEndString: "2020-02-15 21:00",
+  summary: "Sample Event",
+};
 
 function getExpected(inputEvent: IEventCreateInput): AggEvent {
   const tzId = inputEvent.tzId ? inputEvent.tzId : DEFAULT_TZID;
@@ -122,9 +107,9 @@ function getExpected(inputEvent: IEventCreateInput): AggEvent {
 
 export function getMultipleEvents(): IEventCreateInput[] {
   return [
-    getEventAllValuesDefaultTimezone(),
-    getEventAllValuesNoTimezone(),
-    getEventAllValuesNoTimezone(),
-    getEventRequiredValuesNoTimezone(),
+    EVENT_ALL_VALUES_DEFAULT_TZID,
+    EVENT_ALL_VALUES_NON_DEFAULT_TZID,
+    EVENT_ALL_VALUES_NO_TZID,
+    EVENT_REQUIRED_VALUES_NO_TZID,
   ];
 }

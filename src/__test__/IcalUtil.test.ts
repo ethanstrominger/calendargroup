@@ -1,10 +1,10 @@
 import { createCalendarWithEvents, getIcalObjectFromText } from "../IcalUtils";
 import { IEventCreateInput } from "src/IEventCreateInput";
 import {
-  getEventAllValuesDefaultTimezone,
-  getEventAllValuesNonDefaultTimezone,
-  getEventAllValuesNoTimezone,
-  getEventRequiredValuesNoTimezone,
+  EVENT_ALL_VALUES_DEFAULT_TZID,
+  EVENT_ALL_VALUES_NON_DEFAULT_TZID,
+  EVENT_ALL_VALUES_NO_TZID,
+  EVENT_REQUIRED_VALUES_NO_TZID,
   getMultipleEvents,
   verifyEventFromInput,
   verifyEventsFromInputArray,
@@ -13,22 +13,22 @@ import { IcalObject } from "../IcalObject";
 
 describe("Events", () => {
   it("non-repeating, all values, default timezone", () => {
-    const input: IEventCreateInput = getEventAllValuesDefaultTimezone();
+    const input: IEventCreateInput = EVENT_ALL_VALUES_DEFAULT_TZID;
     verifyEventFromInput(input);
   });
 
   it("non-repeating, all values, non-default timezone", () => {
-    const input = getEventAllValuesNonDefaultTimezone();
+    const input = EVENT_ALL_VALUES_NON_DEFAULT_TZID;
     verifyEventFromInput(input);
   });
 
   it("non-repeating, all values, no timezone", () => {
-    const input = getEventAllValuesNoTimezone();
+    const input = EVENT_ALL_VALUES_NO_TZID;
     verifyEventFromInput(input);
   });
 
   it("non-repeating, required values, no timezone", () => {
-    const input = getEventRequiredValuesNoTimezone();
+    const input = EVENT_REQUIRED_VALUES_NO_TZID;
     verifyEventFromInput(input);
   });
 
