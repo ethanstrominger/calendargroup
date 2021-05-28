@@ -1,5 +1,9 @@
 import moment from "moment";
 import { IcalObject } from "src/IcalObject";
+import {
+  createCalendarWithEvents,
+  getIcalObjectFromText,
+} from "../../IcalUtils";
 import { IEventCreateInput } from "src/IEventCreateInput";
 import { AggEvent } from "src/models/AggEvent";
 // import { getVtimezoneComponent } from "@touch4it/ical-timezones";
@@ -9,114 +13,81 @@ export const berlinTzid = "Europe/Berlin";
 export const londonTzid = "Europe/London";
 export const newYorkTzid = "America/New_York";
 
-export function expectObjectArrayToBeTheSame(
-  inputExpectedEvents: { input: IEventCreateInput[]; expected: AggEvent[] },
-  icalObject: IcalObject
-) {
-  inputExpectedEvents.expected.forEach((expectedEvent, index) => {
-    expectObjectToBeSame(expectedEvent, icalObject.events[index]);
+export function verifyEventsFromInputArray(inputArray: IEventCreateInput[]) {
+  inputArray.forEach((input) => {
+    verifyEventFromInput(input);
   });
 }
 
-export function expectObjectToBeSame(
-  expectedEvent: AggEvent,
-  actualEvent: AggEvent
+export function expectObjectToBeSimilar(
+  baseObject: AggEvent,
+  secondObject: AggEvent
 ) {
-  for (const key of Object.keys(expectedEvent)) {
-    expect(`${key}: ${actualEvent[key]}`).toEqual(
-      `${key}: ${expectedEvent[key]}`
+  for (const key of Object.keys(baseObject)) {
+    expect(`${key}: ${secondObject[key]}`).toEqual(
+      `${key}: ${baseObject[key]}`
     );
   }
 }
 
-export function getEventAllValuesDefaultTimezone(): {
-  input: IEventCreateInput[];
-  expected: AggEvent[];
-} {
-  const input = [
-    {
-      uid: "X1",
-      dtStartString: "2020-02-15 18:00",
-      dtEndString: "2020-02-15 21:00",
-      dtStamp: new Date("2020-02-15 15:00:03"),
-      created: new Date("2020-02-15 14:00:01"),
-      tzId: DEFAULT_TZID,
-      location: "2030 Mass Ave, Lexington, MA",
-      summary: "Sample Event",
-    },
-  ];
-  const expected: AggEvent[] = input.map((inputEvent) => {
-    return getExpected(inputEvent);
+export function verifyEventFromInput(input: IEventCreateInput) {
+  const expected = getExpected(input);
+  const icalText = createCalendarWithEvents({
+    eventData: [input],
   });
+  const icalObject = getIcalObjectFromText(icalText);
+  const actual = icalObject.events[0];
+  expect(icalObject.events.length).toEqual(1);
+  expectObjectToBeSimilar(expected, actual);
+}
 
-  return {
-    expected: expected,
-    input: input,
+export function getEventAllValuesDefaultTimezone(): IEventCreateInput {
+  const input = {
+    uid: "X1",
+    dtStartString: "2020-02-15 18:00",
+    dtEndString: "2020-02-15 21:00",
+    dtStamp: new Date("2020-02-15 15:00:03"),
+    created: new Date("2020-02-15 14:00:01"),
+    tzId: DEFAULT_TZID,
+    location: "2030 Mass Ave, Lexington, MA",
+    summary: "Sample Event",
   };
+  return input;
 }
 
 const DEFAULT_TZID = Intl.DateTimeFormat()
   .resolvedOptions()
   .timeZone.toString();
 
-export function getEventAllValuesNonDefaultTimezone(): {
-  input: IEventCreateInput[];
-  expected: AggEvent[];
-} {
+export function getEventAllValuesNonDefaultTimezone(): IEventCreateInput {
   const nonDefaultTzid =
     DEFAULT_TZID === newYorkTzid ? berlinTzid : newYorkTzid;
-  const input = [
-    {
-      uid: "X1",
-      dtStartString: "2020-02-15 18:00",
-      dtEndString: "2020-02-15 21:00",
-      dtStamp: new Date("2020-02-15 15:00:03"),
-      created: new Date("2020-02-15 14:00:01"),
-      tzId: nonDefaultTzid,
-      location: "2030 Mass Ave, Lexington, MA",
-      summary: "Sample Event",
-    },
-  ];
-  const expected: AggEvent[] = input.map((inputEvent) => {
-    return getExpected(inputEvent);
-  });
-
-  return {
-    expected: expected,
-    input: input,
+  const input = {
+    uid: "X1",
+    dtStartString: "2020-02-15 18:00",
+    dtEndString: "2020-02-15 21:00",
+    dtStamp: new Date("2020-02-15 15:00:03"),
+    created: new Date("2020-02-15 14:00:01"),
+    tzId: nonDefaultTzid,
+    location: "2030 Mass Ave, Lexington, MA",
+    summary: "Sample Event",
   };
+  return input;
 }
 
-export function getEventAllValuesNoTimezone(): {
-  input: IEventCreateInput[];
-  expected: AggEvent[];
-} {
-  const nonDefaultTTzid =
-    DEFAULT_TZID === newYorkTzid ? berlinTzid : newYorkTzid;
-  const input = [
-    {
-      uid: "X1",
-      dtStartString: "2020-02-15 18:00",
-      dtEndString: "2020-02-15 21:00",
-      dtStamp: new Date("2020-02-15 15:00:03"),
-      created: new Date("2020-02-15 14:00:01"),
-      location: "2030 Mass Ave, Lexington, MA",
-      summary: "Sample Event",
-    },
-  ];
-  const expected: AggEvent[] = input.map((inputEvent) => {
-    return getExpected(inputEvent);
-  });
-
-  return {
-    expected: expected,
-    input: input,
+export function getEventAllValuesNoTimezone(): IEventCreateInput {
+  const input = {
+    uid: "X1",
+    dtStartString: "2020-02-15 18:00",
+    dtEndString: "2020-02-15 21:00",
+    dtStamp: new Date("2020-02-15 15:00:03"),
+    created: new Date("2020-02-15 14:00:01"),
+    location: "2030 Mass Ave, Lexington, MA",
+    summary: "Sample Event",
   };
+  return input;
 }
-export function getEventRequiredValuesNoTimezone(): {
-  input: IEventCreateInput;
-  expected: AggEvent;
-} {
+export function getEventRequiredValuesNoTimezone(): IEventCreateInput {
   const input = {
     uid: "X1",
     dtStartString: "2020-02-15 18:00",
@@ -126,10 +97,7 @@ export function getEventRequiredValuesNoTimezone(): {
 
   const expected: AggEvent = getExpected(input);
 
-  return {
-    expected: expected,
-    input: input,
-  };
+  return input;
 }
 
 function getExpected(inputEvent: IEventCreateInput): AggEvent {
@@ -159,10 +127,7 @@ function getExpected(inputEvent: IEventCreateInput): AggEvent {
   return expected;
 }
 
-export function getMultipleEvents(): {
-  input: IEventCreateInput;
-  expected: AggEvent;
-}[] {
+export function getMultipleEvents(): IEventCreateInput[] {
   return [
     getEventAllValuesDefaultTimezone(),
     getEventAllValuesNoTimezone(),

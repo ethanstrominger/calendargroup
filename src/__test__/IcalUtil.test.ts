@@ -1,106 +1,46 @@
 import { createCalendarWithEvents, getIcalObjectFromText } from "../IcalUtils";
 import { IEventCreateInput } from "src/IEventCreateInput";
 import {
-  berlinTzid,
-  expectObjectArrayToBeTheSame,
   getEventAllValuesDefaultTimezone,
+  getEventAllValuesNonDefaultTimezone,
   getEventAllValuesNoTimezone,
   getEventRequiredValuesNoTimezone,
   getMultipleEvents,
-  newYorkTzid,
+  verifyEventFromInput,
+  verifyEventsFromInputArray,
 } from "./test-helper/IcalTestHelper";
 import { IcalObject } from "../IcalObject";
-import { AggEvent } from "src/models/AggEvent";
-import moment, { defineLocale } from "moment-timezone";
-
-function addHoursToDate(date: Date, hours: number) {
-  const getTimeToHourMultiplier = 1000 * 60 * 60;
-  return new Date(date.getHours() + hours);
-}
 
 describe("Events", () => {
   it("non-repeating, all values, default timezone", () => {
-    const inputExpectedEvents: {
-      input: IEventCreateInput[];
-      expected: AggEvent[];
-    } = getEventAllValuesDefaultTimezone();
-
-    const icalText = createCalendarWithEvents({
-      eventData: inputExpectedEvents.input,
-    });
-
-    const icalObject: IcalObject = getIcalObjectFromText(icalText);
-    expect(icalObject.events.length).toEqual(1);
-
-    expectObjectArrayToBeTheSame(inputExpectedEvents, icalObject);
+    const input: IEventCreateInput = getEventAllValuesDefaultTimezone();
+    verifyEventFromInput(input);
   });
 
   it("non-repeating, all values, non-default timezone", () => {
-    const inputExpectedEvents: {
-      input: IEventCreateInput[];
-      expected: AggEvent[];
-    } = getEventAllValuesDefaultTimezone();
-
-    const icalText = createCalendarWithEvents({
-      eventData: inputExpectedEvents.input,
-    });
-
-    const icalObject: IcalObject = getIcalObjectFromText(icalText);
-    expect(icalObject.events.length).toEqual(1);
-
-    expectObjectArrayToBeTheSame(inputExpectedEvents, icalObject);
+    const input = getEventAllValuesNonDefaultTimezone();
+    verifyEventFromInput(input);
   });
 
   it("non-repeating, all values, no timezone", () => {
-    const inputExpectedEvents: {
-      input: IEventCreateInput[];
-      expected: AggEvent[];
-    } = getEventAllValuesNoTimezone();
-
-    const icalText = createCalendarWithEvents({
-      eventData: inputExpectedEvents.input,
-    });
-
-    const icalObject: IcalObject = getIcalObjectFromText(icalText);
-    expect(icalObject.events.length).toEqual(1);
-
-    expectObjectArrayToBeTheSame(inputExpectedEvents, icalObject);
+    const input = getEventAllValuesNoTimezone();
+    verifyEventFromInput(input);
   });
 
   it("non-repeating, required values, no timezone", () => {
-    const inputExpectedEvents: {
-      input: IEventCreateInput;
-      expected: AggEvent;
-    } = getEventRequiredValuesNoTimezone();
+    const input = getEventRequiredValuesNoTimezone();
+    verifyEventFromInput(input);
+  });
+
+  it("multiple events", () => {
+    const inputArray: IEventCreateInput[] = getMultipleEvents();
 
     const icalText = createCalendarWithEvents({
-      eventData: [inputExpectedEvents.input],
+      eventData: inputArray,
     });
 
     const icalObject: IcalObject = getIcalObjectFromText(icalText);
-    expect(icalObject.events.length).toEqual(1);
-    expectObjectArrayToBeTheSame(
-      {
-        input: [inputExpectedEvents.input],
-        expected: [inputExpectedEvents.expected],
-      },
-      icalObject
-    );
+
+    verifyEventsFromInputArray(inputArray);
   });
-
-  // it("multiple events", () => {
-  //   const inputExpectedEvents: {
-  //     input: IEventCreateInput;
-  //     expected: AggEvent;
-  //   } = getMultipleEvents();
-
-  //   const icalText = createCalendarWithEvents({
-  //     eventData: inputExpectedEvents.input,
-  //   });
-
-  //   const icalObject: IcalObject = getIcalObjectFromText(icalText);
-  //   expect(icalObject.events.length).toEqual(1);
-
-  //   expectObjectArrayToBeTheSame(inputExpectedEvents, icalObject);
-  // });
 });
