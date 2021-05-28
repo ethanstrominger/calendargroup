@@ -87,10 +87,17 @@ export const EVENT_REQUIRED_VALUES_NO_TZID: IEventCreateInput = {
 
 function getExpected(inputEvent: IEventCreateInput): AggEvent {
   const tzId = inputEvent.tzId ? inputEvent.tzId : DEFAULT_TZID;
+
+  // JavaScript has no native Date/Timezone type, only a Date type
+  // JavaScript date functions set and get values based on default timezone
+  // moment.tz sets date values based on a date string and a specific timezone
+  const dtStartWithTimezone = moment.tz(inputEvent.dtStartString, tzId);
+  const dtEndWithTimezone = moment.tz(inputEvent.dtEndString, tzId);
+
   const expected = {
     uid: inputEvent.uid,
-    dtStart: moment.tz(inputEvent.dtStartString, tzId).toDate(),
-    dtEnd: moment.tz(inputEvent.dtEndString, tzId).toDate(),
+    dtStart: dtStartWithTimezone.toDate(),
+    dtEnd: dtEndWithTimezone.toDate(),
     tzid: tzId,
     created: inputEvent.created,
     summary: inputEvent.summary,
