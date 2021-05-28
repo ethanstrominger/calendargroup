@@ -111,17 +111,10 @@ function getExpected(inputEvent: IEventCreateInput): AggEvent {
     summary: inputEvent.summary,
     location: inputEvent.location,
   };
-
-  if (!inputEvent.dtStamp) {
-    delete inputEvent.dtStamp;
-  }
-
-  if (!inputEvent.created) {
-    delete inputEvent.created;
-  }
-
-  if (!inputEvent.location) {
-    delete inputEvent.location;
+  for (const key in Object.keys(expected)) {
+    if (!expected[key]) {
+      delete expected[key];
+    }
   }
 
   return expected;
