@@ -1,6 +1,6 @@
 import { IcalObject } from "./IcalObject";
-import { DateWithTimeZone, TimeZoneDef, sync } from "node-ical";
-import icalGenerator /* ical */ from "ical-generator";
+import { DateWithTimeZone, sync } from "node-ical";
+import icalGenerator from "ical-generator";
 import { IEventCreateInput } from "./IEventCreateInput";
 import { getVtimezoneComponent } from "@touch4it/ical-timezones";
 
