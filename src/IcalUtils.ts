@@ -9,12 +9,13 @@ const DEFAULT_TZID = Intl.DateTimeFormat()
   .timeZone.toString();
 
 export function createCalendarWithEvents(data: {
+  calendarTzid: string;
   eventData: IEventCreateInput[];
 }) {
   const cal = icalGenerator({});
   // cal.timezone with getVTimezoneComponent ensures timezone details created for
   // the event timezones.
-  cal.timezone({ name: DEFAULT_TZID, generator: getVtimezoneComponent });
+  cal.timezone({ name: data.calendarTzid, generator: getVtimezoneComponent });
 
   data.eventData.forEach((event) => {
     const dtStart = new Date(event.dtStartString);

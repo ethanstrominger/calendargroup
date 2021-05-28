@@ -1,14 +1,19 @@
 import { createCalendarWithEvents, getIcalObjectFromText } from "../IcalUtils";
 import { IEventCreateInput } from "src/IEventCreateInput";
 import {
-  EVENT_ALL_VALUES_DEFAULT_TZID,
-  EVENT_ALL_VALUES_NON_DEFAULT_TZID,
-  EVENT_ALL_VALUES_NO_TZID,
-  EVENT_REQUIRED_VALUES_NO_TZID,
   getMultipleEvents,
   verifyEventFromInput,
   verifyEventsFromInputArray,
 } from "./test-helper/IcalTestHelper";
+import {
+  EVENT_ALL_VALUES_DEFAULT_TZID,
+  EVENT_ALL_VALUES_NON_DEFAULT_TZID,
+  EVENT_ALL_VALUES_NO_TZID,
+  EVENT_REQUIRED_VALUES_NO_TZID,
+  LOS_ANGELES_TZID,
+  NON_DEFAULT_CALENDAR_TZID,
+} from "./test-helper/IcalTestConstants";
+
 import { IcalObject } from "../IcalObject";
 
 describe("Events", () => {
@@ -36,11 +41,9 @@ describe("Events", () => {
     const inputArray: IEventCreateInput[] = getMultipleEvents();
 
     const icalText = createCalendarWithEvents({
+      calendarTzid: NON_DEFAULT_CALENDAR_TZID,
       eventData: inputArray,
     });
-
-    const icalObject: IcalObject = getIcalObjectFromText(icalText);
-
     verifyEventsFromInputArray(inputArray);
   });
 });
