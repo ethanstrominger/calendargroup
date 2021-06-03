@@ -1,4 +1,4 @@
-import { createCalendarWithEvents, getIcalObjectFromText } from "../IcalUtils";
+import { getIcalTextFromEvents, getIcalObjectFromText } from "../IcalUtils";
 import { IEventCreateInput } from "src/IEventCreateInput";
 import {
   getMultipleEvents,
@@ -40,7 +40,7 @@ describe("Events", () => {
   it("multiple events", () => {
     const inputArray: IEventCreateInput[] = getMultipleEvents();
 
-    const icalText = createCalendarWithEvents({
+    const icalText = getIcalTextFromEvents({
       calendarTzid: NON_DEFAULT_CALENDAR_TZID,
       eventData: inputArray,
     });

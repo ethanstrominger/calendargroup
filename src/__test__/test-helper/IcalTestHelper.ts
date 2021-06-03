@@ -1,7 +1,8 @@
 import moment from "moment";
 import {
-  createCalendarWithEvents as getIcalTextFromEvents,
+  getIcalTextFromEvents,
   getIcalObjectFromText,
+  convertToDate,
 } from "../../IcalUtils";
 import { IEventCreateInput } from "src/IEventCreateInput";
 import { AggEvent } from "src/models/AggEvent";
@@ -87,7 +88,3 @@ export function getMultipleEvents(): IEventCreateInput[] {
     EVENT_REQUIRED_VALUES_NO_TZID,
   ];
 }
-function convertToDate(dtString: string, tzId: string) {
-  return moment.tz(dtString, tzId).toDate();
-}
-
