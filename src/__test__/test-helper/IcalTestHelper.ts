@@ -1,6 +1,6 @@
 import moment from "moment";
 import {
-  createCalendarWithEvents,
+  createCalendarWithEvents as getIcalTextFromEvents,
   getIcalObjectFromText,
 } from "../../IcalUtils";
 import { IEventCreateInput } from "src/IEventCreateInput";
@@ -23,6 +23,12 @@ export function verifyEventsFromInputArray(inputArray: IEventCreateInput[]) {
   });
 }
 
+/**
+ * Asserts that all key-value pairs in the baseObject equal the key-value pairs in the secondObject.
+ * Ignores keys in secondObject that are not in the baseObject.
+ * @param baseObject 
+ * @param secondObject 
+ */
 export function expectObjectToBeSimilar(
   baseObject: AggEvent,
   secondObject: AggEvent
@@ -35,13 +41,13 @@ export function expectObjectToBeSimilar(
 }
 
 export function verifyEventFromInput(inputEvent: IEventCreateInput) {
-  const expected = getExpected(inputEvent);
-  const icalText = createCalendarWithEvents({
-    calendarTzid: NON_DEFAULT_CALENDAR_TZID,
+  const icalText = getIcalTextFromEvents({
+    calendarTzid: NON_DEFAULT_CALENDAR_TZID, // Calendar TZID will be different from event TZID
     eventData: [inputEvent],
   });
   const icalObject = getIcalObjectFromText(icalText);
-  const actual = icalObject.events[0];
+  const actual : AggEvent = icalObject.events[0];
+  const expected : AggEvent = getExpected(inputEvent);
   expect(icalObject.events.length).toEqual(1);
   expectObjectToBeSimilar(expected, actual);
 }
@@ -52,6 +58,7 @@ function getExpected(inputEvent: IEventCreateInput): AggEvent {
   // JavaScript has no native Date/Timezone type, only a Date type
   // JavaScript date functions set and get values based on default timezone
   // moment.tz sets date values based on a date string and a specific timezone
+  // todo: refactor (create convert func)
   const dtStartWithTimezone = moment.tz(inputEvent.dtStartString, tzId);
   const dtEndWithTimezone = moment.tz(inputEvent.dtEndString, tzId);
 
@@ -64,6 +71,7 @@ function getExpected(inputEvent: IEventCreateInput): AggEvent {
     summary: inputEvent.summary,
     location: inputEvent.location,
   };
+  // refactor (remove empty keys func)
   for (const key in Object.keys(expected)) {
     if (!expected[key]) {
       delete expected[key];

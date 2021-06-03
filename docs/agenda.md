@@ -14,8 +14,10 @@
 - **Joel:** 
   - Open timers (and modify if needed)
   - Open VS Code 
+  - Pull
   - Open Command Prompt and enter:
     - cd C:\Users\Joel\Documents\Projects\calendargroup\
+    - npm install
     - npm test
   - Arrange windows (MobTi.me top left, Command bottom left, VSCode right fill)
 
@@ -104,5 +106,6 @@ TDD Cycles:
   - 5/13/2021: 9:47 (but not real full-cycle TDD coding)
   - 5/20/2021: 9:48 (but not real full-cycle TDD coding)
   - 5/27/2021: 9:55 (tried but didn't quite get through one full cycle; we got to green but didn't finish refactoring, and didn't create a new red test; i.e., out of the 3 steps, we did 1.2 approx. [the green step was completed and we did about 20% of the refactoring step])
+  - 6/3/2021: 9:49 
   - ...
 - **(Stage,) Commit, & Push** - so everyone has the latest code before leave

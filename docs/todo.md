@@ -1,8 +1,9 @@
 **TO DO:**
-- WIP: Test events with no timezone. Next: Refactor this (already green)
-- Make the timezone test pass (currently red)
-- Test event with only required fields
-- Test that timezone details are included
+- This session:
+  - Refactor tests to use test.each (data driven)
+  - See other comments for refactorings
+  - Add recurring event
+  - Add change to one occurence of a recurring event (not all, just the one)  
 - Add to Agenda TTS batch file: **TTS End of Session reminders**
 - Modify **mob timer** source code to add "stand" reminder (1) text, (2) text to speech (TTS) 
   [and consider other improvements]
@@ -20,6 +21,10 @@
     - Auto-save (check settings)
 
 **DONE:**
+- Make the timezone test pass
+- Test event with only required fields
+- Test that timezone details are included
+- Test events with no timezone
 - Try opening this project in Visual Studio
 - Add Agenda TTS batch file to source control 
 - Created Sample Aggregators json file
