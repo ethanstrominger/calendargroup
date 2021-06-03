@@ -19,26 +19,34 @@ export function getIcalTextFromEvents(data: {
   cal.timezone({ name: data.calendarTzid, generator: getVtimezoneComponent });
 
   data.eventData.forEach((event) => {
-    // WARNING: ICalCalendar expects the date to be supplied incorrectly and then corrects it. 
+    // NOTE: ICalendar.createEvent parameters are MISLEADING.  Read below if you want to understand
+    // how this works, otherwse trust the tests.  dtStart works as follows:
+    //   - value for dtStart parameter is set to new Date(event.dateString) => applies the server's
+    //     default format to figure out the UTC date.  This is different than the
+    // .   dtString with event.tzid applied.
+    //   - createEvent sets dtStart of the calendar event as follows:
+    // .      - derive string value of dtStart, which happens to be the same as event.dtStartString
+    //        - apply the provided tzid to that string
+    //
     // Example:
-    // - When we want to specify this: 18:00 Berlin Time (17:00 UTC)
-    // - We create JS Date of 18:00, which results in a UTC time of 23:00 UTC if the server is in Eastern Time 
-    //   (which is off by 6 hours, i.e., 23:00 - 17:00 = 6 hours)
-    // - ICalCalendar takes the incorrect date (which is off by 6 hours) and the intended tzid and corrects it
-    const dtStart = new Date(event.dtStartString);
-    const dtEnd = new Date(event.dtEndString);
-    const tzId = event.tzId ? event.tzId : DEFAULT_TZID;
+    // - server default timezone is New York
+    // - event.dtStartString = 18:00, event.tzId = Berlin.  UTC time is 17:00.  This is desired value.
+    // - new Date(event.dtStartString) =>  UTC date is 23:00 (adjusted 5 hours for default timezone).
+    // .   UTC date is incorrect
+    // - createEvent magically sets the date of the iCalendar event to 18:00 Berlin tzid => 17:00 UTC even
+    // .    though input was 23:00 UTC.
+
     cal.createEvent({
       id: event.uid,
-      start: dtStart, // start date derived by taking the dtStartString and tzid, NOT the UTC date
-      end: dtEnd,
-      timezone: tzId,
+      start: new Date(event.dtStartString), // see note above
+      end: new Date(event.dtEndString), // see note above
+      timezone: event.tzId ? event.tzId : DEFAULT_TZID,
       summary: event.summary,
       created: event.created,
       stamp: event.dtStamp,
       location: event.location,
-    });    
-  });  
+    });
+  });
   return cal.toString();
 }
 
