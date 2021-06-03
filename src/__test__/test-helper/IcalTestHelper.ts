@@ -59,13 +59,11 @@ function getExpected(inputEvent: IEventCreateInput): AggEvent {
   // JavaScript date functions set and get values based on default timezone
   // moment.tz sets date values based on a date string and a specific timezone
   // todo: refactor (create convert func)
-  const dtStartWithTimezone = moment.tz(inputEvent.dtStartString, tzId);
-  const dtEndWithTimezone = moment.tz(inputEvent.dtEndString, tzId);
 
   const expected = {
     uid: inputEvent.uid,
-    dtStart: dtStartWithTimezone.toDate(),
-    dtEnd: dtEndWithTimezone.toDate(),
+    dtStart: convertToDate(inputEvent.dtStartString, tzId), 
+    dtEnd: convertToDate(inputEvent.dtEndString, tzId),
     tzid: tzId,
     created: inputEvent.created,
     summary: inputEvent.summary,
@@ -89,3 +87,7 @@ export function getMultipleEvents(): IEventCreateInput[] {
     EVENT_REQUIRED_VALUES_NO_TZID,
   ];
 }
+function convertToDate(dtString: string, tzId: string) {
+  return moment.tz(dtString, tzId).toDate();
+}
+

@@ -1,7 +1,7 @@
 **TO DO:**
 - This session:
-  - Refactor tests to use test.each (data driven)
   - See other comments for refactorings
+  - Refactor tests to use test.each (data driven)
   - Add recurring event
   - Add change to one occurence of a recurring event (not all, just the one)  
 - Add to Agenda TTS batch file: **TTS End of Session reminders**
