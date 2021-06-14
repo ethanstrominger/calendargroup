@@ -1,20 +1,19 @@
 import { NEW_YORK_TZID, BERLIN_TZID } from "./IcalTestConstants";
-
 const expectedResults = [
-  { timezone: NEW_YORK_TZID },
-  { timezone: BERLIN_TZID },
-  { timezone: NEW_YORK_TZID },
-  { timezone: BERLIN_TZID },
+    { timezone: NEW_YORK_TZID },
+    { timezone: BERLIN_TZID },
+    { timezone: NEW_YORK_TZID },
+    { timezone: BERLIN_TZID },
 ];
 export const ICAL_TEST_DATA = {
-  testName: "Google Calendar with no timezones",
-  testDescription: `
+    testName: "Google Calendar with no timezones",
+    testDescription: `
 Four events: 
 - 1st and 3rd in America/New_York.  
 - 2nd and 4th in Europe/Berlin. non-repeating events, Google exports the event using UTC
 `,
-  expectedResults: expectedResults,
-  calData: `BEGIN:VCALENDAR
+    expectedResults: expectedResults,
+    calData: `BEGIN:VCALENDAR
 PRODID:-//Google Inc//Google Calendar 70.9054//EN
 VERSION:2.0
 CALSCALE:GREGORIAN
