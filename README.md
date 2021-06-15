@@ -10,7 +10,7 @@ Version 2: Provide query capabilities for any calendar by date, time of day, onl
 
 - Backend: Typescript, Express, Jest
 - Front End: React, axios, Jest
-- DB: TBD
+- DB: To Be Determined
 - Deployment: TBD
 
 # Development Approach
