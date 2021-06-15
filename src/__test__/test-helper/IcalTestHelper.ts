@@ -27,13 +27,15 @@ export function verifyEventsFromInputArray(inputArray: IEventCreateInput[]) {
 /**
  * Asserts that all key-value pairs in the baseObject equal the key-value pairs in the secondObject.
  * Ignores keys in secondObject that are not in the baseObject.
- * @param baseObject 
- * @param secondObject 
+ * @param baseObject
+ * @param secondObject
  */
 export function expectObjectToBeSimilar(
   baseObject: AggEvent,
   secondObject: AggEvent
 ) {
+  console.log("xxxx");
+  console.log("abc", baseObject, secondObject);
   for (const key of Object.keys(baseObject)) {
     expect(`${key}: ${secondObject[key]}`).toEqual(
       `${key}: ${baseObject[key]}`
@@ -47,9 +49,11 @@ export function verifyEventFromInput(inputEvent: IEventCreateInput) {
     eventData: [inputEvent],
   });
   const icalObject = getIcalObjectFromText(icalText);
-  const actual : AggEvent = icalObject.events[0];
-  const expected : AggEvent = getExpected(inputEvent);
+  const actual: AggEvent = icalObject.events[0];
+  const expected: AggEvent = getExpected(inputEvent);
   expect(icalObject.events.length).toEqual(1);
+  console.log("expected object");
+  console.log(expected, actual);
   expectObjectToBeSimilar(expected, actual);
 }
 
@@ -63,12 +67,13 @@ function getExpected(inputEvent: IEventCreateInput): AggEvent {
 
   const expected = {
     uid: inputEvent.uid,
-    dtStart: convertToDate(inputEvent.dtStartString, tzId), 
+    dtStart: convertToDate(inputEvent.dtStartString, tzId),
     dtEnd: convertToDate(inputEvent.dtEndString, tzId),
     tzid: tzId,
     created: inputEvent.created,
     summary: inputEvent.summary,
     location: inputEvent.location,
+    rrule: "place holder",
   };
   // refactor (remove empty keys func)
   for (const key in Object.keys(expected)) {

@@ -7,4 +7,5 @@ export interface IEventCreateInput {
   created?: Date;
   location?: string;
   summary: string;
+  rrule?: string;
 }

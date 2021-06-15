@@ -136,6 +136,8 @@ module.exports = {
 
   // The test environment that will be used for testing
   testEnvironment: "node",
+  verbose: false,
+  silent: false,
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},

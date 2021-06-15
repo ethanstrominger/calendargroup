@@ -12,6 +12,7 @@ import {
   EVENT_REQUIRED_VALUES_NO_TZID,
   LOS_ANGELES_TZID,
   NON_DEFAULT_CALENDAR_TZID,
+  REPEATING_EVENT_ALL_VALUES_DEFAULT_TZID,
 } from "./test-helper/IcalTestConstants";
 
 import { IcalObject } from "../IcalObject";
@@ -45,5 +46,11 @@ describe("Events", () => {
       eventData: inputArray,
     });
     verifyEventsFromInputArray(inputArray);
+  });
+
+  it("repeating, all values, default timezone, contains rrule", () => {
+    console.log("here");
+    const input: IEventCreateInput = REPEATING_EVENT_ALL_VALUES_DEFAULT_TZID;
+    verifyEventFromInput(input);
   });
 });
