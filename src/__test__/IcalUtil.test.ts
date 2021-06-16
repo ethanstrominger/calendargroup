@@ -43,11 +43,11 @@ describe("Events", () => {
   // icalUtil.getIcalObjectFromTexts([icalText1, icalText2, icalText3]) 
   // combines events from all three calendars.
 
-  it("getIcalObjectFromTexts combines events from all three calendars", () => {
+  it("getIcalObjectFromTexts combines events from empty list of calendars", () => {
     const icalObject: IcalObject = parse( [] as string[]);
     expect(icalObject).toBeDefined();
+    expect(icalObject.events.length).toEqual(0);
   });
-
 
   it.skip("multiple events", () => {
     const inputArray: IEventCreateInput[] = getMultipleEvents();
