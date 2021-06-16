@@ -38,6 +38,16 @@
 
 ```
 
+Create empty express service
+Write a test that you get an OK
+Add a config file and makes
+
+https://localhost:3000/calendar/softwarecraft
+function produceCalendar(suffix)
+suffix => getUrls()
+
+https://localhost:3000/calendar/sports
+
 ## USER EVENT INFO MODEL (V2)
 
 USERS ---< SUBSCRIBED ICAL EVENT INFO >---- AGG EVENTS

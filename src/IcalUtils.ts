@@ -4,7 +4,11 @@ import icalGenerator from "ical-generator";
 import { IEventCreateInput } from "./IEventCreateInput";
 import { getVtimezoneComponent } from "@touch4it/ical-timezones";
 import moment from "moment";
+import dotenv from "dotenv";
 
+dotenv.config();
+const consoleLogString = process.env.CONSOLE_LOG?.toUpperCase();
+const doConsoleLog = consoleLogString === "TRUE";
 const DEFAULT_TZID = Intl.DateTimeFormat()
   .resolvedOptions()
   .timeZone.toString();
@@ -45,18 +49,32 @@ export function getIcalTextFromEvents(data: {
       created: event.created,
       stamp: event.dtStamp,
       location: event.location,
+      repeating: event.rrule,
     });
   });
   return cal.toString();
+}
+
+export function consoleDebug(m1: string, m2?: any, m3?: any) {
+  if (doConsoleLog || m1 === consoleLogString) {
+    console.log(m1, m2, m3);
+  }
 }
 
 export function getIcalObjectFromText(icalText: string): IcalObject {
   const icalData = sync.parseICS(icalText);
   const icalObject = new IcalObject();
 
+  consoleDebug("icalData:", icalData);
   for (const parsedEvent of Object.values(icalData).filter(
     (obj) => obj.type == "VEVENT"
   )) {
+    const rrule: any = parsedEvent.rrule;
+    for (const p in rrule) {
+      consoleDebug(p, rrule[p]);
+    }
+
+    consoleDebug("parsedEvent.rrule:", parsedEvent.rrule);
     icalObject.events.push({
       uid: parsedEvent.uid.toString(),
       dtStart: parsedEvent.start as Date,

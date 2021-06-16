@@ -1,4 +1,4 @@
-import { NEW_YORK_TZID, BERLIN_TZID } from "./IcalTestHelper";
+import { NEW_YORK_TZID, BERLIN_TZID } from "./IcalTestConstants";
 
 const expectedResults = [
   { timezone: NEW_YORK_TZID },
