@@ -3,6 +3,7 @@ import {
   getIcalTextFromEvents,
   getIcalObjectFromText,
   convertToDate,
+  consoleDebug,
 } from "../../IcalUtils";
 import { IEventCreateInput } from "src/IEventCreateInput";
 import { AggEvent } from "src/models/AggEvent";
@@ -34,8 +35,8 @@ export function expectObjectToBeSimilar(
   baseObject: AggEvent,
   secondObject: AggEvent
 ) {
-  console.log("xxxx");
-  console.log("abc", baseObject, secondObject);
+  consoleDebug("baseObject", baseObject);
+  consoleDebug("secondObject", secondObject);
   for (const key of Object.keys(baseObject)) {
     expect(`${key}: ${secondObject[key]}`).toEqual(
       `${key}: ${baseObject[key]}`
@@ -48,12 +49,13 @@ export function verifyEventFromInput(inputEvent: IEventCreateInput) {
     calendarTzid: NON_DEFAULT_CALENDAR_TZID, // Calendar TZID will be different from event TZID
     eventData: [inputEvent],
   });
+  consoleDebug("*** ICAL TEXT ***", icalText);
   const icalObject = getIcalObjectFromText(icalText);
   const actual: AggEvent = icalObject.events[0];
   const expected: AggEvent = getExpected(inputEvent);
   expect(icalObject.events.length).toEqual(1);
-  console.log("expected object");
-  console.log(expected, actual);
+  consoleDebug("expected object", expected);
+  consoleDebug("actual object");
   expectObjectToBeSimilar(expected, actual);
 }
 
@@ -73,7 +75,7 @@ function getExpected(inputEvent: IEventCreateInput): AggEvent {
     created: inputEvent.created,
     summary: inputEvent.summary,
     location: inputEvent.location,
-    rrule: "place holder",
+    rrule: inputEvent.rrule,
   };
   // refactor (remove empty keys func)
   for (const key in Object.keys(expected)) {

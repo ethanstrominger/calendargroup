@@ -63,5 +63,5 @@ export const REPEATING_EVENT_ALL_VALUES_DEFAULT_TZID: IEventCreateInput = {
   tzId: DEFAULT_TZID,
   location: "2030 Mass Ave, Lexington, MA",
   summary: "Sample Event",
-  rrule: "Placeholder",
+  rrule: "RRULE:FREQ=MONTHLY",
 };
