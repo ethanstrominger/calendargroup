@@ -61,6 +61,11 @@ export function consoleDebug(m1: string, m2?: any, m3?: any) {
   }
 }
 
+export function getIcalObjectFromTexts() {
+  const icalObject = new IcalObject();
+  return icalObject;
+}
+
 export function getIcalObjectFromText(icalText: string): IcalObject {
   const icalData = sync.parseICS(icalText);
   const icalObject = new IcalObject();

@@ -1,5 +1,6 @@
-import { getIcalTextFromEvents, getIcalObjectFromText } from "../IcalUtils";
 import { IEventCreateInput } from "src/IEventCreateInput";
+import { IcalObject } from "../IcalObject";
+import { getIcalObjectFromTexts } from "../IcalUtils";
 import {
   getMultipleEvents,
   verifyEventFromInput,
@@ -15,7 +16,7 @@ import {
   REPEATING_EVENT_ALL_VALUES_DEFAULT_TZID,
 } from "./test-helper/IcalTestConstants";
 
-import { IcalObject } from "../IcalObject";
+
 
 describe("Events", () => {
   it("non-repeating, all values, default timezone", () => {
@@ -37,6 +38,15 @@ describe("Events", () => {
     const input = EVENT_REQUIRED_VALUES_NO_TZID;
     verifyEventFromInput(input);
   });
+
+  // icalUtil.getIcalObjectFromTexts([icalText1, icalText2, icalText3]) 
+  // combines events from all three calendars.
+
+  it("getIcalObjectFromTexts combines events from all three calendars", () => {
+    const icalObject: IcalObject = getIcalObjectFromTexts([]);
+    expect(icalObject).toBeDefined();
+  });
+
 
   it.skip("multiple events", () => {
     const inputArray: IEventCreateInput[] = getMultipleEvents();

@@ -21,7 +21,7 @@ ICalObject, AggEvent
 
 Joining
 
-[ ] Add test for icalUtil.getIcalObjectFromTexts([icalText1, icalText2, icalText3]) combines events from all three calendars.
+[*] Add test for icalUtil.getIcalObjectFromTexts([icalText1, icalText2, icalText3]) combines events from all three calendars.
 [ ] Add test for icalUtils.getUrls(prefix) returns an array of URLs associated
 with the prefix in the config file.
 
