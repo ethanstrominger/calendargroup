@@ -62,8 +62,11 @@ export function consoleDebug(m1: string, m2?: any, m3?: any) {
   }
 }
 
-export function getIcalObjectFromTexts(events: string[]) {
+export function parseIcalTextArray(icalTexts: string[]) {
   const icalObject = new IcalObject();
+  icalTexts.forEach(icalText => {
+
+  });
   return icalObject;
 }
 
