@@ -20,8 +20,19 @@ import {
 // import { AggEvent } from "src/models/AggEvent";
 
 export function verifyEventsFromInputArray(inputArray: IEventCreateInput[]) {
-  inputArray.forEach((input) => {
-    verifyEventFromInput(input);
+  const icalText = getIcalTextFromEvents({
+    calendarTzid: NON_DEFAULT_CALENDAR_TZID,
+    eventData: inputArray,
+  });
+  const icalObject = getIcalObjectFromText(icalText);
+  inputArray.forEach((inputEvent) => {
+    const actual: AggEvent = icalObject.eventsWithKeys[inputEvent.uid];
+    const expected: AggEvent = getExpected(inputEvent);
+    consoleDebug("expected multiple object", expected);
+    consoleDebug("actual multiple object", actual);
+    expectObjectToBeSimilar(expected, actual);
+
+    verifyEventFromInput(inputArray);
   });
 }
 

@@ -38,13 +38,9 @@ describe("Events", () => {
     verifyEventFromInput(input);
   });
 
-  it("multiple events", () => {
+  it.skip("multiple events", () => {
     const inputArray: IEventCreateInput[] = getMultipleEvents();
 
-    const icalText = getIcalTextFromEvents({
-      calendarTzid: NON_DEFAULT_CALENDAR_TZID,
-      eventData: inputArray,
-    });
     verifyEventsFromInputArray(inputArray);
   });
 
