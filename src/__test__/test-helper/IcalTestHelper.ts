@@ -1,4 +1,3 @@
-import moment from "moment";
 import {
   getIcalTextFromEvents,
   getIcalObjectFromText,
@@ -32,7 +31,7 @@ export function verifyEventsFromInputArray(inputArray: IEventCreateInput[]) {
     consoleDebug("actual multiple object", actual);
     expectObjectToBeSimilar(expected, actual);
 
-    verifyEventFromInput(inputArray);
+    verifyEventFromInput(inputEvent);
   });
 }
 
