@@ -40,7 +40,6 @@ describe("Events", () => {
 
   it.skip("multiple events", () => {
     const inputArray: IEventCreateInput[] = getMultipleEvents();
-
     verifyEventsFromInputArray(inputArray);
   });
 
