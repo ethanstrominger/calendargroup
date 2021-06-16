@@ -5,6 +5,7 @@ import { IEventCreateInput } from "./IEventCreateInput";
 import { getVtimezoneComponent } from "@touch4it/ical-timezones";
 import moment from "moment";
 import dotenv from "dotenv";
+import { AggEvent } from "./models/AggEvent";
 
 dotenv.config();
 const consoleLogString = process.env.CONSOLE_LOG?.toUpperCase();
@@ -61,7 +62,7 @@ export function consoleDebug(m1: string, m2?: any, m3?: any) {
   }
 }
 
-export function getIcalObjectFromTexts() {
+export function getIcalObjectFromTexts(events: string[]) {
   const icalObject = new IcalObject();
   return icalObject;
 }

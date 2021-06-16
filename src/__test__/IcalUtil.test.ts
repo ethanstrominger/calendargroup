@@ -1,6 +1,6 @@
 import { IEventCreateInput } from "src/IEventCreateInput";
 import { IcalObject } from "../IcalObject";
-import { getIcalObjectFromTexts } from "../IcalUtils";
+import { getIcalObjectFromTexts as parse } from "../IcalUtils";
 import {
   getMultipleEvents,
   verifyEventFromInput,
@@ -15,6 +15,7 @@ import {
   NON_DEFAULT_CALENDAR_TZID,
   REPEATING_EVENT_ALL_VALUES_DEFAULT_TZID,
 } from "./test-helper/IcalTestConstants";
+import { AggEvent } from "src/models/AggEvent";
 
 
 
@@ -43,7 +44,7 @@ describe("Events", () => {
   // combines events from all three calendars.
 
   it("getIcalObjectFromTexts combines events from all three calendars", () => {
-    const icalObject: IcalObject = getIcalObjectFromTexts([]);
+    const icalObject: IcalObject = parse( [] as string[]);
     expect(icalObject).toBeDefined();
   });
 
