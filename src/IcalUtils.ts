@@ -1,4 +1,4 @@
-import { IcalObject } from "./IcalObject";
+import { EventData } from "./EventData";
 import { DateWithTimeZone, sync } from "node-ical";
 import icalGenerator from "ical-generator";
 import { IEventCreateInput } from "./IEventCreateInput";
@@ -65,19 +65,19 @@ export function consoleDebug(m1: string, m2?: any, m3?: any) {
 export function parseIcalTextArray(icalTexts: string[]) {
   const events: AggEvent[] = [];
   icalTexts.forEach(icalText => {
-     const tempIcalObject = getIcalObjectFromText(icalText);
-     const ev = tempIcalObject.events;
-     events.push(...tempIcalObject.events);
+     const tempEventData = getEventDataFromText(icalText);
+     const ev = tempEventData.events;
+     events.push(...tempEventData.events);
 
   });
-  const icalObject = new IcalObject();
-  icalObject.events = events;
-  return icalObject;
+  const eventData = new EventData();
+  eventData.events = events;
+  return eventData;
 }
 
-export function getIcalObjectFromText(icalText: string): IcalObject {
+export function getEventDataFromText(icalText: string): EventData {
   const icalData = sync.parseICS(icalText);
-  const icalObject = new IcalObject();
+  const eventData = new EventData();
 
   consoleDebug("icalData:", icalData);
   for (const parsedEvent of Object.values(icalData).filter(
@@ -89,7 +89,7 @@ export function getIcalObjectFromText(icalText: string): IcalObject {
     }
 
     consoleDebug("parsedEvent.rrule:", parsedEvent.rrule);
-    icalObject.events.push({
+    eventData.events.push({
       uid: parsedEvent.uid.toString(),
       dtStart: parsedEvent.start as Date,
       dtEnd: parsedEvent.end as Date,
@@ -102,7 +102,7 @@ export function getIcalObjectFromText(icalText: string): IcalObject {
       tzid: (parsedEvent.start as DateWithTimeZone).tz,
     });
   }
-  return icalObject;
+  return eventData;
 }
 
 export function convertToDate(dtString: string, tzId: string) {

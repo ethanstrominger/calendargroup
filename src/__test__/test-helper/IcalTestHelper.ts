@@ -1,6 +1,6 @@
 import {
   getIcalTextFromEvents,
-  getIcalObjectFromText,
+  getEventDataFromText,
   convertToDate,
   consoleDebug,
 } from "../../IcalUtils";
@@ -23,9 +23,9 @@ export function verifyEventsFromInputArray(inputArray: IEventCreateInput[]) {
     calendarTzid: NON_DEFAULT_CALENDAR_TZID,
     eventData: inputArray,
   });
-  const icalObject = getIcalObjectFromText(icalText);
+  const eventData = getEventDataFromText(icalText);
   inputArray.forEach((inputEvent) => {
-    const actual: AggEvent = icalObject.eventsWithKeys[inputEvent.uid];
+    const actual: AggEvent = eventData.eventsWithKeys[inputEvent.uid];
     const expected: AggEvent = getExpected(inputEvent);
     consoleDebug("expected multiple object", expected);
     consoleDebug("actual multiple object", actual);
@@ -60,10 +60,10 @@ export function verifyEventFromInput(inputEvent: IEventCreateInput) {
     eventData: [inputEvent],
   });
   consoleDebug("*** ICAL TEXT ***", icalText);
-  const icalObject = getIcalObjectFromText(icalText);
-  const actual: AggEvent = icalObject.events[0];
+  const eventData = getEventDataFromText(icalText);
+  const actual: AggEvent = eventData.events[0];
   const expected: AggEvent = getExpected(inputEvent);
-  expect(icalObject.events.length).toEqual(1);
+  expect(eventData.events.length).toEqual(1);
   consoleDebug("expected object", expected);
   consoleDebug("actual object");
   expectObjectToBeSimilar(expected, actual);

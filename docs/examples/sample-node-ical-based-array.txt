@@ -78,4 +78,4 @@ pair into an array.
       }
     ]
 
-      at getIcalObjectFromText2 (src/IcalUtils.ts:24:11)
+      at getEventDataFromText2 (src/IcalUtils.ts:24:11)

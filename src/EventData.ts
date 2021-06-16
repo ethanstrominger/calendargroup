@@ -3,7 +3,7 @@ import { AggEvent } from "./models/AggEvent";
 interface AggEventKeyType {
   [key: string]: AggEvent;
 }
-export class IcalObject {
+export class EventData {
   constructor() {}
 
   addEvents(aggEvents: AggEvent[]) {

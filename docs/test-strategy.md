@@ -5,14 +5,14 @@ This will not catch type mismatches (1 + "3"). To catch type mismatches, run `ya
 
 Objective
 
-Join calendars from three URLs for calendars in the ical text to create a new calendar that includes all the events. This must use icalObject. IcalObject has a single property events which is an array of type AggEvent.
+Join calendars from three URLs for calendars in the ical text to create a new calendar that includes all the events. This must use eventData. EventData has a single property events which is an array of type AggEvent.
 
 localhost:3000/calendar/softwarecraft
 
 IcalUtis Functions implemented
 
 getIcalTextFromEvents(aggEvent: AggEvent[]) - returns text in ical format
-getIcalObjectFromText(icalText: string) - returns an icalObject - icalObject.events => AggEvent[]
+getEventDataFromText(icalText: string) - returns an eventData - eventData.events => AggEvent[]
 
 Note: getIcalTextFromEvents is currently used for generating test data, no
 texts for this.
@@ -21,7 +21,7 @@ ICalObject, AggEvent
 
 Joining
 
-[*] Add test for icalUtil.getIcalObjectFromTexts([icalText1, icalText2, icalText3]) combines events from all three calendars.
+[*] Add test for icalUtil.getEventDataFromTexts([icalText1, icalText2, icalText3]) combines events from all three calendars.
 [ ] Add test for icalUtils.getUrls(prefix) returns an array of URLs associated
 with the prefix in the config file.
 

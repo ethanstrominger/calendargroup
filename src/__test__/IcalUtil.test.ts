@@ -1,5 +1,5 @@
 import { IEventCreateInput } from "src/IEventCreateInput";
-import { IcalObject } from "../IcalObject";
+import { EventData } from "../EventData";
 import { parseIcalTextArray, getIcalTextFromEvents } from "../IcalUtils";
 import {
   getMultipleEvents,
@@ -40,22 +40,22 @@ describe("Events", () => {
     verifyEventFromInput(input);
   });
 
-  it("getIcalObjectFromTexts combines events from empty list of calendars", () => {
-    const icalObject: IcalObject = parseIcalTextArray( [] as string[]);
-    expect(icalObject).toBeDefined();
-    expect(icalObject.events.length).toEqual(0);
+  it("getEventDataFromTexts combines events from empty list of calendars", () => {
+    const eventData: EventData = parseIcalTextArray( [] as string[]);
+    expect(eventData).toBeDefined();
+    expect(eventData.events.length).toEqual(0);
   });
   
-  // icalUtil.getIcalObjectFromTexts([icalText1, icalText2, icalText3]) 
+  // icalUtil.getEventDataFromTexts([icalText1, icalText2, icalText3]) 
   // combines events from all three calendars.
-  it("getIcalObjectFromTexts extracts events from one calendar", () => {
+  it("getEventDataFromTexts extracts events from one calendar", () => {
     const icalText = getIcalTextFromEvents({
       calendarTzid: NON_DEFAULT_CALENDAR_TZID, // Calendar TZID will be different from event TZID
       eventData: [EVENT_REQUIRED_VALUES_NO_TZID],
     })
-     const icalObject: IcalObject = parseIcalTextArray( [icalText] );
-    expect(icalObject).toBeDefined();
-    expect(icalObject.events.length).toEqual(1);
+     const eventData: EventData = parseIcalTextArray( [icalText] );
+    expect(eventData).toBeDefined();
+    expect(eventData.events.length).toEqual(1);
   });
   
 
