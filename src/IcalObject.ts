@@ -6,6 +6,10 @@ interface AggEventKeyType {
 export class IcalObject {
   constructor() {}
 
+  addEvents(aggEvents: AggEvent[]) {
+    this._events.push(...aggEvents);
+  }
+
   private _events: AggEvent[] = [];
 
   get events(): AggEvent[] {

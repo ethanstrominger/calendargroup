@@ -63,10 +63,15 @@ export function consoleDebug(m1: string, m2?: any, m3?: any) {
 }
 
 export function parseIcalTextArray(icalTexts: string[]) {
-  const icalObject = new IcalObject();
+  const events: AggEvent[] = [];
   icalTexts.forEach(icalText => {
+     const tempIcalObject = getIcalObjectFromText(icalText);
+     const ev = tempIcalObject.events;
+     events.push(...tempIcalObject.events);
 
   });
+  const icalObject = new IcalObject();
+  icalObject.events = events;
   return icalObject;
 }
 
