@@ -2,7 +2,8 @@
   "scripts": {
     "test": "jest",
     "build": "tsc --build",
-    "clean": "tsc --build --clean"
+    "clean": "tsc --build --clean",
+    "noemit": "tsc --noEmit"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
