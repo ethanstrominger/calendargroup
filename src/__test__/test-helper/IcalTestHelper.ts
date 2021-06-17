@@ -1,6 +1,6 @@
 import {
   getIcalTextFromEvents,
-  getEventDataFromText,
+  parseIcalText,
   convertToDate,
   consoleDebug,
 } from "../../IcalUtils";
@@ -23,7 +23,7 @@ export function verifyEventsFromInputArray(inputArray: IEventCreateInput[]) {
     calendarTzid: NON_DEFAULT_CALENDAR_TZID,
     eventData: inputArray,
   });
-  const eventData = getEventDataFromText(icalText);
+  const eventData = parseIcalText(icalText);
   inputArray.forEach((inputEvent) => {
     const actual: AggEvent = eventData.eventsWithKeys[inputEvent.uid];
     const expected: AggEvent = getExpected(inputEvent);
@@ -60,7 +60,7 @@ export function verifyEventFromInput(inputEvent: IEventCreateInput) {
     eventData: [inputEvent],
   });
   consoleDebug("*** ICAL TEXT ***", icalText);
-  const eventData = getEventDataFromText(icalText);
+  const eventData = parseIcalText(icalText);
   const actual: AggEvent = eventData.events[0];
   const expected: AggEvent = getExpected(inputEvent);
   expect(eventData.events.length).toEqual(1);

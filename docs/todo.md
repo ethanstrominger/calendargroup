@@ -1,6 +1,8 @@
 **TO DO:**
 - This session:
-  - See other comments for refactorings
+  - Refactor: Remove function names from test descriptions (make English)
+  - Refactor: Use equivalent of params keyword and/or rename nearly identical functions taking one vs. many args
+  See other comments for refactorings
   - Refactor tests to use test.each (data driven)
   - Add recurring event
   - Add change to one occurence of a recurring event (not all, just the one)  
