@@ -40,21 +40,22 @@ describe("Events", () => {
     verifyEventFromInput(input);
   });
 
-  it("getEventDataFromTexts combines events from empty list of calendars", () => {
+  it("parseIcalTextArray combines events from empty list of calendars", () => {
     const eventData: EventData = parseIcalTextArray( [] as string[]);
     expect(eventData).toBeDefined();
     expect(eventData.events.length).toEqual(0);
   });
   
-  // icalUtil.getEventDataFromTexts([icalText1, icalText2, icalText3]) 
-  // combines events from all three calendars.
-  it("getEventDataFromTexts extracts events from one calendar", () => {
+  it("parseIcalTextArray extracts events from one calendar", () => {
+    // Arrange
     const icalText = getIcalTextFromEvents({
       calendarTzid: NON_DEFAULT_CALENDAR_TZID, // Calendar TZID will be different from event TZID
       eventData: [EVENT_REQUIRED_VALUES_NO_TZID],
     })
+    // Act
      const eventData: EventData = parseIcalTextArray( [icalText] );
-    expect(eventData).toBeDefined();
+    // Assert
+     expect(eventData).toBeDefined();
     expect(eventData.events.length).toEqual(1);
   });
   

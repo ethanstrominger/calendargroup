@@ -66,7 +66,6 @@ export function parseIcalTextArray(icalTexts: string[]) {
   const events: AggEvent[] = [];
   icalTexts.forEach(icalText => {
      const tempEventData = getEventDataFromText(icalText);
-     const ev = tempEventData.events;
      events.push(...tempEventData.events);
 
   });
