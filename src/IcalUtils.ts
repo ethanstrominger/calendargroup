@@ -64,9 +64,8 @@ export function consoleDebug(m1: string, m2?: any, m3?: any) {
 
 export function parseIcalTextArray(icalTexts: string[]) {
   const events: AggEvent[] = [];
-  
   icalTexts.forEach(icalText => {
-     const tempEventData = parseIcalText(icalText);
+     const tempEventData = getEventDataFromText(icalText);
      events.push(...tempEventData.events);
 
   });
@@ -75,7 +74,7 @@ export function parseIcalTextArray(icalTexts: string[]) {
   return eventData;
 }
 
-export function parseIcalText(icalText: string): EventData {
+export function getEventDataFromText(icalText: string): EventData {
   const icalData = sync.parseICS(icalText);
   const eventData = new EventData();
 
