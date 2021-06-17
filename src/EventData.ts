@@ -13,7 +13,7 @@ export class EventData {
   private _events: AggEvent[] = [];
 
   get events(): AggEvent[] {
-    return this._events;
+    return [...this._events];
   }
 
   set events(events: AggEvent[]) {

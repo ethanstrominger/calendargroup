@@ -5,7 +5,6 @@ import { IEventCreateInput } from "./IEventCreateInput";
 import { getVtimezoneComponent } from "@touch4it/ical-timezones";
 import moment from "moment";
 import dotenv from "dotenv";
-import { AggEvent } from "./models/AggEvent";
 
 dotenv.config();
 const consoleLogString = process.env.CONSOLE_LOG?.toUpperCase();
@@ -63,15 +62,11 @@ export function consoleDebug(m1: string, m2?: any, m3?: any) {
 }
 
 export function parseIcalTextArray(icalTexts: string[]) {
-  const events: AggEvent[] = [];
-  icalTexts.forEach(icalText => {
-     const tempEventData = getEventDataFromText(icalText);
-     const ev = tempEventData.events;
-     events.push(...tempEventData.events);
-
-  });
   const eventData = new EventData();
-  eventData.events = events;
+  icalTexts.forEach((icalText) => {
+    const tempEventData = getEventDataFromText(icalText);
+    eventData.addEvents(tempEventData.events);
+  });
   return eventData;
 }
 
@@ -89,18 +84,20 @@ export function getEventDataFromText(icalText: string): EventData {
     }
 
     consoleDebug("parsedEvent.rrule:", parsedEvent.rrule);
-    eventData.events.push({
-      uid: parsedEvent.uid.toString(),
-      dtStart: parsedEvent.start as Date,
-      dtEnd: parsedEvent.end as Date,
-      dtStamp: parsedEvent.dtstamp as Date,
-      created: parsedEvent.created as Date,
-      location: parsedEvent.location as string,
-      summary: parsedEvent.summary as string,
-      recurrenceId: parsedEvent.recurrenceid,
-      rrule: parsedEvent.rrule?.toString(),
-      tzid: (parsedEvent.start as DateWithTimeZone).tz,
-    });
+    eventData.addEvents([
+      {
+        uid: parsedEvent.uid.toString(),
+        dtStart: parsedEvent.start as Date,
+        dtEnd: parsedEvent.end as Date,
+        dtStamp: parsedEvent.dtstamp as Date,
+        created: parsedEvent.created as Date,
+        location: parsedEvent.location as string,
+        summary: parsedEvent.summary as string,
+        recurrenceId: parsedEvent.recurrenceid,
+        rrule: parsedEvent.rrule?.toString(),
+        tzid: (parsedEvent.start as DateWithTimeZone).tz,
+      },
+    ]);
   }
   return eventData;
 }
