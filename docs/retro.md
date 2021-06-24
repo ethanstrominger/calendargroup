@@ -2,6 +2,28 @@ TO START EACH RETRO, ASK:
 - "Did we do any rounds of red-green-refactor [RGR] and when did that really start?"
   (And write down when/if that happened)
 
+6/24/21
+
+Improve
+- Coding 2 hrs./wk. is ineffective - takes a long time to remember/get started. Possible remediations:
+  - Add more time? And/or bunch the time together, e.g., instead of 2 hrs/wk every wk, try 8 hrs in one week each month (same amount of time per month but all in one week instead of spread out)
+  - Ethan code the day before - to get it into his memory
+  - Some way to make thinking easier? (Sometimes harder for Ethan when trying to think out loud to the other person.) Maybe "Research" time (before meeting,...)?
+  - Start with retro next time (to keep trying to figure this issue out)
+  - Additional ideas:    
+    - Reduce noise to signal ratio: Joel may benefit from more extensive refactoring (finding redundant code and consolidating it, making it easier to focus on what is significant and not see the insignificant information mixed in)
+    - Work on something simpler (to both of us) that can more easily be accomplished in 2 hrs./week (Collaborate on a simpler project and/or in a simpler environment and/or in languages Joel already knows better; Joel is new to TypeScript and would learn faster in a greenfield simplified environment, e.g., in Cyber-Dojo: FizzBuzz and others; as stepping stones to then working in more complex enviroments & projects)
+    - Limit (or eliminate) changes between meetings (or limit to areas of the code Joel won't be working on). (It already takes Joel time to remember what was done last time. Adding the need to understand new changes between meetings adds to this time.)
+- Figure out why tests were passing even after the EventData class was deleted (mysterious)
+- Figure out Mac keyboard issues (very frequently Ethan's key presses were not working as intended, popping up Windows features, etc. unexpectedly)
+
+Feel
+- 
+
+Like
+- Got to green and did refactoring
+- Tests finally passed (after some mystery)
+
 6/17/21 - Ethan & Joel
 
 2nd Retro
