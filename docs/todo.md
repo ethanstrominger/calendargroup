@@ -1,9 +1,12 @@
 **TO DO:**
+- Replace EventData object with AggEventSource object (no need for both; latter is better)
+- Figure out how to open files in new tabs rather than replace tabs
 - This session:
   - See other comments for refactorings
   - Refactor tests to use test.each (data driven)
   - Add recurring event
   - Add change to one occurence of a recurring event (not all, just the one)  
+- Add gated checkins
 - Add to Agenda TTS batch file: **TTS End of Session reminders**
 - Modify **mob timer** source code to add "stand" reminder (1) text, (2) text to speech (TTS) 
   [and consider other improvements]

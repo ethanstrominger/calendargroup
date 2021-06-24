@@ -2,6 +2,36 @@ TO START EACH RETRO, ASK:
 - "Did we do any rounds of red-green-refactor [RGR] and when did that really start?"
   (And write down when/if that happened)
 
+6/17/21 - Ethan & Joel
+
+2nd Retro
+
+Improve
+- Don't use reset. Use revert instead. (Improve use of GitHub to rollback changes)
+- Add gated checkins (i.e., prevent commit when tests are failing)
+- Ethan close local copy of VS Code (so don't confuse it with remote copy on Joel's PC)
+
+Feel
+- Unhappy, frustrated
+
+Like
+-
+
+1st Retro
+
+Improve
+- pushing and pulling green right from the get go
+- before meeting: test after push and/or after commit
+- speak up as navigator if not want to do a suggestion and move on
+- bias towards action, try do some coding every turn
+
+Feel
+- aggravated
+
+Like
+- started with refactoring, made sure we were green
+- disagree - trying to invoke/determine rule
+
 5/27/21 - Ethan & Joel 
 
 2nd Retro 

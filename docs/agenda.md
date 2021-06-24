@@ -5,21 +5,21 @@
 - **Ethan:** 
   - Prep with specific background so that we can jump in on a new red-green-refactor with a clear requirement (and clear description of dependencies)
   - Check branches, push, & verify changes appear on GitHub
+  - Close all applications (especially VS Code)
   - Have snack and water on hand before meeting (if will need)
   - Turn off Slack
   - Set keyboard (for use with Windows remotely)
-  - Restart computer before meeting (if still having problems after moving it from floor)
   - Discuss staying alert (snacks, standing,...)
 
 - **Joel:** 
   - Open timers (and modify if needed)
   - Open VS Code 
-  - Pull
-  - Open Command Prompt and enter:
+  - Pull (usually from main branch)
+  - Open Git Bash Terminal in VS Code and enter:
     - cd C:\Users\Joel\Documents\Projects\calendargroup\
-    - npm install
-    - npm test
-  - Arrange windows (MobTi.me top left, Command bottom left, VSCode right fill)
+    - yarn install
+    - yarn test
+  - Arrange windows (MobTi.me top left, VSCode right fill)
 
 - **Key Reminders / New Agreements:**
   - Prefer start on new Red Green Refactor (rather than debugging/fixing unfixed red test from previous session or between-session non-pair coded changes). 
@@ -107,5 +107,6 @@ TDD Cycles:
   - 5/20/2021: 9:48 (but not real full-cycle TDD coding)
   - 5/27/2021: 9:55 (tried but didn't quite get through one full cycle; we got to green but didn't finish refactoring, and didn't create a new red test; i.e., out of the 3 steps, we did 1.2 approx. [the green step was completed and we did about 20% of the refactoring step])
   - 6/3/2021: 9:49 (spent a lot of time trying to understand the code and refactor it for better understanding, including commenting the bizarre behavior of ICalCalendar expecting incorrect JS Dates)
+  - 6/24/2021: ...
   - ...
 - **(Stage,) Commit, & Push** - so everyone has the latest code before leave
