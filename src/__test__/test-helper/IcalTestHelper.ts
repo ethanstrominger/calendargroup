@@ -61,9 +61,9 @@ export function verifyEventFromInput(inputEvent: IEventCreateInput) {
   });
   consoleDebug("*** ICAL TEXT ***", icalText);
   const eventData = getEventDataFromText(icalText);
-  const actual: AggEvent = eventData.events[0];
+  const actual: AggEvent = eventData.aggEvents[0];
   const expected: AggEvent = getExpected(inputEvent);
-  expect(eventData.events.length).toEqual(1);
+  expect(eventData.aggEvents.length).toEqual(1);
   consoleDebug("expected object", expected);
   consoleDebug("actual object");
   expectObjectToBeSimilar(expected, actual);

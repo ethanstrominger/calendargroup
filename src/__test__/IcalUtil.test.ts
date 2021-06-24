@@ -43,7 +43,7 @@ describe("Events", () => {
   it("parseIcalTextArray combines events from empty list of calendars", () => {
     const eventData: EventData = parseIcalTextArray( [] as string[]);
     expect(eventData).toBeDefined();
-    expect(eventData.events.length).toEqual(0);
+    expect(eventData.aggEvents.length).toEqual(0);
   });
   
   it("parseIcalTextArray extracts events from one calendar", () => {
@@ -56,7 +56,7 @@ describe("Events", () => {
      const eventData: EventData = parseIcalTextArray( [icalText] );
     // Assert
      expect(eventData).toBeDefined();
-    expect(eventData.events.length).toEqual(1);
+    expect(eventData.aggEvents.length).toEqual(1);
   });
   
 

@@ -1,4 +1,4 @@
-import { EventData } from "./EventData";
+import { AggEventSource } from './models/AggEventSource';
 import { DateWithTimeZone, sync } from "node-ical";
 import icalGenerator from "ical-generator";
 import { IEventCreateInput } from "./IEventCreateInput";
@@ -66,17 +66,17 @@ export function parseIcalTextArray(icalTexts: string[]) {
   const events: AggEvent[] = [];
   icalTexts.forEach(icalText => {
      const tempEventData = getEventDataFromText(icalText);
-     events.push(...tempEventData.events);
+     events.push(...tempEventData.aggEvents);
 
   });
-  const eventData = new EventData();
-  eventData.events = events;
-  return eventData;
+  const eventSource = new AggEventSource('Ethan', 'file', 'xyz.txt');
+  eventSource.addAggEvents(events);
+  return eventSource;
 }
 
-export function getEventDataFromText(icalText: string): EventData {
+export function getEventDataFromText(icalText: string): AggEventSource {
   const icalData = sync.parseICS(icalText);
-  const eventData = new EventData();
+  const eventSource = new AggEventSource('Ethan', 'file', 'xyz.txt');
 
   consoleDebug("icalData:", icalData);
   for (const parsedEvent of Object.values(icalData).filter(
@@ -88,7 +88,7 @@ export function getEventDataFromText(icalText: string): EventData {
     }
 
     consoleDebug("parsedEvent.rrule:", parsedEvent.rrule);
-    eventData.events.push({
+    eventSource.addAggEvent({
       uid: parsedEvent.uid.toString(),
       dtStart: parsedEvent.start as Date,
       dtEnd: parsedEvent.end as Date,
@@ -101,7 +101,7 @@ export function getEventDataFromText(icalText: string): EventData {
       tzid: (parsedEvent.start as DateWithTimeZone).tz,
     });
   }
-  return eventData;
+  return eventSource;
 }
 
 export function convertToDate(dtString: string, tzId: string) {
