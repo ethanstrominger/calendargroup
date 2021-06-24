@@ -1,5 +1,4 @@
 **TO DO:**
-- Replace EventData object with AggEventSource object (no need for both; latter is better)
 - Figure out how to open files in new tabs rather than replace tabs
 - This session:
   - See other comments for refactorings
@@ -24,6 +23,7 @@
     - Auto-save (check settings)
 
 **DONE:**
+- Replace EventData object with AggEventSource object (no need for both; latter is better)
 - Make the timezone test pass
 - Test event with only required fields
 - Test that timezone details are included

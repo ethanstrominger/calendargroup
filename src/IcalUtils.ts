@@ -16,14 +16,14 @@ const DEFAULT_TZID = Intl.DateTimeFormat()
 
 export function getIcalTextFromEvents(data: {
   calendarTzid: string;
-  eventData: IEventCreateInput[];
+  inputEventData: IEventCreateInput[];
 }) {
   const cal = icalGenerator({});
   // cal.timezone with getVTimezoneComponent ensures timezone details created for
   // the event timezones.
   cal.timezone({ name: data.calendarTzid, generator: getVtimezoneComponent });
 
-  data.eventData.forEach((event) => {
+  data.inputEventData.forEach((event) => {
     // NOTE: ICalendar.createEvent parameters are MISLEADING.  Read below if you want to understand
     // how this works, otherwse trust the tests.  dtStart works as follows:
     //   - value for dtStart parameter is set to new Date(event.dateString) => applies the server's

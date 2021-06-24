@@ -21,11 +21,11 @@ import {
 export function verifyEventsFromInputArray(inputArray: IEventCreateInput[]) {
   const icalText = getIcalTextFromEvents({
     calendarTzid: NON_DEFAULT_CALENDAR_TZID,
-    eventData: inputArray,
+    inputEventData: inputArray,
   });
-  const eventData = getEventDataFromText(icalText);
+  const eventSource = getEventDataFromText(icalText);
   inputArray.forEach((inputEvent) => {
-    const actual: AggEvent = eventData.eventsWithKeys[inputEvent.uid];
+    const actual: AggEvent = eventSource.eventsWithKeys[inputEvent.uid];
     const expected: AggEvent = getExpected(inputEvent);
     consoleDebug("expected multiple object", expected);
     consoleDebug("actual multiple object", actual);
@@ -57,13 +57,13 @@ export function expectObjectToBeSimilar(
 export function verifyEventFromInput(inputEvent: IEventCreateInput) {
   const icalText = getIcalTextFromEvents({
     calendarTzid: NON_DEFAULT_CALENDAR_TZID, // Calendar TZID will be different from event TZID
-    eventData: [inputEvent],
+    inputEventData: [inputEvent],
   });
   consoleDebug("*** ICAL TEXT ***", icalText);
-  const eventData = getEventDataFromText(icalText);
-  const actual: AggEvent = eventData.aggEvents[0];
+  const eventSource = getEventDataFromText(icalText);
+  const actual: AggEvent = eventSource.aggEvents[0];
   const expected: AggEvent = getExpected(inputEvent);
-  expect(eventData.aggEvents.length).toEqual(1);
+  expect(eventSource.aggEvents.length).toEqual(1);
   consoleDebug("expected object", expected);
   consoleDebug("actual object");
   expectObjectToBeSimilar(expected, actual);

@@ -1,5 +1,5 @@
 import { IEventCreateInput } from "src/IEventCreateInput";
-import { EventData } from "../EventData";
+import { AggEventSource } from "../models/AggEventSource";
 import { parseIcalTextArray, getIcalTextFromEvents } from "../IcalUtils";
 import {
   getMultipleEvents,
@@ -41,22 +41,22 @@ describe("Events", () => {
   });
 
   it("parseIcalTextArray combines events from empty list of calendars", () => {
-    const eventData: EventData = parseIcalTextArray( [] as string[]);
-    expect(eventData).toBeDefined();
-    expect(eventData.aggEvents.length).toEqual(0);
+    const eventSource: AggEventSource = parseIcalTextArray( [] as string[]);
+    expect(eventSource).toBeDefined();
+    expect(eventSource.aggEvents.length).toEqual(0);
   });
   
   it("parseIcalTextArray extracts events from one calendar", () => {
     // Arrange
     const icalText = getIcalTextFromEvents({
       calendarTzid: NON_DEFAULT_CALENDAR_TZID, // Calendar TZID will be different from event TZID
-      eventData: [EVENT_REQUIRED_VALUES_NO_TZID],
+      inputEventData: [EVENT_REQUIRED_VALUES_NO_TZID],
     })
     // Act
-     const eventData: EventData = parseIcalTextArray( [icalText] );
+     const eventSource: AggEventSource = parseIcalTextArray( [icalText] );
     // Assert
-     expect(eventData).toBeDefined();
-    expect(eventData.aggEvents.length).toEqual(1);
+     expect(eventSource).toBeDefined();
+    expect(eventSource.aggEvents.length).toEqual(1);
   });
   
 
