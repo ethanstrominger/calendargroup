@@ -47,7 +47,7 @@ describe("Events", () => {
     // Arrange
     const icalText = getIcalTextFromEvents(
       NON_DEFAULT_CALENDAR_TZID, // Calendar TZID will be different from event TZID
-      [EVENT_REQUIRED_VALUES_NO_TZID]
+      EVENT_REQUIRED_VALUES_NO_TZID
     );
     // Act
     const eventSource: AggEventSource = parseIcalTextArray([icalText]);

@@ -53,7 +53,7 @@ export function expectObjectToBeSimilar(
 export function verifyEventFromInput(params: IEventCreationParams) {
   const icalText = getIcalTextFromEvents(
     NON_DEFAULT_CALENDAR_TZID, // Calendar TZID will be different from event TZID
-    [params]
+    params
   );
   consoleDebug("*** ICAL TEXT ***", icalText);
   const eventSource = getEventDataFromText(icalText);
