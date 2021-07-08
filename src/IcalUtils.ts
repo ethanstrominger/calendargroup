@@ -1,7 +1,7 @@
 import { AggEventSource } from "./models/AggEventSource";
 import { DateWithTimeZone, sync } from "node-ical";
 import icalGenerator from "ical-generator";
-import { IEventCreateInput } from "./IEventCreateInput";
+import { IParamsToCreateEvent } from "./IParamsToCreateEvent";
 import { getVtimezoneComponent } from "@touch4it/ical-timezones";
 import moment from "moment";
 import dotenv from "dotenv";
@@ -16,14 +16,14 @@ const DEFAULT_TZID = Intl.DateTimeFormat()
 
 export function getIcalTextFromEvents(
   calendarTzid: string,
-  inputEventData: IEventCreateInput[]
+  params: IParamsToCreateEvent[]
 ) {
   const cal = icalGenerator({});
   // cal.timezone with getVTimezoneComponent ensures timezone details created for
   // the event timezones.
   cal.timezone({ name: calendarTzid, generator: getVtimezoneComponent });
 
-  inputEventData.forEach((event) => {
+  params.forEach((event) => {
     // NOTE: ICalendar.createEvent parameters are MISLEADING.  Read below if you want to understand
     // how this works, otherwse trust the tests.  dtStart works as follows:
     //   - value for dtStart parameter is set to new Date(event.dateString) => applies the server's

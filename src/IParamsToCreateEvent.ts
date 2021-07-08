@@ -1,4 +1,4 @@
-export interface IEventCreateInput {
+export interface IParamsToCreateEvent {
   uid: string;
   dtStartString: string;
   dtEndString: string;
