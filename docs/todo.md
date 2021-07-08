@@ -1,4 +1,6 @@
 **TO DO:**
+- Modify functions that take arrays to allow single variable to be passed
+- Other refactorings (rename, etc.) & review for understanding
 - Figure out how to open files in new tabs rather than replace tabs
 - This session:
   - See other comments for refactorings

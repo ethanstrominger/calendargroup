@@ -4,7 +4,7 @@ import {
   convertToDate,
   consoleDebug,
 } from "../../IcalUtils";
-import { IParamsToCreateEvent } from "src/IParamsToCreateEvent";
+import { IEventCreationParams } from "src/IEventCreationParams";
 import { AggEvent } from "src/models/AggEvent";
 import {
   DEFAULT_TZID,
@@ -12,23 +12,22 @@ import {
   EVENT_ALL_VALUES_NON_DEFAULT_TZID,
   EVENT_ALL_VALUES_NO_TZID,
   EVENT_REQUIRED_VALUES_NO_TZID,
-  LOS_ANGELES_TZID,
   NON_DEFAULT_CALENDAR_TZID,
 } from "./IcalTestConstants";
 // import { getVtimezoneComponent } from "@touch4it/ical-timezones";
 // import { AggEvent } from "src/models/AggEvent";
 
-export function verifyEventsFromInputArray(params: IParamsToCreateEvent[]) {
-  const icalText = getIcalTextFromEvents(NON_DEFAULT_CALENDAR_TZID, params);
+export function verifyEventsFromInputArray(paramsArray: IEventCreationParams[]) {
+  const icalText = getIcalTextFromEvents(NON_DEFAULT_CALENDAR_TZID, paramsArray);
   const eventSource = getEventDataFromText(icalText);
-  params.forEach((eventParams) => {
-    const actual: AggEvent = eventSource.eventsWithKeys[eventParams.uid];
-    const expected: AggEvent = getExpected(eventParams);
+  paramsArray.forEach((params) => {
+    const actual: AggEvent = eventSource.eventsWithKeys[params.uid];
+    const expected: AggEvent = getExpected(params);
     consoleDebug("expected multiple object", expected);
     consoleDebug("actual multiple object", actual);
     expectObjectToBeSimilar(expected, actual);
 
-    verifyEventFromInput(eventParams);
+    verifyEventFromInput(params);
   });
 }
 
@@ -51,7 +50,7 @@ export function expectObjectToBeSimilar(
   }
 }
 
-export function verifyEventFromInput(params: IParamsToCreateEvent) {
+export function verifyEventFromInput(params: IEventCreationParams) {
   const icalText = getIcalTextFromEvents(
     NON_DEFAULT_CALENDAR_TZID, // Calendar TZID will be different from event TZID
     [params]
@@ -66,7 +65,7 @@ export function verifyEventFromInput(params: IParamsToCreateEvent) {
   expectObjectToBeSimilar(expected, actual);
 }
 
-function getExpected(params: IParamsToCreateEvent): AggEvent {
+function getExpected(params: IEventCreationParams): AggEvent {
   const tzId = params.tzId ? params.tzId : DEFAULT_TZID;
 
   // JavaScript has no native Date/Timezone type, only a Date type
@@ -94,7 +93,7 @@ function getExpected(params: IParamsToCreateEvent): AggEvent {
   return expected;
 }
 
-export function getMultipleEvents(): IParamsToCreateEvent[] {
+export function getMultipleEvents(): IEventCreationParams[] {
   return [
     EVENT_ALL_VALUES_DEFAULT_TZID,
     EVENT_ALL_VALUES_NON_DEFAULT_TZID,

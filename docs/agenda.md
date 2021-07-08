@@ -12,11 +12,10 @@
   - Discuss staying alert (snacks, standing,...)
 
 - **Joel:** 
-  - Open timers (and modify if needed)
+  - Open timers (and modify if needed) (https://mobti.me/arrested-egg and TTS agenda timer)
   - Open VS Code 
   - Pull (usually from main branch)
   - Open Git Bash Terminal in VS Code and enter:
-    - cd C:\Users\Joel\Documents\Projects\calendargroup\
     - yarn install
     - yarn test
   - Arrange windows (MobTi.me top left, VSCode right fill)

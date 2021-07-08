@@ -1,7 +1,7 @@
 import { AggEventSource } from "./models/AggEventSource";
 import { DateWithTimeZone, sync } from "node-ical";
 import icalGenerator from "ical-generator";
-import { IParamsToCreateEvent } from "./IParamsToCreateEvent";
+import { IEventCreationParams } from "./IEventCreationParams";
 import { getVtimezoneComponent } from "@touch4it/ical-timezones";
 import moment from "moment";
 import dotenv from "dotenv";
@@ -16,7 +16,7 @@ const DEFAULT_TZID = Intl.DateTimeFormat()
 
 export function getIcalTextFromEvents(
   calendarTzid: string,
-  params: IParamsToCreateEvent[]
+  params: IEventCreationParams[]
 ) {
   const cal = icalGenerator({});
   // cal.timezone with getVTimezoneComponent ensures timezone details created for
