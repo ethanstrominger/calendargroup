@@ -2,6 +2,23 @@ TO START EACH RETRO, ASK:
 - "Did we do any rounds of red-green-refactor [RGR] and when did that really start?"
   (And write down when/if that happened)
 
+7/8/21
+
+Improve
+- When typing in retro feedback, just put what the other person says and when their turn is completely done (all feedback given) then go back and add supporting details if needed. (If have a question, still ask and feel free to type the response.)
+
+Feel
+- Happy and excited (+1)
+
+Like
+- Extended retro/planning at beginning to solve major issue
+  - Decided to spend more concentrated time (try 3 sessions within 2 days next time)
+  - Made focused decision for next experiment plus also discussed other project possibilities for later (besides calendar, also: flag tracker, chh, or another project, including possibly very simple stuff for Joel to learn JavaScript faster, etc.)
+- Good flow
+- Refactoring
+- Better switching navigator/driver (not forgetting, etc.)
+- Comfortable to speak up
+
 6/24/21
 
 Improve

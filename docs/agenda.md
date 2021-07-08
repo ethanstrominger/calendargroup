@@ -18,6 +18,7 @@
   - Open Git Bash Terminal in VS Code and enter:
     - yarn install
     - yarn test
+    - yarn test --watch
   - Arrange windows (MobTi.me top left, VSCode right fill)
 
 - **Key Reminders / New Agreements:**
@@ -107,5 +108,6 @@ TDD Cycles:
   - 5/27/2021: 9:55 (tried but didn't quite get through one full cycle; we got to green but didn't finish refactoring, and didn't create a new red test; i.e., out of the 3 steps, we did 1.2 approx. [the green step was completed and we did about 20% of the refactoring step])
   - 6/3/2021: 9:49 (spent a lot of time trying to understand the code and refactor it for better understanding, including commenting the bizarre behavior of ICalCalendar expecting incorrect JS Dates)
   - 6/24/2021: 10:35 (late start because: not on right branch to start, confused about the nature of what was planned to start on, problems opening files in expect tabs,...)
+  - 7/8/2021: N/A started late intentionally so could do larger retro/planning (and we actually did do coding after a 10:25 break)
   - ...
 - **(Stage,) Commit, & Push** - so everyone has the latest code before leave
