@@ -48,10 +48,10 @@ describe("Events", () => {
   
   it("parseIcalTextArray extracts events from one calendar", () => {
     // Arrange
-    const icalText = getIcalTextFromEvents({
+    const icalText = getIcalTextFromEvents(
       calendarTzid: NON_DEFAULT_CALENDAR_TZID, // Calendar TZID will be different from event TZID
       inputEventData: [EVENT_REQUIRED_VALUES_NO_TZID],
-    })
+    )
     // Act
      const eventSource: AggEventSource = parseIcalTextArray( [icalText] );
     // Assert

@@ -19,10 +19,10 @@ import {
 // import { AggEvent } from "src/models/AggEvent";
 
 export function verifyEventsFromInputArray(inputArray: IEventCreateInput[]) {
-  const icalText = getIcalTextFromEvents({
+  const icalText = getIcalTextFromEvents(
     calendarTzid: NON_DEFAULT_CALENDAR_TZID,
     inputEventData: inputArray,
-  });
+  );
   const eventSource = getEventDataFromText(icalText);
   inputArray.forEach((inputEvent) => {
     const actual: AggEvent = eventSource.eventsWithKeys[inputEvent.uid];
@@ -55,10 +55,10 @@ export function expectObjectToBeSimilar(
 }
 
 export function verifyEventFromInput(inputEvent: IEventCreateInput) {
-  const icalText = getIcalTextFromEvents({
+  const icalText = getIcalTextFromEvents(
     calendarTzid: NON_DEFAULT_CALENDAR_TZID, // Calendar TZID will be different from event TZID
     inputEventData: [inputEvent],
-  });
+  );
   consoleDebug("*** ICAL TEXT ***", icalText);
   const eventSource = getEventDataFromText(icalText);
   const actual: AggEvent = eventSource.aggEvents[0];

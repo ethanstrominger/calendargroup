@@ -1,4 +1,4 @@
-import { AggEventSource } from './models/AggEventSource';
+import { AggEventSource } from "./models/AggEventSource";
 import { DateWithTimeZone, sync } from "node-ical";
 import icalGenerator from "ical-generator";
 import { IEventCreateInput } from "./IEventCreateInput";
@@ -14,10 +14,10 @@ const DEFAULT_TZID = Intl.DateTimeFormat()
   .resolvedOptions()
   .timeZone.toString();
 
-export function getIcalTextFromEvents(data: {
-  calendarTzid: string;
-  inputEventData: IEventCreateInput[];
-}) {
+export function getIcalTextFromEvents(
+  calendarTzid: string,
+  inputEventData: IEventCreateInput[]
+) {
   const cal = icalGenerator({});
   // cal.timezone with getVTimezoneComponent ensures timezone details created for
   // the event timezones.
@@ -64,19 +64,18 @@ export function consoleDebug(m1: string, m2?: any, m3?: any) {
 
 export function parseIcalTextArray(icalTexts: string[]) {
   const events: AggEvent[] = [];
-  icalTexts.forEach(icalText => {
-     const tempEventData = getEventDataFromText(icalText);
-     events.push(...tempEventData.aggEvents);
-
+  icalTexts.forEach((icalText) => {
+    const tempEventData = getEventDataFromText(icalText);
+    events.push(...tempEventData.aggEvents);
   });
-  const eventSource = new AggEventSource('Ethan', 'file', 'xyz.txt');
+  const eventSource = new AggEventSource("Ethan", "file", "xyz.txt");
   eventSource.addAggEvents(events);
   return eventSource;
 }
 
 export function getEventDataFromText(icalText: string): AggEventSource {
   const icalData = sync.parseICS(icalText);
-  const eventSource = new AggEventSource('Ethan', 'file', 'xyz.txt');
+  const eventSource = new AggEventSource("Ethan", "file", "xyz.txt");
 
   consoleDebug("icalData:", icalData);
   for (const parsedEvent of Object.values(icalData).filter(
