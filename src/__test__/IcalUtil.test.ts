@@ -15,9 +15,6 @@ import {
   NON_DEFAULT_CALENDAR_TZID,
   REPEATING_EVENT_ALL_VALUES_DEFAULT_TZID,
 } from "./test-helper/IcalTestConstants";
-import { AggEvent } from "src/models/AggEvent";
-
-
 
 describe("Events", () => {
   it("non-repeating, all values, default timezone", () => {
@@ -41,24 +38,23 @@ describe("Events", () => {
   });
 
   it("parseIcalTextArray combines events from empty list of calendars", () => {
-    const eventSource: AggEventSource = parseIcalTextArray( [] as string[]);
+    const eventSource: AggEventSource = parseIcalTextArray([] as string[]);
     expect(eventSource).toBeDefined();
     expect(eventSource.aggEvents.length).toEqual(0);
   });
-  
+
   it("parseIcalTextArray extracts events from one calendar", () => {
     // Arrange
     const icalText = getIcalTextFromEvents(
-      calendarTzid: NON_DEFAULT_CALENDAR_TZID, // Calendar TZID will be different from event TZID
-      inputEventData: [EVENT_REQUIRED_VALUES_NO_TZID],
-    )
+      NON_DEFAULT_CALENDAR_TZID, // Calendar TZID will be different from event TZID
+      [EVENT_REQUIRED_VALUES_NO_TZID]
+    );
     // Act
-     const eventSource: AggEventSource = parseIcalTextArray( [icalText] );
+    const eventSource: AggEventSource = parseIcalTextArray([icalText]);
     // Assert
-     expect(eventSource).toBeDefined();
+    expect(eventSource).toBeDefined();
     expect(eventSource.aggEvents.length).toEqual(1);
   });
-  
 
   it.skip("multiple events", () => {
     const inputArray: IEventCreateInput[] = getMultipleEvents();
