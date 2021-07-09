@@ -1,4 +1,4 @@
-import { AggEvent } from "../../models/AggEvent";
+import { AggEvent } from "../src/models/AggEvent";
 import { getAggEventsFromIcalFile, getVeventComponentsTextFromFile } from "../IcalUtils.tsx-archive";
 import { getAggEventsFromIcalURL } from "../IcalUtils.tsx-archive";
 import { ICAL_FILENAME, ICAL_URL } from '../../../src/__test-helper__/testGlobals';

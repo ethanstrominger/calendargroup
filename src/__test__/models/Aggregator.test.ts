@@ -1,5 +1,5 @@
-import { Aggregator } from "../../models/Aggregator";
-import { AggEventSource } from "../../models/AggEventSource";
+import { Aggregator } from "../src/models/Aggregator";
+import { AggEventSource } from "../src/models/AggEventSource";
 
 describe("Aggregator CRUD", () => {
   it("An Aggregator can be created", () => {

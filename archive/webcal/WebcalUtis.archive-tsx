@@ -1,4 +1,4 @@
-import { AggEvent } from "../models/AggEvent";
+import { AggEvent } from "src/models/AggEvent";
 import { readFileSync } from "fs";
 import ICAL from "ical.js";
 import { XMLHttpRequest } from "xmlhttprequest";

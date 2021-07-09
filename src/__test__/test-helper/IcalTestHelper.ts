@@ -5,7 +5,7 @@ import {
   consoleDebug,
 } from "src/IcalUtils";
 import { IEventCreationParams } from "../../IEventCreationParams";
-import { AggEvent } from "../../models/AggEvent";
+import { AggEvent } from "../src/models/AggEvent";
 import {
   DEFAULT_TZID,
   EVENT_ALL_VALUES_DEFAULT_TZID,

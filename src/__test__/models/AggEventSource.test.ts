@@ -1,5 +1,5 @@
-import { AggEventSource } from "../../models/AggEventSource";
-import { AggEvent } from "../../models/AggEvent";
+import { AggEventSource } from "src/models/AggEventSource";
+import { AggEvent } from "src/models/AggEvent";
 
 describe("AggEventSource CRUD", () => {
   it("A aggEventSource can be created", () => {

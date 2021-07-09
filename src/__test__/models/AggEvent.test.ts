@@ -1,4 +1,4 @@
-import { AggEvent } from "../../models/AggEvent";
+import { AggEvent } from "../src/models/AggEvent";
 
 describe("store", () => {
   it("not repeating event can be created", () => {
