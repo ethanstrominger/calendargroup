@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": "./", // "./src" works too
-    "paths": {
-      "src/*": ["src/*"],
-      "tests/*": ["__tests__/*"]
-    },
     "jsx": "react",
     "target": "ES2020",
     "moduleResolution": "node",

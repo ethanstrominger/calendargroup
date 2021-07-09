@@ -24,7 +24,6 @@ module.exports = {
   coverageDirectory: "coverage",
   moduleNameMapper: {
     "src/(.*)": "<rootDir>/src/$1",
-    "tests/(.*)": "<rootDir>/__tests__/$1",
   },
 
   // An array of regexp pattern strings used to skip coverage collection
