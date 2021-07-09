@@ -3,7 +3,7 @@ import {
   getEventDataFromText,
   convertToDate,
   consoleDebug,
-} from "../../IcalUtils";
+} from "src/IcalUtils";
 import { IEventCreationParams } from "../../IEventCreationParams";
 import { AggEvent } from "../../models/AggEvent";
 import {
