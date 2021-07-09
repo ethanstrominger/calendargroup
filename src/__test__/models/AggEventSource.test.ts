@@ -13,12 +13,12 @@ describe("AggEventSource CRUD", () => {
     expect(aggEventSource.source).toEqual(source);
   });
 
-  it("You can get an aggEventSource by UoriginIcalUid", () => {
+  it("You can get an aggEventSource by originIcaluid", () => {
     const name = "Name";
     const sourceType = "URL";
     const source = "www.google.com";
     const aggEventSource = new AggEventSource(name, sourceType, source);
-    const retrievedEventSource = AggEventSource.getByUUID(aggEventSource.uuid);
+    const retrievedEventSource = AggEventSource.getByUuid(aggEventSource.uuid);
     expect(retrievedEventSource.name).toEqual(name);
     expect(retrievedEventSource.sourceType).toEqual(sourceType);
     expect(retrievedEventSource.source).toEqual(source);

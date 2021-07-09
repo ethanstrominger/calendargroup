@@ -1,4 +1,4 @@
-import { AggEvent } from "../src/models/AggEvent";
+import { AggEvent } from "src/models/AggEvent";
 
 describe("store", () => {
   it("not repeating event can be created", () => {
@@ -10,7 +10,7 @@ describe("store", () => {
       dtStart: currentTime,
       dtEnd: new Date(currentTime.getTime() + 1000 * 60 * 60),
     });
-    expect(aggEvent).toBeDefined();
+    expect(AggEvent).toBeDefined();
   });
 });
 

@@ -22,9 +22,9 @@ export function getIcalTextFromEvents(
   // cal.timezone with getVTimezoneComponent ensures timezone details created for
   // the event timezones.
   cal.timezone({ name: calendarTzid, generator: getVtimezoneComponent });
-  
-  const paramsArray = Array.isArray(params) ? params : [params]; 
-  
+
+  const paramsArray = Array.isArray(params) ? params : [params];
+
   paramsArray.forEach((event) => {
     // NOTE: ICalendar.createEvent parameters are MISLEADING.  Read below if you want to understand
     // how this works, otherwse trust the tests.  dtStart works as follows:

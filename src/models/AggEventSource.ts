@@ -10,7 +10,7 @@ export class AggEventSource {
   source: string;
 
   static aggEventSources: { [key: string]: AggEventSource } = {};
-  static getByUUID(uuid: string) {
+  static getByUuid(uuid: string) {
     return AggEventSource.aggEventSources[uuid];
   }
 
