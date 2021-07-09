@@ -1,6 +1,6 @@
-import { IEventCreationParams } from "../IEventCreationParams";
+import { IEventCreationParams } from "src/IEventCreationParams";
 import { AggEventSource } from "src/models/AggEventSource";
-import { parseIcalTextArray, getIcalTextFromEvents } from "../IcalUtils";
+import { parseIcalTextArray, getIcalTextFromEvents } from "src/IcalUtils";
 import {
   getMultipleEvents,
   verifyEventFromInput,
@@ -11,7 +11,6 @@ import {
   EVENT_ALL_VALUES_NON_DEFAULT_TZID,
   EVENT_ALL_VALUES_NO_TZID,
   EVENT_REQUIRED_VALUES_NO_TZID,
-  LOS_ANGELES_TZID,
   NON_DEFAULT_CALENDAR_TZID,
   REPEATING_EVENT_ALL_VALUES_DEFAULT_TZID,
 } from "./test-helper/IcalTestConstants";
@@ -56,7 +55,7 @@ describe("Events", () => {
     expect(eventSource.aggEvents.length).toEqual(1);
   });
 
-  it.skip("multiple events", () => {
+  it("multiple events", () => {
     const inputArray: IEventCreationParams[] = getMultipleEvents();
     verifyEventsFromInputArray(inputArray);
   });

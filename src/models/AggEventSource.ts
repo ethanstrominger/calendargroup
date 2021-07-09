@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export class AggEventSource {
   // C Field -
-  readonly aggEvents: AggEvent[] = [];
+  readonly aggEventsWithKeys: { [key: string]: AggEvent } = {};
   readonly uuid: string = "";
   name: string;
   sourceType: string;
@@ -22,10 +22,18 @@ export class AggEventSource {
     AggEventSource.aggEventSources[this.uuid] = this;
   }
 
-  addAggEvent = (aggEvent: AggEvent) => this.aggEvents.push(aggEvent);
+  addAggEvent = (aggEvent: AggEvent) => {
+    this.aggEventsWithKeys[aggEvent.uid] = aggEvent;
+  };
 
   addAggEvents = (aggEvents: AggEvent[]) =>
     aggEvents.map((aggEvent) => {
       this.addAggEvent(aggEvent);
     });
+
+  get aggEvents() {
+    return Object.values(this.aggEventsWithKeys);
+  }
+
+  getEventByUid = (uid: string) => this.aggEventsWithKeys[uid];
 }

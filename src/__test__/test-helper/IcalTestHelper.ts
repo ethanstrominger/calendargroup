@@ -4,8 +4,8 @@ import {
   convertToDate,
   consoleDebug,
 } from "src/IcalUtils";
-import { IEventCreationParams } from "../../IEventCreationParams";
-import { AggEvent } from "../src/models/AggEvent";
+import { IEventCreationParams } from "src/IEventCreationParams";
+import { AggEvent } from "src/models/AggEvent";
 import {
   DEFAULT_TZID,
   EVENT_ALL_VALUES_DEFAULT_TZID,
@@ -24,7 +24,7 @@ export function verifyEventsFromInputArray(
   );
   const eventSource = getEventDataFromText(icalText);
   paramsArray.forEach((params) => {
-    const actual: AggEvent = eventSource.eventsWithKeys[params.uid];
+    const actual: AggEvent = eventSource.getEventByUid(params.uid);
     const expected: AggEvent = getExpected(params);
     consoleDebug("expected multiple object", expected);
     consoleDebug("actual multiple object", actual);
@@ -75,7 +75,6 @@ function getExpected(params: IEventCreationParams): AggEvent {
   // JavaScript date functions set and get values based on default timezone
   // moment.tz sets date values based on a date string and a specific timezone
   // todo: refactor (create convert func)
-
   const expected = {
     uid: params.uid,
     dtStart: convertToDate(params.dtStartString, tzId),
@@ -86,6 +85,7 @@ function getExpected(params: IEventCreationParams): AggEvent {
     location: params.location,
     rrule: params.rrule,
   };
+
   // refactor (remove empty keys func)
   for (const key in Object.keys(expected)) {
     if (!expected[key]) {
@@ -100,7 +100,7 @@ export function getMultipleEvents(): IEventCreationParams[] {
   return [
     EVENT_ALL_VALUES_DEFAULT_TZID,
     EVENT_ALL_VALUES_NON_DEFAULT_TZID,
-    EVENT_ALL_VALUES_NO_TZID,
-    EVENT_REQUIRED_VALUES_NO_TZID,
+    // EVENT_ALL_VALUES_NO_TZID,
+    // EVENT_REQUIRED_VALUES_NO_TZID,
   ];
 }

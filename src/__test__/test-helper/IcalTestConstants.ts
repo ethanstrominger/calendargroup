@@ -27,9 +27,9 @@ export const EVENT_ALL_VALUES_DEFAULT_TZID: IEventCreationParams = {
 };
 
 export const EVENT_ALL_VALUES_NON_DEFAULT_TZID: IEventCreationParams = {
-  uid: "X1",
-  dtStartString: "2020-02-15 18:00",
-  dtEndString: "2020-02-15 21:00",
+  uid: "XXXX",
+  dtStartString: "2020-02-16 18:00",
+  dtEndString: "2020-02-16 21:00",
   dtStamp: new Date("2020-02-15 15:00:03"),
   created: new Date("2020-02-15 14:00:01"),
   tzId: NON_DEFAULT_EVENT_TZID,
@@ -39,8 +39,8 @@ export const EVENT_ALL_VALUES_NON_DEFAULT_TZID: IEventCreationParams = {
 
 export const EVENT_ALL_VALUES_NO_TZID: IEventCreationParams = {
   uid: "X1",
-  dtStartString: "2020-02-15 18:00",
-  dtEndString: "2020-02-15 21:00",
+  dtStartString: "2020-02-17 18:00",
+  dtEndString: "2020-02-17 21:00",
   dtStamp: new Date("2020-02-15 15:00:03"),
   created: new Date("2020-02-15 14:00:01"),
   location: "2030 Mass Ave, Lexington, MA",
@@ -49,15 +49,15 @@ export const EVENT_ALL_VALUES_NO_TZID: IEventCreationParams = {
 
 export const EVENT_REQUIRED_VALUES_NO_TZID: IEventCreationParams = {
   uid: "X1",
-  dtStartString: "2020-02-15 18:00",
-  dtEndString: "2020-02-15 21:00",
+  dtStartString: "2020-02-18 18:00",
+  dtEndString: "2020-02-18 21:00",
   summary: "Sample Event",
 };
 
 export const REPEATING_EVENT_ALL_VALUES_DEFAULT_TZID: IEventCreationParams = {
   uid: "X1",
-  dtStartString: "2020-02-15 18:00",
-  dtEndString: "2020-02-15 21:00",
+  dtStartString: "2020-02-19 18:00",
+  dtEndString: "2020-02-19 21:00",
   dtStamp: new Date("2020-02-15 15:00:03"),
   created: new Date("2020-02-15 14:00:01"),
   tzId: DEFAULT_TZID,
