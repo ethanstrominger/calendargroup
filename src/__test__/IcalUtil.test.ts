@@ -1,5 +1,5 @@
-import { IEventCreationParams } from "src/IEventCreationParams";
-import { AggEventSource } from "src/models/AggEventSource";
+import { IEventCreationParams } from "../IEventCreationParams";
+import { AggEventSource } from "../models/AggEventSource";
 import { parseIcalTextArray, getIcalTextFromEvents } from "../IcalUtils";
 import {
   getMultipleEvents,
