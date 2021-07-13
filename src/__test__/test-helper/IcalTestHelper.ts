@@ -100,7 +100,7 @@ export function getMultipleEvents(): IEventCreationParams[] {
   return [
     EVENT_ALL_VALUES_DEFAULT_TZID,
     EVENT_ALL_VALUES_NON_DEFAULT_TZID,
-    // EVENT_ALL_VALUES_NO_TZID,
-    // EVENT_REQUIRED_VALUES_NO_TZID,
+    EVENT_ALL_VALUES_NO_TZID,
+    EVENT_REQUIRED_VALUES_NO_TZID,
   ];
 }

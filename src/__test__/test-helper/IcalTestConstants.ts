@@ -27,7 +27,7 @@ export const EVENT_ALL_VALUES_DEFAULT_TZID: IEventCreationParams = {
 };
 
 export const EVENT_ALL_VALUES_NON_DEFAULT_TZID: IEventCreationParams = {
-  uid: "XXXX",
+  uid: "X2",
   dtStartString: "2020-02-16 18:00",
   dtEndString: "2020-02-16 21:00",
   dtStamp: new Date("2020-02-15 15:00:03"),
@@ -38,7 +38,7 @@ export const EVENT_ALL_VALUES_NON_DEFAULT_TZID: IEventCreationParams = {
 };
 
 export const EVENT_ALL_VALUES_NO_TZID: IEventCreationParams = {
-  uid: "X1",
+  uid: "X3",
   dtStartString: "2020-02-17 18:00",
   dtEndString: "2020-02-17 21:00",
   dtStamp: new Date("2020-02-15 15:00:03"),
@@ -48,14 +48,14 @@ export const EVENT_ALL_VALUES_NO_TZID: IEventCreationParams = {
 };
 
 export const EVENT_REQUIRED_VALUES_NO_TZID: IEventCreationParams = {
-  uid: "X1",
+  uid: "X4",
   dtStartString: "2020-02-18 18:00",
   dtEndString: "2020-02-18 21:00",
   summary: "Sample Event",
 };
 
 export const REPEATING_EVENT_ALL_VALUES_DEFAULT_TZID: IEventCreationParams = {
-  uid: "X1",
+  uid: "X5",
   dtStartString: "2020-02-19 18:00",
   dtEndString: "2020-02-19 21:00",
   dtStamp: new Date("2020-02-15 15:00:03"),
