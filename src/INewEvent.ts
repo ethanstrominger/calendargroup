@@ -1,4 +1,4 @@
-export interface IEventCreationParams {
+export interface INewEvent {
   uid: string;
   dtStartString: string;
   dtEndString: string;

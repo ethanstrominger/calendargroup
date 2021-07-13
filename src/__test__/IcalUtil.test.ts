@@ -1,4 +1,4 @@
-import { IEventCreationParams } from "src/IEventCreationParams";
+import { INewEvent } from "src/INewEvent";
 import { AggEventSource } from "src/models/AggEventSource";
 import { parseIcalTextArray, getIcalTextFromEvents } from "src/IcalUtils";
 import {
@@ -17,7 +17,7 @@ import {
 
 describe("Events", () => {
   it("non-repeating, all values, default timezone", () => {
-    const input: IEventCreationParams = EVENT_ALL_VALUES_DEFAULT_TZID;
+    const input: INewEvent = EVENT_ALL_VALUES_DEFAULT_TZID;
     verifyEventFromInput(input);
   });
 
@@ -56,12 +56,12 @@ describe("Events", () => {
   });
 
   it("multiple events", () => {
-    const inputArray: IEventCreationParams[] = getMultipleEvents();
+    const inputArray: INewEvent[] = getMultipleEvents();
     verifyEventsFromInputArray(inputArray);
   });
 
   it.skip("repeating, all values, default timezone, contains rrule", () => {
-    const input: IEventCreationParams = REPEATING_EVENT_ALL_VALUES_DEFAULT_TZID;
+    const input: INewEvent = REPEATING_EVENT_ALL_VALUES_DEFAULT_TZID;
     verifyEventFromInput(input);
   });
 });
