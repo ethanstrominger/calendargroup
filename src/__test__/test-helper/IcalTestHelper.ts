@@ -48,15 +48,20 @@ export function expectObjectToBeSimilar(
   }
 }
 
-export function verifyEventFromInput(params: INewEvent) {
-  const icalText = getIcalTextFromEvents(
+export function makeTestIcalText(newEvents: INewEvent[] | INewEvent) {
+  const newEventsArray = Array.isArray(newEvents) ? newEvents : [newEvents];
+  return getIcalTextFromEvents(
     NON_DEFAULT_CALENDAR_TZID, // Calendar TZID will be different from event TZID
-    params
+    newEventsArray
   );
+}
+
+export function verifyEventFromInput(newEvents: INewEvent) {
+  const icalText = makeTestIcalText(newEvents);
   consoleDebug("*** ICAL TEXT ***", icalText);
   const eventSource = getEventDataFromText(icalText);
   const actual: AggEvent = eventSource.aggEvents[0];
-  const expected: AggEvent = getExpectedEvent(params);
+  const expected: AggEvent = getExpectedEvent(newEvents);
   expect(eventSource.aggEvents.length).toEqual(1);
   consoleDebug("expected object", expected);
   consoleDebug("actual object");
