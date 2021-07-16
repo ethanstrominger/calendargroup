@@ -1,6 +1,10 @@
 import { INewEvent } from "src/INewEvent";
 import { AggEventSource } from "src/models/AggEventSource";
-import { parseIcalTextArray, getIcalTextFromEvents } from "src/IcalUtils";
+import {
+  parseIcalTextArray,
+  getIcalTextFromEvents,
+  getIcalTextFromEvent,
+} from "src/IcalUtils";
 import {
   getMultipleEvents,
   verifyEventFromInput,
@@ -44,7 +48,7 @@ describe("Events", () => {
 
   it("parseIcalTextArray extracts events from one calendar", () => {
     // Arrange
-    const icalText = getIcalTextFromEvents(
+    const icalText = getIcalTextFromEvent(
       NON_DEFAULT_CALENDAR_TZID, // Calendar TZID will be different from event TZID
       EVENT_REQUIRED_VALUES_NO_TZID
     );
