@@ -48,6 +48,16 @@ export function expectObjectToBeSimilar(
   }
 }
 
+export function expectObjectsToBeSimilar(
+  baseObjects: AggEvent[],
+  secondObjects: AggEvent[]
+) {
+  baseObjects.forEach((baseObject, i) => {
+    const secondObject = secondObjects[i];
+    expectObjectToBeSimilar(baseObject, secondObject);
+  });
+}
+
 export function makeTestIcalText(newEvents: INewEvent[] | INewEvent) {
   const newEventsArray = Array.isArray(newEvents) ? newEvents : [newEvents];
   return getIcalTextFromEvents(
@@ -58,14 +68,21 @@ export function makeTestIcalText(newEvents: INewEvent[] | INewEvent) {
 
 export function verifyEventFromInput(newEvents: INewEvent) {
   const icalText = makeTestIcalText(newEvents);
-  consoleDebug("*** ICAL TEXT ***", icalText);
+  const expected: AggEvent = getExpectedEvent(newEvents);
+  return verifyEventFromCalText(icalText, expected);
+}
+
+export function verifyEventFromCalText(
+  icalText: string,
+  expected: AggEvent[] | AggEvent
+) {
+  const expectedArray = Array.isArray(expected) ? expected : [expected];
   const eventSource = getEventDataFromText(icalText);
   const actual: AggEvent = eventSource.aggEvents[0];
-  const expected: AggEvent = getExpectedEvent(newEvents);
   expect(eventSource.aggEvents.length).toEqual(1);
   consoleDebug("expected object", expected);
   consoleDebug("actual object");
-  expectObjectToBeSimilar(expected, actual);
+  expectObjectToBeSimilar(expectedArray[0], actual);
 }
 
 function getExpectedEvent(newEvent: INewEvent): AggEvent {
