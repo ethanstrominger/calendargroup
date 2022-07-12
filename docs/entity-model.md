@@ -3,38 +3,30 @@
 ## AGGREGATOR MODEL
 
 ```
-┌----------------------┐                                      ┌------------┐
-│ EXTERNAL CALENDAR /  │ ------------------------------------<|  EXTERNAL  |
-│    EVENT LIST        │                                      |   EVENTS   |
-└----------------------┘                                      └------------┘
-          |                                                         |
-          |                                                         |
-          |                                                         |
-         /|\                                                        |
-┌----------------------┐                                            |
-|        EVENT         | -------------------------------------------┐   <==== Event aggregator procedure fetches
-|     SOURCES          |                                            |         external events for an event aggregrator and
-└----------------------┘                                            |         if applicable, filters the events based on the
-   \|/                                                              |         filter for the event aggregator
-    |                                                               |
-    |                                                               |
-    |                                                      ┌--------|----------┐
-    |                                                      |        |          |
-    |     ┌-------------┐    ┌-------------------┐         |       /|\         |
-    |     |   FILTER    |---<| FILTER CONDITIONS |         |    ┌------------┐ |
-    |     └-------------┘    └-------------------┘         |    | AGGREGATED | |
-    |          \|/                                         |    | EVENTS     | |
-    |           |                                          |    └------------┘ |
-┌----------------------┐                                   |                   |
-|       SMART CALENDAR | >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> |     CALENDAR      |      events for all the event aggregators of an
-└----------------------┘                                   |                   | .    event group
-                                                           |                   |
-                                                           └-------------------┘
-                                                                    /\
-                                                                    ||
-                                                                    || Event Goer subscribes to calendr
-                                                                    ||
-                                                                 EVENT GOER
+┌-----------------------------------------┐
+| ┌----------------┐      ┌------------┐  |             ┌---------------┐
+│ | AGGREGATOR     │ ---< | AGG EVENTS |  | >>>>>>>>>>> | GENERATED ICS |
+│ └----------------┘      └------------┘  |             └---------------┘
+|         |     |                         |           ICS generated with all events
+└---------|-----|-------------------------┘           from calendars referred to by
+          |     |                                     the Agg Event Sources
+          |     /\
+          |  ┌-------------┐    ┌-------------------┐
+          |  |   FILTER    |---<| FILTER CONDITIONS |
+          |  └-------------┘    └-------------------┘
+          |
+         /|\
+┌----------------------┐            ┌----------┐
+|    AGG EVENT         | -----------| EXTERNAL |
+|     SOURCES          |            | CALENDAR |
+└----------------------┘            |   (ICS)  |
+         |                          └----------┘
+         |                              ||
+        /|\                             || One Agg Event created for each
+┌----------------------┐                || event in the ICS
+|    AGG EVENTS        | <================
+|                      |
+└----------------------┘
 
 ```
 
