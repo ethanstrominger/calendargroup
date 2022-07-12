@@ -2,6 +2,8 @@
 node_modules
 *.log
 .vs
-docs
 typedoc
 coverage
+docs/img
+docs/scripts
+docs/styles
