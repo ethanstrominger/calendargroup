@@ -2,7 +2,6 @@ import { v4 as uuidv4 } from "uuid";
 export class AggEvent {
   static aggEvents: { [key: string]: AggEvent } = {};
   static getByUid(uid: string) {
-    console.log("aggEvents", uid, AggEvent.aggEvents);
     return AggEvent.aggEvents[uid];
   }
   uid?: string; // unique id of an original repeating event or stand alone

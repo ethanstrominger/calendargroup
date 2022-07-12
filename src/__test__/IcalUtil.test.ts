@@ -64,7 +64,7 @@ describe("Events", () => {
     verifyEventsFromInputArray(inputArray);
   });
 
-  it.skip("repeating, all values, default timezone, contains rrule", () => {
+  it("repeating, all values, default timezone, contains rrule", () => {
     const input: INewAggEvent = REPEATING_EVENT_ALL_VALUES_DEFAULT_TZID;
     verifyEventFromInput(input);
   });
