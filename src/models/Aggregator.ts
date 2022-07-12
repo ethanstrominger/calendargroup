@@ -12,7 +12,7 @@ export class Aggregator {
   getEventSources(): any {
     return this.aggEventSources;
   }
-  addEventSource(aggEventSource: AggEventSource) {
+  addAggEventSource(aggEventSource: AggEventSource) {
     this.aggEventSources[aggEventSource.uuid] = aggEventSource;
   }
 }

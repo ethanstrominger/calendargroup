@@ -1,0 +1,7 @@
+{
+  "entryPoints": ["src/IcalUtils.ts"],
+  "out": "typedoc/out",
+  "readme": "README.md",
+  "name": "Web Server Documentation",
+  "tsconfig": "./tsconfig.json"
+}

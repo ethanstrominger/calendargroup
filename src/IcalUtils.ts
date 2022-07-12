@@ -1,7 +1,7 @@
 import { AggEventSource } from "./models/AggEventSource";
 import { DateWithTimeZone, sync } from "node-ical";
 import icalGenerator from "ical-generator";
-import { INewEvent } from "./INewEvent";
+import { INewAggEvent } from "./INewAggEvent";
 import { getVtimezoneComponent } from "@touch4it/ical-timezones";
 import moment from "moment";
 import dotenv from "dotenv";
@@ -14,34 +14,53 @@ const DEFAULT_TZID = Intl.DateTimeFormat()
   .resolvedOptions()
   .timeZone.toString();
 
+/**
+ * Test
+ * @param calendarTzid
+ * @returns an empty icalObject
+ */
 function createEmptyIcal(calendarTzid: string) {
-  const cal = icalGenerator({});
-  // cal.timezone with getVTimezoneComponent ensures timezone details created for
+  const icalObject = icalGenerator({});
+  // icalObject.timezone with getVTimezoneComponent ensures timezone details created for
   // the event timezones.
-  cal.timezone({ name: calendarTzid, generator: getVtimezoneComponent });
-  return cal;
+  icalObject.timezone({ name: calendarTzid, generator: getVtimezoneComponent });
+  return icalObject;
 }
 
-export function getIcalTextFromEvent(
+/**
+ * Gets the icalText for a calendar with a single event
+ * based on a single specificied event (JSON object)
+ * @param calendarTzid timezone
+ * @param newAggEvent JSON object
+ * @returns iCal text for a calendar that includes the specified event
+ */
+export function getIcalTextFromAggEvent(
   calendarTzid: string,
-  newEvent: INewEvent
+  newAggEvent: INewAggEvent
 ) {
-  return getIcalTextFromEvents(calendarTzid, [newEvent]);
+  return getIcalTextFromAggEvents(calendarTzid, [newAggEvent]);
 }
 
-export function getIcalTextFromEvents(
+/**
+ * Gets the icalText for a calendar with events
+ * based on an array of specificied events (JSON object)
+ * @param calendarTzid timezone
+ * @param newAggEvent JSON object
+ * @returns ical text
+ */
+export function getIcalTextFromAggEvents(
   calendarTzid: string,
-  newEvents: INewEvent[]
+  newAggEvents: INewAggEvent[]
 ) {
-  const cal = createEmptyIcal(calendarTzid);
+  const icalObject = createEmptyIcal(calendarTzid);
 
-  newEvents.forEach((event) => {
-    addEventToIcal(cal, event);
+  newAggEvents.forEach((event) => {
+    addAggEventToIcalObj(icalObject, event);
   });
-  return cal.toString();
+  return icalObject.toString();
 }
 
-function addEventToIcal(cal, event: INewEvent) {
+function addAggEventToIcalObj(icalObject, event: INewAggEvent) {
   // NOTE: ICalendar.createEvent parameters are MISLEADING.  Read below if you want to understand
   // how this works, otherwse trust the tests.  dtStart works as follows:
   //   - value for dtStart parameter is set to new Date(event.dateString) => applies the server's
@@ -58,7 +77,7 @@ function addEventToIcal(cal, event: INewEvent) {
   // .   UTC date is incorrect
   // - createEvent magically sets the date of the iCalendar event to 18:00 Berlin tzid => 17:00 UTC even
   // .    though input was 23:00 UTC.
-  cal.createEvent({
+  icalObject.createEvent({
     id: event.uid,
     start: new Date(event.dtStartString),
     end: new Date(event.dtEndString),
@@ -72,37 +91,39 @@ function addEventToIcal(cal, event: INewEvent) {
 }
 
 export function consoleDebug(m1: string, m2?: any, m3?: any) {
-  if (doConsoleLog || m1 === consoleLogString) {
-    console.log(m1, m2, m3);
-  }
+  // if (doConsoleLog || m1 === consoleLogString) {
+  console.log(m1, m2, m3);
+  // }
 }
 
+/**
+ * Create event source from multiple ical formated calendars
+ * @param icalTexts
+ * @returns an aggEventSource which includes all the events from all the icalTexts
+ */
 export function parseIcalTextArray(icalTexts: string[]) {
   const events: AggEvent[] = [];
   icalTexts.forEach((icalText) => {
-    const tempEventData = getEventDataFromText(icalText);
+    const tempEventData = parseIcalText(icalText);
     events.push(...tempEventData.aggEvents);
   });
-  const eventSource = new AggEventSource("Ethan", "file", "xyz.txt");
-  eventSource.addAggEvents(events);
-  return eventSource;
+  const aggEventSource = new AggEventSource("Ethan", "file", "xyz.txt");
+  aggEventSource.addAggEvents(events);
+  return aggEventSource;
 }
 
-export function getEventDataFromText(icalText: string): AggEventSource {
+/**
+ *
+ * @param icalText
+ * @returns an agg event source with agg events attached
+ */
+export function parseIcalText(icalText: string): AggEventSource {
   const icalData = sync.parseICS(icalText);
-  const eventSource = new AggEventSource("Ethan", "file", "xyz.txt");
-
-  consoleDebug("icalData:", icalData);
+  const aggEventSource = new AggEventSource("Ethan", "file", "xyz.txt");
   for (const parsedEvent of Object.values(icalData).filter(
     (obj) => obj.type == "VEVENT"
   )) {
-    const rrule: any = parsedEvent.rrule;
-    for (const p in rrule) {
-      consoleDebug(p, rrule[p]);
-    }
-
-    consoleDebug("parsedEvent.rrule:", parsedEvent.rrule);
-    eventSource.addAggEvent({
+    aggEventSource.addAggEvent({
       uid: parsedEvent.uid.toString(),
       dtStart: parsedEvent.start as Date,
       dtEnd: parsedEvent.end as Date,
@@ -115,7 +136,7 @@ export function getEventDataFromText(icalText: string): AggEventSource {
       tzid: (parsedEvent.start as DateWithTimeZone).tz,
     });
   }
-  return eventSource;
+  return aggEventSource;
 }
 
 export function convertToDate(dtString: string, tzId: string) {

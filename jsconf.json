@@ -1,0 +1,15 @@
+{
+  "templates": {
+    "default": {
+      "staticFiles": {
+        "include": ["./jsdoc-output"]
+      }
+    }
+  },
+  "source": {
+    "include": ["./src/*.ts"],
+    "exclude": [],
+    "includePattern": ".+\\.js(doc|x)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  }
+}

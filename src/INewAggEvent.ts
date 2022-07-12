@@ -1,4 +1,4 @@
-export interface INewEvent {
+export interface INewAggEvent {
   uid: string;
   dtStartString: string;
   dtEndString: string;

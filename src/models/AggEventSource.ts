@@ -2,7 +2,6 @@ import { AggEvent } from "./AggEvent";
 import { v4 as uuidv4 } from "uuid";
 
 export class AggEventSource {
-  // C Field -
   readonly aggEventsWithKeys: { [key: string]: AggEvent } = {};
   readonly uuid: string = "";
   name: string;
@@ -22,6 +21,10 @@ export class AggEventSource {
     AggEventSource.aggEventSources[this.uuid] = this;
   }
 
+  /**
+   *
+   * @param aggEvent
+   */
   addAggEvent = (aggEvent: AggEvent) => {
     this.aggEventsWithKeys[aggEvent.uid] = aggEvent;
   };

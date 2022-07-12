@@ -1,9 +1,9 @@
-import { INewEvent } from "src/INewEvent";
+import { INewAggEvent } from "src/INewAggEvent";
 import { AggEventSource } from "src/models/AggEventSource";
 import {
   parseIcalTextArray,
-  getIcalTextFromEvents,
-  getIcalTextFromEvent,
+  getIcalTextFromAggEvents,
+  getIcalTextFromAggEvent,
 } from "src/IcalUtils";
 import {
   getMultipleEvents,
@@ -21,7 +21,7 @@ import {
 
 describe("Events", () => {
   it("non-repeating, all values, default timezone", () => {
-    const input: INewEvent = EVENT_ALL_VALUES_DEFAULT_TZID;
+    const input: INewAggEvent = EVENT_ALL_VALUES_DEFAULT_TZID;
     verifyEventFromInput(input);
   });
 
@@ -41,31 +41,31 @@ describe("Events", () => {
   });
 
   it("parseIcalTextArray combines events from empty list of calendars", () => {
-    const eventSource: AggEventSource = parseIcalTextArray([] as string[]);
-    expect(eventSource).toBeDefined();
-    expect(eventSource.aggEvents.length).toEqual(0);
+    const aggEventSource: AggEventSource = parseIcalTextArray([] as string[]);
+    expect(aggEventSource).toBeDefined();
+    expect(aggEventSource.aggEvents.length).toEqual(0);
   });
 
   it("parseIcalTextArray extracts events from one calendar", () => {
     // Arrange
-    const icalText = getIcalTextFromEvent(
+    const icalText = getIcalTextFromAggEvent(
       NON_DEFAULT_CALENDAR_TZID, // Calendar TZID will be different from event TZID
       EVENT_REQUIRED_VALUES_NO_TZID
     );
     // Act
-    const eventSource: AggEventSource = parseIcalTextArray([icalText]);
+    const aggEventSource: AggEventSource = parseIcalTextArray([icalText]);
     // Assert
-    expect(eventSource).toBeDefined();
-    expect(eventSource.aggEvents.length).toEqual(1);
+    expect(aggEventSource).toBeDefined();
+    expect(aggEventSource.aggEvents.length).toEqual(1);
   });
 
   it("multiple events", () => {
-    const inputArray: INewEvent[] = getMultipleEvents();
+    const inputArray: INewAggEvent[] = getMultipleEvents();
     verifyEventsFromInputArray(inputArray);
   });
 
   it.skip("repeating, all values, default timezone, contains rrule", () => {
-    const input: INewEvent = REPEATING_EVENT_ALL_VALUES_DEFAULT_TZID;
+    const input: INewAggEvent = REPEATING_EVENT_ALL_VALUES_DEFAULT_TZID;
     verifyEventFromInput(input);
   });
 });

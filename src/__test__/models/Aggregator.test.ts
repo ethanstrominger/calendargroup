@@ -15,7 +15,7 @@ describe("Aggregator CRUD", () => {
       "URL",
       "https://example.com/events"
     );
-    aggregator.addEventSource(aggEventSource);
+    aggregator.addAggEventSource(aggEventSource);
     expect(aggregator.getEventSources()[aggEventSource.uuid]).toEqual(
       aggEventSource
     );
