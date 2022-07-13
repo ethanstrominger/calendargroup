@@ -1,10 +1,22 @@
 # Purpose
 
-Version 1: Provide capability to select calendars from various web sources into a single subscribable calendar. Anyone can then subscribe to the aggregated calendar using their favorite calendar app using a URL. They will then be able to view the events from the aggregagated calendar in their calendar app and can optionally display them along with their other personal and subscribed calendars.
+Version 1
+
+Provide capability to select calendars from various web sources into a single subscribable calendar. Anyone can then subscribe to the aggregated calendar using their favorite calendar app using a URL. They will then be able to view the events from the aggregagated calendar in their calendar app and can optionally display them along with their other personal and subscribed calendars. For version 1, web sources will only be calendars in ICAL format.
+
+Version 2
 
 Sources for events will include calendars in ical format (most web calendars), web scraping of event bright and other sources, and CSV files.
 
-Version 2: Provide query capabilities for any calendar by date, time of day, online/offline, location, tags, and other criteria.
+Version 3
+
+Add query conditions to an aggregated calendar to only show events that match that criteria.
+
+Criteria will include day of the week, time of day, online/offline, location, tags, and other criteria.
+
+Version 4
+
+Add query condition for an availability calendar.
 
 # Technology
 
