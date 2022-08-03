@@ -3,28 +3,31 @@
 ## AGGREGATOR MODEL
 
 ```
-┌-------------------------------------------------┐
-| ┌------------------┐      ┌-------------------┐ |             ┌----------------------┐
-│ | AGGREGATOR (int) │ ---< | AGG EVENTS (virt) | | >>>>>>>>>>> | GENERATED ICAL (out) |
-│ └------------------┘      └-------------------┘ |             └----------------------┘
-|         |     |                                 |            ICS generated with all events
-└---------|-----|---------------------------------┘            from calendars referred to by
-          |     |                                              the Agg Event Sources
+┌----------------------------------------┐
+| ┌---------------┐      ┌-----------┐   |                ┌------------------┐
+│ | AGGREGATOR    │ ---< | AGG EVENTS| >>>>>>>>>>>>>>>>>> | GENERATED ICAL   |
+│ | (internal)    │      | (derived) |   |                | (derived output) |
+│ └---------------┘      └-----------┘   |                └------------------┘
+|         |     |                        |             ICS generated with all events
+└---------|-----|------------------------┘             from calendars referred to by
+          |     |                                      the Agg Event Sources
           |     /\
-          |  ┌-----------------┐    ┌-------------------------┐
-          |  |   FILTER  (int) |---<| FILTER CONDITIONS (int) |
-          |  └-----------------┘    └-------------------------┘
+          |  ┌------------┐    ┌------------------┐
+          |  |   FILTER   |---<| FILTER CONDITIONS|
+          |  | (internal) |    |    (internal)    |
+          |  └------------┘    └------------------┘
           |
          /|\
 ┌----------------------┐            ┌----------┐
-|    CALENDAR (int)         | -----------| EXTERNAL (ext) |
-|     SOURCES          |            | CALENDAR |
-└----------------------┘            |   (ICS)  |
-         |                          └----------┘
+|    CALENDAR SOURCES  | -----------| EXTERNAL |
+|       (internal)     |            | CALENDAR |
+└----------------------┘            └----------┘
+         |                              ||
          |                              ||
         /|\                             || One Agg Event created for each
 ┌----------------------┐                || event in the ICS
-|    AGG EVENTS (virt)        | <================
+|    AGG EVENTS        |                ||
+|    (derived)         | <================
 └----------------------┘
 
 ```
