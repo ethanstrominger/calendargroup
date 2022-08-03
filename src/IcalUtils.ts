@@ -1,4 +1,4 @@
-import { AggEventSource } from "./models/AggEventSource";
+import { CalendarSource } from "./models/CalendarSource";
 import { DateWithTimeZone, sync } from "node-ical";
 import icalGenerator from "ical-generator";
 import { INewAggEvent } from "./INewAggEvent";
@@ -99,17 +99,23 @@ export function consoleDebug(m1: string, m2?: any, m3?: any) {
 /**
  * Create event source from multiple ical formated calendars
  * @param icalTexts
- * @returns an aggEventSource which includes all the events from all the icalTexts
+ * @returns an calendarSource which includes all the events from all the icalTexts
  */
-export function parseIcalTextArray(icalTexts: string[]) {
+export function parseIcalText(icalTexts: string[] | string) {
+  let icalTextsArray: string[];
+  if (typeof icalTexts === "string") {
+    icalTextsArray = [icalTexts as string];
+  } else {
+    icalTextsArray = icalTexts as string[];
+  }
   const events: AggEvent[] = [];
-  icalTexts.forEach((icalText) => {
-    const tempEventData = parseIcalText(icalText);
+  icalTextsArray.forEach((icalText) => {
+    const tempEventData = parseIcalText2(icalText);
     events.push(...tempEventData.aggEvents);
   });
-  const aggEventSource = new AggEventSource("Ethan", "file", "xyz.txt");
-  aggEventSource.addAggEvents(events);
-  return aggEventSource;
+  const calendarSource = new CalendarSource("Ethan", "file", "xyz.txt");
+  calendarSource.addAggEvents(events);
+  return calendarSource;
 }
 
 /**
@@ -117,13 +123,13 @@ export function parseIcalTextArray(icalTexts: string[]) {
  * @param icalText
  * @returns an agg event source with agg events attached
  */
-export function parseIcalText(icalText: string): AggEventSource {
+export function parseIcalText2(icalText: string): CalendarSource {
   const icalData = sync.parseICS(icalText);
-  const aggEventSource = new AggEventSource("Ethan", "file", "xyz.txt");
+  const calendarSource = new CalendarSource("Ethan", "file", "xyz.txt");
   for (const parsedEvent of Object.values(icalData).filter(
     (obj) => obj.type == "VEVENT"
   )) {
-    aggEventSource.addAggEvent({
+    calendarSource.addAggEvent({
       uid: parsedEvent.uid.toString(),
       dtStart: parsedEvent.start as Date,
       dtEnd: parsedEvent.end as Date,
@@ -136,7 +142,7 @@ export function parseIcalText(icalText: string): AggEventSource {
       tzid: (parsedEvent.start as DateWithTimeZone).tz,
     });
   }
-  return aggEventSource;
+  return calendarSource;
 }
 
 export function convertToDate(dtString: string, tzId: string) {

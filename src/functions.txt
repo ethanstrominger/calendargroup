@@ -1,5 +1,9 @@
 icalText represents a complete calendar in ical format
 
+Specify a Aggregator
+Loop through all sources for that aggregator to get icalText => AggEvents from the ical
+Takes all the AggEvents => ical
+
 AggEvent(s) => iCalText
 export function getIcalTextFromAggEvents(calendarTzid, newAggEvent)
 export function getIcalTextFromAggEvents(calendarTzid: string, newAggEvents: INewAggEvent[]
@@ -9,6 +13,8 @@ icalText(s) => AggEventSource -< AggEvent
 export function parseIcalTextArray(icalTexts) 
 export function parseIcalText(icalText)
 --
+
+
 export function convertToDate(dtString: string, tzId: string) 
 --
 function addAggEventToIcalObj(icalObject, event: INewAggEvent) 

@@ -1,7 +1,7 @@
-import { AggEventSource } from "./AggEventSource";
+import { CalendarSource } from "./CalendarSource";
 
 export class Aggregator {
-  aggEventSources: { [key: string]: AggEventSource } = {};
+  calendarSources: { [key: string]: CalendarSource } = {};
 
   name: string;
 
@@ -10,9 +10,9 @@ export class Aggregator {
   }
 
   getEventSources(): any {
-    return this.aggEventSources;
+    return this.calendarSources;
   }
-  addAggEventSource(aggEventSource: AggEventSource) {
-    this.aggEventSources[aggEventSource.uuid] = aggEventSource;
+  addCalendarSource(calendarSource: CalendarSource) {
+    this.calendarSources[calendarSource.uuid] = calendarSource;
   }
 }

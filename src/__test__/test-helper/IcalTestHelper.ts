@@ -1,6 +1,6 @@
 import {
   getIcalTextFromAggEvents,
-  parseIcalText,
+  parseIcalText2,
   convertToDate,
   consoleDebug,
 } from "src/IcalUtils";
@@ -20,9 +20,9 @@ export function verifyEventsFromInputArray(newAggEvents: INewAggEvent[]) {
     NON_DEFAULT_CALENDAR_TZID,
     newAggEvents
   );
-  const aggEventSource = parseIcalText(icalText);
+  const calendarSource = parseIcalText2(icalText);
   newAggEvents.forEach((newAggEvent) => {
-    const actual: AggEvent = aggEventSource.getEventByUid(newAggEvent.uid);
+    const actual: AggEvent = calendarSource.getEventByUid(newAggEvent.uid);
     const expected: AggEvent = getExpectedEvent(newAggEvent);
     consoleDebug("expected multiple object", expected);
     consoleDebug("actual multiple object", actual);
@@ -80,9 +80,9 @@ export function verifyEventFromIcalText(
   expected: AggEvent[] | AggEvent
 ) {
   const expectedArray = Array.isArray(expected) ? expected : [expected];
-  const aggEventSource = parseIcalText(icalText);
-  const actual: AggEvent = aggEventSource.aggEvents[0];
-  expect(aggEventSource.aggEvents.length).toEqual(1);
+  const calendarSource = parseIcalText2(icalText);
+  const actual: AggEvent = calendarSource.aggEvents[0];
+  expect(calendarSource.aggEvents.length).toEqual(1);
   expectObjectToBeSimilar(expectedArray[0], actual);
 }
 

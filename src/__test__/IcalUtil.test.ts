@@ -1,7 +1,7 @@
 import { INewAggEvent } from "src/INewAggEvent";
-import { AggEventSource } from "src/models/AggEventSource";
+import { CalendarSource } from "src/models/CalendarSource";
 import {
-  parseIcalTextArray,
+  parseIcalText,
   getIcalTextFromAggEvents,
   getIcalTextFromAggEvent,
 } from "src/IcalUtils";
@@ -40,20 +40,20 @@ describe("Events", () => {
     verifyEventFromInput(input);
   });
 
-  it("parseIcalTextArray combines events from empty list of calendars", () => {
-    const aggEventSource: AggEventSource = parseIcalTextArray([] as string[]);
+  it("parseIcalText combines events from empty list of calendars", () => {
+    const aggEventSource: CalendarSource = parseIcalText([] as string[]);
     expect(aggEventSource).toBeDefined();
     expect(aggEventSource.aggEvents.length).toEqual(0);
   });
 
-  it("parseIcalTextArray extracts events from one calendar", () => {
+  it("parseIcalText extracts events from one calendar", () => {
     // Arrange
     const icalText = getIcalTextFromAggEvent(
       NON_DEFAULT_CALENDAR_TZID, // Calendar TZID will be different from event TZID
       EVENT_REQUIRED_VALUES_NO_TZID
     );
     // Act
-    const aggEventSource: AggEventSource = parseIcalTextArray([icalText]);
+    const aggEventSource: CalendarSource = parseIcalText(icalText);
     // Assert
     expect(aggEventSource).toBeDefined();
     expect(aggEventSource.aggEvents.length).toEqual(1);

@@ -1,16 +1,16 @@
 import { AggEvent } from "./AggEvent";
 import { v4 as uuidv4 } from "uuid";
 
-export class AggEventSource {
+export class CalendarSource {
   readonly aggEventsWithKeys: { [key: string]: AggEvent } = {};
   readonly uuid: string = "";
   name: string;
   sourceType: string;
   source: string;
 
-  static aggEventSources: { [key: string]: AggEventSource } = {};
+  static calendarSources: { [key: string]: CalendarSource } = {};
   static getByUuid(uuid: string) {
-    return AggEventSource.aggEventSources[uuid];
+    return CalendarSource.calendarSources[uuid];
   }
 
   constructor(name, sourceType, source) {
@@ -18,7 +18,7 @@ export class AggEventSource {
     this.name = name;
     this.sourceType = sourceType;
     this.source = source;
-    AggEventSource.aggEventSources[this.uuid] = this;
+    CalendarSource.calendarSources[this.uuid] = this;
   }
 
   /**

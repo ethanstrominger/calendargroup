@@ -1,5 +1,5 @@
 import { Aggregator } from "src/models/Aggregator";
-import { AggEventSource } from "src/models/AggEventSource";
+import { CalendarSource } from "src/models/CalendarSource";
 
 describe("Aggregator CRUD", () => {
   it("An Aggregator can be created", () => {
@@ -10,14 +10,14 @@ describe("Aggregator CRUD", () => {
   it("Add event sources to the event aggregator		The event aggregator source list should include all of those event sources", () => {
     const name = "event aggregator name";
     const aggregator = new Aggregator(name);
-    const aggEventSource = new AggEventSource(
+    const calendarSource = new CalendarSource(
       "agg 1",
       "URL",
       "https://example.com/events"
     );
-    aggregator.addAggEventSource(aggEventSource);
-    expect(aggregator.getEventSources()[aggEventSource.uuid]).toEqual(
-      aggEventSource
+    aggregator.addCalendarSource(calendarSource);
+    expect(aggregator.getEventSources()[calendarSource.uuid]).toEqual(
+      calendarSource
     );
   });
 });
