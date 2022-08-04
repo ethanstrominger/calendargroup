@@ -7,3 +7,6 @@
 [ ] Retrieve agg source by name
 [ ] Retrieve aggregator by name
 [ ] Store aggregator and sources
+[ ] Add filters
+[ ] Create filter and filter condition classes
+[ ] Modify aggregation code to apply filter

@@ -1,6 +1,6 @@
 import { AggEvent } from "src/models/AggEvent";
 
-describe("store", () => {
+describe("non repeating event", () => {
   it("non-repeating event can be created", () => {
     const currentTime = new Date();
     const values = {

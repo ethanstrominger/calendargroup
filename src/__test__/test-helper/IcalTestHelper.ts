@@ -24,8 +24,8 @@ export function verifyEventsFromInputArray(newAggEvents: INewAggEvent[]) {
   newAggEvents.forEach((newAggEvent) => {
     const actual: AggEvent = calendarSource.getEventByUid(newAggEvent.uid);
     const expected: AggEvent = getExpectedEvent(newAggEvent);
-    consoleDebug("expected multiple object", expected);
-    consoleDebug("actual multiple object", actual);
+    // consoleDebug("expected multiple object", expected);
+    // consoleDebug("actual multiple object", actual);
     expectObjectToBeSimilar(expected, actual);
 
     verifyEventFromInput(newAggEvent);
@@ -69,9 +69,9 @@ export function makeTestIcalText(newAggEvents: INewAggEvent[] | INewAggEvent) {
   );
 }
 
-export function verifyEventFromInput(newAggEvents: INewAggEvent) {
-  const icalText = makeTestIcalText(newAggEvents);
-  const expected: AggEvent = getExpectedEvent(newAggEvents);
+export function verifyEventFromInput(newAggEvent: INewAggEvent) {
+  const icalText = makeTestIcalText(newAggEvent);
+  const expected: AggEvent = getExpectedEvent(newAggEvent);
   return verifyEventFromIcalText(icalText, expected);
 }
 
