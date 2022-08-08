@@ -1,7 +1,7 @@
 import { INewAggEvent } from "src/INewAggEvent";
 import { CalendarSource } from "src/models/CalendarSource";
 import {
-  parseIcalText,
+  parseIcalTexts,
   getIcalTextFromAggEvents,
   getIcalTextFromAggEvent,
 } from "src/IcalUtils";
@@ -18,6 +18,7 @@ import {
   NON_DEFAULT_CALENDAR_TZID,
   REPEATING_EVENT_ALL_VALUES_DEFAULT_TZID,
 } from "./test-helper/IcalTestConstants";
+import { AggEvent } from "src/models/AggEvent";
 
 describe("Events", () => {
   it("non-repeating, all values, default timezone", () => {
@@ -26,7 +27,19 @@ describe("Events", () => {
   });
 
   it("non-repeating, all values, non-default timezone", () => {
-    const input = EVENT_ALL_VALUES_NON_DEFAULT_TZID;
+    console.log("const", EVENT_ALL_VALUES_NON_DEFAULT_TZID.dtStart);
+    const input = new AggEvent(EVENT_ALL_VALUES_NON_DEFAULT_TZID);
+    console.log(
+      "debug start",
+      EVENT_ALL_VALUES_NON_DEFAULT_TZID.dtStart,
+      input.tzid,
+      input.dtStart
+    );
+    console.log(
+      "debug calling verifyEventFromInput",
+      input.dtStart,
+      input.tzid
+    );
     verifyEventFromInput(input);
   });
 
@@ -40,20 +53,20 @@ describe("Events", () => {
     verifyEventFromInput(input);
   });
 
-  it("parseIcalText combines events from empty list of calendars", () => {
-    const aggEventSource: CalendarSource = parseIcalText([] as string[]);
+  it("parseIcalTexts combines events from empty list of calendars", () => {
+    const aggEventSource: CalendarSource = parseIcalTexts([] as string[]);
     expect(aggEventSource).toBeDefined();
     expect(aggEventSource.aggEvents.length).toEqual(0);
   });
 
-  it("parseIcalText extracts events from one calendar", () => {
+  it("parseIcalTexts extracts events from one calendar", () => {
     // Arrange
     const icalText = getIcalTextFromAggEvent(
       NON_DEFAULT_CALENDAR_TZID, // Calendar TZID will be different from event TZID
       EVENT_REQUIRED_VALUES_NO_TZID
     );
     // Act
-    const aggEventSource: CalendarSource = parseIcalText(icalText);
+    const aggEventSource: CalendarSource = parseIcalTexts(icalText);
     // Assert
     expect(aggEventSource).toBeDefined();
     expect(aggEventSource.aggEvents.length).toEqual(1);

@@ -1,4 +1,6 @@
+// TODO: ical generator ICAL.Time.fromDateTimeString(dateTimeString);
 import { v4 as uuidv4 } from "uuid";
+import { DateTime } from "luxon";
 export class AggEvent {
   static aggEvents: { [key: string]: AggEvent } = {};
   static getByUid(uid: string) {
@@ -20,11 +22,24 @@ export class AggEvent {
   exdates?: string; //
 
   constructor(aggEvent: AggEvent) {
+    const tzid = aggEvent.tzid;
+    const start = aggEvent.dtStart;
+    const end = aggEvent.dtEnd;
     this.uid = aggEvent.uid ? aggEvent.uid : uuidv4();
     this.summary = aggEvent.summary;
     this.description = aggEvent.description;
-    this.dtStart = aggEvent.dtStart;
-    this.dtEnd = aggEvent.dtEnd;
+    this.dtStart = new Date(
+      new DateTime(start, {
+        zone: tzid,
+      }).getTime() +
+        start.getTimezoneOffset() * 60 * 1000
+    );
+    this.dtEnd = new Date(
+      new DateTime(aggEvent.dtEnd, {
+        zone: aggEvent.tzid,
+      }).getTime() +
+        aggEvent.dtStart.getTimezoneOffset() * 60 * 1000
+    );
     this.location = aggEvent.location;
     this.rrule = aggEvent.rrule;
     this.recurrenceId = aggEvent.recurrenceId;
@@ -34,5 +49,11 @@ export class AggEvent {
     this.exdates = aggEvent.exdates;
     this.tzid = aggEvent.tzid;
     AggEvent.aggEvents[this.uid] = this;
+    console.log(
+      "debug aggevent",
+      aggEvent.dtStart,
+      this.dtStart,
+      aggEvent.tzid
+    );
   }
 }

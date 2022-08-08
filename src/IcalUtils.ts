@@ -6,6 +6,7 @@ import { getVtimezoneComponent } from "@touch4it/ical-timezones";
 import moment from "moment";
 import dotenv from "dotenv";
 import { AggEvent } from "./models/AggEvent";
+import { DateTime } from "luxon";
 
 dotenv.config();
 const consoleLogString = process.env.CONSOLE_LOG?.toUpperCase();
@@ -15,11 +16,40 @@ const DEFAULT_TZID = Intl.DateTimeFormat()
   .timeZone.toString();
 
 /**
+ * Parse an iCalendar text string into a calendar source.
+ * @param utcDateTime Format is
+ *  utc date+T+UTC time+<space>+time zone
+ * - utcdate and time must be a UTC value.  For instance, using America/Los_Angeles is UTC -7:
+ *     - 20220830T220000 America/Los_Angeles => 2022-08-30 15:00:00 America/Los_Angeles on calendar
+ *     - 20220325T020000 America/Los_Angeles => 2-22-03-24 17:00:00 America/Los_Angeles on calendar (previous day)
+ * - time zone is required.  It is specified using TZ Database Time Zones format (also known as Olson or IANA time zone format).
+ * America/New_York is an example.
+ */
+export function getDateTimeWithTimeZone(
+  utcDateTime: string | Date,
+  timezone: string
+): DateWithTimeZone {
+  if (!timezone) {
+    throw new Error("timezone is required");
+  }
+  let retval;
+  if (typeof utcDateTime == "string") {
+    retval = new Date(utcDateTime);
+  } else {
+    retval = utcDateTime;
+  }
+  retval = new DateTime(retval, { zone: timezone }).toJSDate();
+  retval["tzid"] = timezone;
+  console.log("debug getDateTime", utcDateTime, timezone, retval);
+  return retval;
+}
+
+/**
  * Test
  * @param calendarTzid
  * @returns an empty icalObject
  */
-function createEmptyIcal(calendarTzid: string) {
+function createIcal(calendarTzid: string) {
   const icalObject = icalGenerator({});
   // icalObject.timezone with getVTimezoneComponent ensures timezone details created for
   // the event timezones.
@@ -52,9 +82,10 @@ export function getIcalTextFromAggEvents(
   calendarTzid: string,
   newAggEvents: INewAggEvent[]
 ) {
-  const icalObject = createEmptyIcal(calendarTzid);
+  const icalObject = createIcal(calendarTzid);
 
   newAggEvents.forEach((event) => {
+    console.log("adding", event.summary, event.dtStart, event.tzid);
     addAggEventToIcalObj(icalObject, event);
   });
   return icalObject.toString();
@@ -72,16 +103,17 @@ function addAggEventToIcalObj(icalObject, event: INewAggEvent) {
   //
   // Example:
   // - server default timezone is New York
-  // - event.dtStartString = 18:00, event.tzId = Berlin.  UTC time is 17:00.  This is desired value.
+  // - event.dtStartString = 18:00, event.tzid = Berlin.  UTC time is 17:00.  This is desired value.
   // - new Date(event.dtStartString) =>  UTC date is 23:00 (adjusted 5 hours for default timezone).
   // .   UTC date is incorrect
   // - createEvent magically sets the date of the iCalendar event to 18:00 Berlin tzid => 17:00 UTC even
   // .    though input was 23:00 UTC.
+  console.log("debug dtstart", event.dtStart);
   icalObject.createEvent({
     id: event.uid,
-    start: new Date(event.dtStartString),
-    end: new Date(event.dtEndString),
-    timezone: event.tzId ? event.tzId : DEFAULT_TZID,
+    start: event.dtStart,
+    end: event.dtEnd,
+    timezone: event.tzid ? event.tzid : DEFAULT_TZID,
     summary: event.summary,
     created: event.created,
     stamp: event.dtStamp,
@@ -101,7 +133,7 @@ export function consoleDebug(m1: string, m2?: any, m3?: any) {
  * @param icalTexts
  * @returns an calendarSource which includes all the events from all the icalTexts
  */
-export function parseIcalText(icalTexts: string[] | string) {
+export function parseIcalTexts(icalTexts: string[] | string) {
   let icalTextsArray: string[];
   if (typeof icalTexts === "string") {
     icalTextsArray = [icalTexts as string];
@@ -110,7 +142,7 @@ export function parseIcalText(icalTexts: string[] | string) {
   }
   const events: AggEvent[] = [];
   icalTextsArray.forEach((icalText) => {
-    const tempEventData = parseIcalText2(icalText);
+    const tempEventData = _parseSingleICalText(icalText);
     events.push(...tempEventData.aggEvents);
   });
   const calendarSource = new CalendarSource("Ethan", "file", "xyz.txt");
@@ -121,18 +153,25 @@ export function parseIcalText(icalTexts: string[] | string) {
 /**
  *
  * @param icalText
- * @returns an agg event source with agg events attached
+ * @returns a calendar source with agg events attached
  */
-export function parseIcalText2(icalText: string): CalendarSource {
+function _parseSingleICalText(icalText: string): CalendarSource {
   const icalData = sync.parseICS(icalText);
   const calendarSource = new CalendarSource("Ethan", "file", "xyz.txt");
   for (const parsedEvent of Object.values(icalData).filter(
     (obj) => obj.type == "VEVENT"
   )) {
+    console.log(
+      "debug loop",
+      parsedEvent.summary,
+      "start:",
+      parsedEvent.start,
+      new Date(parsedEvent.start.toString())
+    );
     calendarSource.addAggEvent({
       uid: parsedEvent.uid.toString(),
-      dtStart: parsedEvent.start as Date,
-      dtEnd: parsedEvent.end as Date,
+      dtStart: new Date(parsedEvent.start.toString()),
+      dtEnd: new Date(parsedEvent.end.toString()),
       dtStamp: parsedEvent.dtstamp as Date,
       created: parsedEvent.created as Date,
       location: parsedEvent.location as string,
@@ -145,6 +184,23 @@ export function parseIcalText2(icalText: string): CalendarSource {
   return calendarSource;
 }
 
-export function convertToDate(dtString: string, tzId: string) {
-  return moment.tz(dtString, tzId).toDate();
+export function convertToDate(dtString: string, tzid: string) {
+  return moment.tz(dtString, tzid).toDate();
+}
+function getFunnyDate(origDate: DateWithTimeZone): Date {
+  const origUTCTime = origDate.getTime();
+  const f = origDate.toString();
+  const localOffset = origDate.getTimezoneOffset();
+  // const origOffsetMilliseconds = origUTCTime - origUTCTime;
+  // const origOffsetMinutes = origOffsetMilliseconds / 1000 / 60;
+  const adjustedDate = new Date(origUTCTime + localOffset);
+  console.log(
+    "debug 2 -orig date",
+    origDate.toString(),
+    "UTC time",
+    new Date(origDate.getTime()),
+    localOffset,
+    adjustedDate
+  );
+  return origDate;
 }

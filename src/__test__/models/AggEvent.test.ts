@@ -14,6 +14,7 @@ describe("non repeating event", () => {
       description: values.descrption,
       dtStart: values.dtStart,
       dtEnd: values.dtEnd,
+      tzid: "America/New_York",
     });
     const aggEventByUid = AggEvent.getByUid(aggEvent.uid);
     expect(aggEventByUid.summary).toEqual(values.summary);
@@ -27,7 +28,7 @@ describe("repeating events", () => {
       uid: "hi",
       summary: "a summary",
       description: "a description",
-      dtStart: currentTime,
+      dtStart: new Date(currentTime),
       dtEnd: new Date(currentTime.getTime() + 1000 * 60 * 60),
       rrule: "FREQ=DAILY",
     });

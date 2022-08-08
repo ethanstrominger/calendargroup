@@ -10,8 +10,8 @@ export function getIcalTextFromAggEvents(calendarTzid: string, newAggEvents: INe
 --
 icalText(s) => AggEventSource -< AggEvent
 
-export function parseIcalTextArray(icalTexts) 
-export function parseIcalText(icalText)
+export function parseIcalTextsArray(icalTexts) 
+export function parseIcalTexts(icalText)
 --
 
 
