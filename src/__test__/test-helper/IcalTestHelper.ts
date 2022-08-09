@@ -16,6 +16,7 @@ import {
 } from "./IcalTestConstants";
 
 export function verifyEventsFromInputArray(newAggEvents: INewAggEvent[]) {
+  console.log("new Agg Events", newAggEvents);
   const icalText = getIcalTextFromAggEvents(
     NON_DEFAULT_CALENDAR_TZID,
     newAggEvents
@@ -71,6 +72,8 @@ export function makeTestIcalText(newAggEvents: INewAggEvent[] | INewAggEvent) {
 
 export function verifyEventFromInput(newAggEvent: INewAggEvent) {
   const icalText = makeTestIcalText(newAggEvent);
+  console.log(icalText);
+
   const expected: AggEvent = getExpectedEvent(newAggEvent);
   return verifyEventFromIcalText(icalText, expected);
 }
@@ -103,6 +106,7 @@ function getExpectedEvent(newAggEvent: INewAggEvent): AggEvent {
     location: newAggEvent.location,
     rrule: newAggEvent.rrule,
   };
+  console.log("expected", newAggEvent.dtStartString, expected.dtStart);
 
   // refactor (remove empty keys func)
   for (const key in Object.keys(expected)) {

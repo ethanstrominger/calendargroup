@@ -77,10 +77,21 @@ function addAggEventToIcalObj(icalObject, event: INewAggEvent) {
   // .   UTC date is incorrect
   // - createEvent magically sets the date of the iCalendar event to 18:00 Berlin tzid => 17:00 UTC even
   // .    though input was 23:00 UTC.
+  console.log(
+    "dtStartString",
+    event.dtStartString,
+    convertToDate(event.dtStartString, event.tzId ? event.tzId : DEFAULT_TZID)
+  );
   icalObject.createEvent({
     id: event.uid,
-    start: new Date(event.dtStartString),
-    end: new Date(event.dtEndString),
+    start: convertToDate(
+      event.dtStartString,
+      event.tzId ? event.tzId : DEFAULT_TZID
+    ),
+    end: convertToDate(
+      event.dtEndString,
+      event.tzId ? event.tzId : DEFAULT_TZID
+    ),
     timezone: event.tzId ? event.tzId : DEFAULT_TZID,
     summary: event.summary,
     created: event.created,
