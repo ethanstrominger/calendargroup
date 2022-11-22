@@ -16,7 +16,6 @@ import {
 } from "./IcalTestConstants";
 
 export function verifyEventsFromInputArray(newAggEvents: INewAggEvent[]) {
-  console.log("new Agg Events", newAggEvents);
   const icalText = getIcalTextFromAggEvents(
     NON_DEFAULT_CALENDAR_TZID,
     newAggEvents
@@ -72,8 +71,7 @@ export function makeTestIcalText(newAggEvents: INewAggEvent[] | INewAggEvent) {
 
 export function verifyEventFromInput(newAggEvent: INewAggEvent) {
   const icalText = makeTestIcalText(newAggEvent);
-  console.log(icalText);
-
+  const lastPos = icalText.lastIndexOf("DTSTART");
   const expected: AggEvent = getExpectedEvent(newAggEvent);
   return verifyEventFromIcalText(icalText, expected);
 }
@@ -90,7 +88,7 @@ export function verifyEventFromIcalText(
 }
 
 function getExpectedEvent(newAggEvent: INewAggEvent): AggEvent {
-  const tzId = newAggEvent.tzId ? newAggEvent.tzId : DEFAULT_TZID;
+  const tzId = newAggEvent.timezone ? newAggEvent.timezone : DEFAULT_TZID;
 
   // JavaScript has no native Date/Timezone type, only a Date type
   // JavaScript date functions set and get values based on default timezone
@@ -106,7 +104,6 @@ function getExpectedEvent(newAggEvent: INewAggEvent): AggEvent {
     location: newAggEvent.location,
     rrule: newAggEvent.rrule,
   };
-  console.log("expected", newAggEvent.dtStartString, expected.dtStart);
 
   // refactor (remove empty keys func)
   for (const key in Object.keys(expected)) {
